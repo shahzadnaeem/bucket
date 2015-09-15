@@ -1,0 +1,69 @@
+  183  sudo usermod -aG docker shahzad
+  184  sudo dnf install docker
+  185  docker run hello-world
+  186  docker help
+  187  docker ps
+  188  sudo docker ps
+  189  sudo systemctl status docker
+  190  sudo systemctl start docker
+  191  sudo docker ps
+  192  docker ps
+  193  sudo docker ps
+  194  sudo docker run hello-world
+  195  sudo docker ps
+  196  sudo docker run -it ubuntu bash
+  197  sudo docker ps
+  198  sudo docker ps --all
+  199  docker ps
+  202  sudo systemctl start docker
+  203  docker ps
+  204  sudo systemctl enable docker
+  205  sudo systemctl status docker
+  288  docker
+  289  docker ps
+  290  docker ps --all
+  291  docker images
+  560  systemctl docker status
+  561  systemctl status docker
+  571  mkdir docker
+  572  cd docker
+  573  docker run -it ubuntu bash
+  575  docker images
+  581  docker build -t my_whale
+  582  docker build -t my_whale Dock
+  583  docker build -t my_whale .
+  584  sudo vi /etc/default/docker
+  585  find /etc -name docker
+  586  sudo vi /etc/docker
+  587  cd /etc/docker/
+  591  DOCKER_OPTS="-dns 8.8.8.8" docker build -t my_whale .
+  594  cd docker/whalesay/
+  595  DOCKER_OPTS="-dns 8.8.8.8" docker build -t my_whale .
+  902  ls docker/
+  903  cd docker/whalesay/
+  906  sudo docker images --all
+  907  docker run -it whalesay
+  908  docker run -it docker.io/docker/whalesay
+  909  docker run docker.io/docker/whalesay
+  910  history | grep docker
+  912  docker build -t my_whale
+  913  docker build
+  914  docker build .
+  919  sudo docker images
+  920  sudo docker run fb434121fc77
+  922  sudo docker build my-whale
+  924  sudo docker build
+  925  sudo docker build .
+  972  cd docker/
+  977  docker images
+  979  sudo docker build .
+  980  sudo docker images
+  981  sudo docker build
+  982  sudo docker build -name my-whale .
+  983  docker help build
+  984  sudo docker build -t my-whale .
+  985  docker images
+  986  sudo docker run my-whale
+  989  sudo docker build -t my-whale .
+  990  sudo docker run my-whale
+  995  history | grep docker > history

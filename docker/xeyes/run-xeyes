@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -x
+
+XSOCK=/tmp/.X11-unix
+XAUTH=/tmp/.docker.xauth
+
+# Get auth info into a file for run
+xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
+
+# Run container, passing necessary data to container
+docker run -ti -v $XSOCK:$XSOCK -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH -e DISPLAY=$DISPLAY xeyes
