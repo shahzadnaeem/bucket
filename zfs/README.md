@@ -1,5 +1,4 @@
 # ZFS Related Stuff
-#### Links
 ##### Jeff Bonwick's Blog - Oracle (Sun)
 [RaidZ Entry](https://blogs.oracle.com/bonwick/entry/raid_z)
 ##### Matthew Ahrens - Delphix Blog
