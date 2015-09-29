@@ -1,0 +1,69 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+umask 022
+
+# Tools and PATH
+
+PATH=$HOME/bin:$PATH
+
+export JAVA_HOME=/usr/java/latest
+PATH=$JAVA_HOME/bin:$PATH
+
+export COMMON_BUILD_TOOLS=~/projects/maxfocus-CommonBuildTools
+export ANT_HOME=$COMMON_BUILD_TOOLS/Software/Ant
+export ANT_OPTS=-Xmx1g
+export PATH=$ANT_HOME/bin:$PATH
+export MAVEN_HOME=$COMMON_BUILD_TOOLS/Software/Maven
+export PATH=$MAVEN_HOME/bin:$PATH
+
+alias p='cd ~/projects'
+
+# User specific aliases and functions
+
+# Misc aliases
+alias a='atom &'
+alias e='xemacs &'
+alias x='clear'
+alias h='history'
+alias mhz='grep MHz /proc/cpuinfo'
+alias ltr='ls -ltr'
+
+alias t="watch -n 1 'banner \`date +%H:%M:%S\` | sed -e \"s/\(.\)/\1\1\1/g\" -e \"p\" | cowsay -n'"
+
+alias ard='cd Arduino'
+
+# Subversion aliases
+alias w='cd ~/SVN-WORK'
+alias vh='svn help'
+alias vl='svn list'
+alias vg='svn log'
+alias vs='svn status'
+alias vsq='svn status -q'
+alias vd='svn diff'
+alias vu='svn update'
+alias vc='svn commit'
+alias vm='svn merge'
+
+# Git aliases
+alias ga='git add'
+alias gl='git log'
+alias gb='git branch'
+alias gp='git pull'
+alias gpl='git pull'
+alias gco='git checkout'
+alias gcl='git clone'
+alias gui='gitk'
+alias gs='git status'
+alias gc='git commit'
+alias gph='git push'
+
+# yum
+alias yu='sudo dnf update'
+
+# ssh stuff
+alias keys='ssh-add -l'
