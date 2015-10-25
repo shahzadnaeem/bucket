@@ -10,8 +10,8 @@ Use openssl s_client to check the status of a site's SSL Certificate
 $ openssl s_client -connect bbc.co.uk:443
 ```
 
-> Verify return code: 0 (ok)
-> ---
+> Verify return code: 0 (ok) <br>
+> \---
 >
 > You will need to Ctrl-D or Ctrl-C to exit the above command
 
