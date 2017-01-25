@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: org.shahzad.hello.AppTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.035 sec <<< FAILURE!
+testHelloSay(org.shahzad.hello.AppTest)  Time elapsed: 0.012 sec  <<< FAILURE!
+junit.framework.AssertionFailedError: expected:<102> but was:<103>
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.failNotEquals(Assert.java:282)
+	at junit.framework.Assert.assertEquals(Assert.java:64)
+	at junit.framework.Assert.assertEquals(Assert.java:201)
+	at junit.framework.Assert.assertEquals(Assert.java:207)
+	at org.shahzad.hello.AppTest.testHelloSay(AppTest.java:74)
+
