@@ -18,6 +18,32 @@
             <target>1.8</target>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.5.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <executable>bash</executable>
+          <workingDirectory>/tmp</workingDirectory>
+          <arguments>
+            <argument>-c</argument>
+            <argument>
+cd ${project.build.directory}
+echo -e "\n\n[$PWD] === Date is `date` ===\n";
+echo -e "${project.basedir}/scripts";
+ls -l ${project.basedir}/scripts
+</argument>
+          </arguments>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
