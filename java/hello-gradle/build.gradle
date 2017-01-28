@@ -1,0 +1,44 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'org.shahzad.hello'
+version = '1.0-SNAPSHOT'
+
+description = """hello-mvn"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+test {
+  testLogging {
+    showStandardStreams true
+    events = [ "started", "passed", "failed" ]
+  }
+
+  minHeapSize = "128m"
+  maxHeapSize = "512m"
+
+  jvmArgs '-XX:MaxPermSize=256m'
+
+  beforeTest { descriptor ->
+     logger.lifecycle("Running test: " + descriptor)
+  }
+
+  onOutput { descriptor, event ->
+     logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message )
+  }
+}
+
+task post(dependsOn: test) {
+  doLast {
+    println "Doing 'post' task"
+  }
+}
+
+repositories {
+  maven { url "https://repo.maven.apache.org/maven2" }
+}
+
+dependencies {
+  testCompile group: 'junit', name: 'junit', version:'3.8.1'
+}
