@@ -1,13 +1,33 @@
+// ==================================================================================
+
 apply plugin: 'java'
 apply plugin: 'maven'
 
 group = 'org.shahzad.hello'
 version = '1.0-SNAPSHOT'
 
-description = """hello-mvn"""
+description = """hello-gradle"""
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+// ==================================================================================
+
+jar {
+  manifest {
+    attributes (
+      'Main-Class': 'org.shahzad.hello.App'
+    )
+  }
+}
+
+project.ext {
+  targetDir  = "${project.libsDir}"
+  target     = "hello.run"
+  scriptsDir = "${project.projectDir}/scripts"
+}
+
+// ==================================================================================
 
 test {
   testLogging {
@@ -29,11 +49,52 @@ test {
   }
 }
 
-task post(dependsOn: test) {
+// ==================================================================================
+
+task runnablejar(dependsOn: build) {
+
   doLast {
-    println "Doing 'post' task"
+
+//    println "Doing '${project.task.name}' task to create '${project.ext.target}' in '${project.ext.targetDir}'"
+
+    exec {
+      executable  "/usr/bin/bash"
+      args        "-c",  "cat ${project.ext.scriptsDir}/runjar.sh ${project.libsDir}/${project.jar.archiveName} > ${project.ext.targetDir}/${project.ext.target}"
+    }
+
+    exec {
+      executable "/usr/bin/chmod"
+      args       "755", "${project.ext.targetDir}/${project.ext.target}"
+    }
   }
 }
+
+// ==================================================================================
+
+import java.text.SimpleDateFormat
+import java.util.Date
+
+def now() {
+  Date             d = new Date()
+  SimpleDateFormat f = new SimpleDateFormat( "MM-dd-yyyy_hh_mm" )
+
+  return f.format( d )
+}
+
+task demo(dependsOn: runnablejar) {
+
+  def theArgs = project.hasProperty('democount') ? [ now(), democount ] : [ now() ]
+
+  doLast {
+    exec {
+      executable "${project.ext.targetDir}/${project.ext.target}"
+
+      args theArgs
+    }
+  }
+}
+
+// ==================================================================================
 
 repositories {
   maven { url "https://repo.maven.apache.org/maven2" }
@@ -42,3 +103,6 @@ repositories {
 dependencies {
   testCompile group: 'junit', name: 'junit', version:'3.8.1'
 }
+
+// ==================================================================================
+
