@@ -6,11 +6,12 @@
 
 #include <ncurses.h>
 
-int SyncDelay = 20000;
+int SyncDelay = 9000;
 
 unsigned char chA[] = { 0x00, 0x1c, 0x22, 0x42, 0x42, 0x7e, 0x42, 0x42 };
 unsigned char chB[] = { 0x00, 0x78, 0x44, 0x44, 0x78, 0x44, 0x44, 0x7c };
 unsigned char ch_[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+unsigned char ch_ALL[] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
 
 typedef struct pos { int x; int y; } pos_t;
 
@@ -57,6 +58,17 @@ pos_t spiral( int size, pos_t in )
       }
     }
   }
+
+  return out;
+}
+
+pos_t rev_spiral( int size, pos_t in )
+{
+  pos_t out = spiral( size, in );
+
+  int tmp = out.x;
+  out.x = out.y;
+  out.y = tmp;
 
   return out;
 }
@@ -116,10 +128,11 @@ void testSpiral()
   for ( int y = 0; y < size; y ++ )
     for ( int x = 0; x < size; x ++ ) {
 
-      pos_t in  = { x, y };
-      pos_t out = spiral( size, in );
+      pos_t in      = { x, y };
+      pos_t out     = spiral( size, in );
+      pos_t rev_out = rev_spiral( size, in );
 
-      printf( "in: (%d,%d) => (%d,%d)\n", in.x, in.y, out.x, out.y );
+      printf( "in: (%d,%d) => (%d,%d), rev(%d,%d)\n", in.x, in.y, out.x, out.y, rev_out.x, rev_out.y );
     }
 
   exit(1);
@@ -129,17 +142,30 @@ int main()
 {
   int i, j;
 
-  testSpiral();
+  //testSpiral();
 
   initscr();
+  curs_set(0);
 
   showChar( 8, 1, 3, chA );
   showChar( 8, 1, 4, chB );
-  showCharSpiral( 8, 1, 3, chB );
 
-  refresh();
+  int res = -1;
 
-  getch();
+  while ( res == -1 ) {
+    showCharSpiral( 8, 1, 3, ch_ );
+    showCharSpiral( 8, 1, 3, ch_ALL );
+
+    refresh();
+
+    timeout( 1000 );
+    res = getch();
+
+    move( 20, 0 );
+    printw( "res  = %5d", res );
+
+    refresh();
+  }
 
   endwin();
 }
