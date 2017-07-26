@@ -1,0 +1,316 @@
+#include <LedControl.h>
+
+LedControl lc=LedControl(2,3,4,1);
+
+unsigned long delaytime = 100;
+
+void setup() {
+
+  Serial.begin(115200);
+  
+  // Wake up  
+  lc.shutdown(0,false);
+
+  // Med brighness
+  lc.setIntensity(0,8);
+
+  // Clear
+  lc.clearDisplay(0);
+}
+
+byte font[95][8] = { {0,0,0,0,0,0,0,0}, // SPACE
+                     {0x10,0x18,0x18,0x18,0x18,0x00,0x18,0x18}, // EXCL
+                     {0x28,0x28,0x08,0x00,0x00,0x00,0x00,0x00}, // QUOT
+                     {0xFF,0x81,0x81,0x81,0x81,0x81,0x81,0xFF}, // # - SQUARE
+                     {0x10,0x38,0x54,0x70,0x1c,0x54,0x38,0x10}, // $
+                     {0x00,0x60,0x66,0x08,0x10,0x66,0x06,0x00}, // %
+                     {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF}, // ALL-ON
+                     {0x00,0x10,0x18,0x18,0x08,0x00,0x00,0x00}, // '
+                     {0x02,0x04,0x08,0x08,0x08,0x08,0x08,0x04}, // (
+                     {0x40,0x20,0x10,0x10,0x10,0x10,0x10,0x20}, // )
+                     {0x00,0x10,0x54,0x38,0x10,0x38,0x54,0x10}, // *
+                     {0x00,0x08,0x08,0x08,0x7f,0x08,0x08,0x08}, // +
+                     {0x00,0x00,0x00,0x00,0x00,0x18,0x18,0x08}, // COMMA
+                     {0x00,0x00,0x00,0x00,0x7e,0x00,0x00,0x00}, // -
+                     {0x00,0x00,0x00,0x00,0x00,0x00,0x06,0x06}, // DOT
+                     {0x00,0x04,0x04,0x08,0x10,0x20,0x40,0x40}, // /
+                     {0x00,0x38,0x44,0x4c,0x54,0x64,0x44,0x38}, // 0
+                     {0x04,0x0c,0x14,0x24,0x04,0x04,0x04,0x04}, // 1
+                     {0x00,0x30,0x48,0x04,0x04,0x38,0x40,0x7c}, // 2
+                     {0x00,0x38,0x04,0x04,0x18,0x04,0x44,0x38}, // 3
+                     {0x00,0x04,0x0c,0x14,0x24,0x7e,0x04,0x04}, // 4
+                     {0x00,0x7c,0x40,0x40,0x78,0x04,0x04,0x38}, // 5
+                     {0x00,0x38,0x40,0x40,0x78,0x44,0x44,0x38}, // 6
+                     {0x00,0x7c,0x04,0x04,0x08,0x08,0x10,0x10}, // 7
+                     {0x00,0x3c,0x44,0x44,0x38,0x44,0x44,0x78}, // 8
+                     {0x00,0x38,0x44,0x44,0x3c,0x04,0x04,0x78}, // 9
+                     {0x00,0x18,0x18,0x00,0x00,0x18,0x18,0x00}, // :
+                     {0x00,0x18,0x18,0x00,0x00,0x18,0x18,0x08}, // ;
+                     {0x00,0x10,0x20,0x40,0x80,0x40,0x20,0x10}, // <
+                     {0x00,0x00,0x7e,0x00,0x00,0xfc,0x00,0x00}, // =
+                     {0x00,0x08,0x04,0x02,0x01,0x02,0x04,0x08}, // >
+                     {0x00,0x38,0x44,0x04,0x08,0x10,0x00,0x10}, // ?
+                     {0x00,0x30,0x48,0xba,0xba,0x84,0x78,0x00}, // @
+                     {0x00,0x1c,0x22,0x42,0x42,0x7e,0x42,0x42}, // A
+                     {0x00,0x78,0x44,0x44,0x78,0x44,0x44,0x7c}, // B
+                     {0x00,0x3c,0x44,0x40,0x40,0x40,0x44,0x7c}, // C
+                     {0x00,0x7c,0x42,0x42,0x42,0x42,0x44,0x78}, // D
+                     {0x00,0x78,0x40,0x40,0x70,0x40,0x40,0x7c}, // E
+                     {0x00,0x7c,0x40,0x40,0x78,0x40,0x40,0x40}, // F
+                     {0x00,0x3c,0x40,0x40,0x5c,0x44,0x44,0x78}, // G
+                     {0x00,0x42,0x42,0x42,0x7e,0x42,0x42,0x42}, // H
+                     {0x00,0x7c,0x10,0x10,0x10,0x10,0x10,0x7e}, // I
+                     {0x00,0x7e,0x02,0x02,0x02,0x02,0x04,0x38}, // J
+                     {0x00,0x44,0x48,0x50,0x60,0x50,0x48,0x44}, // K
+                     {0x00,0x40,0x40,0x40,0x40,0x40,0x40,0x7c}, // L
+                     {0x00,0x82,0xc6,0xaa,0x92,0x82,0x82,0x82}, // M
+                     {0x00,0x42,0x42,0x62,0x52,0x4a,0x46,0x42}, // N
+                     {0x00,0x3c,0x42,0x42,0x42,0x42,0x44,0x38}, // O
+                     {0x00,0x78,0x44,0x44,0x48,0x70,0x40,0x40}, // P
+                     {0x00,0x3c,0x42,0x42,0x52,0x4a,0x44,0x3a}, // Q
+                     {0x00,0x78,0x44,0x44,0x78,0x50,0x48,0x44}, // R
+                     {0x00,0x38,0x40,0x40,0x38,0x04,0x04,0x78}, // S
+                     {0x00,0x7e,0x90,0x10,0x10,0x10,0x10,0x10}, // T
+                     {0x00,0x42,0x42,0x42,0x42,0x42,0x42,0x3e}, // U
+                     {0x00,0x42,0x42,0x42,0x42,0x44,0x28,0x10}, // V
+                     {0x80,0x82,0x82,0x92,0x92,0x92,0x94,0x78}, // W
+                     {0x00,0x42,0x42,0x24,0x18,0x24,0x42,0x42}, // X
+                     {0x00,0x44,0x44,0x28,0x10,0x10,0x10,0x10}, // Y
+                     {0x00,0x7c,0x04,0x08,0x7c,0x20,0x40,0xfe}, // Z
+                      // (the font does not contain any lower case letters. you can add your own.)
+};
+
+struct pos { int x; int y; };
+
+struct pos spiral( int size, struct pos in )
+{
+  struct pos out  = { size / 2, size / 2 - 1 };
+  struct pos iter = { 0, 0 };
+
+  int inc_y    = 1;
+  int inc      = 1;
+  int inc_l    = 1;
+  int inc_curl = 1;
+
+  while ( iter.x != in.x || iter.y != in.y ) {
+    if ( inc_y ) {
+      out.y += inc;
+      inc_curl --;
+
+      if ( inc_curl == 0 ) {
+        inc_y    = 0;
+        inc_curl = inc_l;
+        inc      = - inc;
+      }
+    } else {
+      out.x += inc;
+      inc_curl --;
+
+      if ( inc_curl == 0 ) {
+        inc_y    = 1;
+        inc_l ++;
+        inc_curl = inc_l;
+      }
+    }
+
+    iter.x ++;
+    if ( iter.x == size ) {
+      iter.x = 0;
+      iter.y ++;
+    }
+  }
+
+  return out;
+}
+
+void testSpiral()
+{
+  int y, x;
+  int size = 4;
+
+  for ( int y = 0; y < size; y ++ )
+    for ( int x = 0; x < size; x ++ ) {
+
+      struct pos in  = { x, y };
+      struct pos out = spiral( size, in );
+
+      Serial.print( "in: ");
+      Serial.print( in.x );
+      Serial.print( ", " );
+      Serial.print( in.y );
+      Serial.print( " => " );
+      Serial.print( out.x );
+      Serial.print( ", " );
+      Serial.println( out.y );
+    }
+}
+
+void showChar( int size, byte *ch ) {
+
+  int x, y;
+
+  for ( y = 0; y < size; y ++ ) {
+    for ( x = 0; x < size; x ++ ) {
+      byte mask = 1 << ( size - 1 - x );
+
+      lc.setLed(0, y, x, ch[y] & mask );
+    }
+  }
+}
+
+void setBit( int d, int y, int x, int b )
+{
+  lc.setLed(d, y, x, 1 );
+  delay( delaytime / 20 );
+  lc.setLed(d, y, x, 0 );
+  delay( delaytime / 20 );
+  lc.setLed(d, y, x, b );
+  delay( delaytime / 20 );
+}
+
+void showCharSpiral( int size, byte *ch )
+{
+  for ( int y = 0; y < size; y ++ ) {
+    for ( int x = 0; x < size; x ++ ) {
+
+      struct pos in = { x, y };
+
+      struct pos out = spiral( size, in );
+
+      byte mask = 1 << ( size - 1 - out.x );
+
+      setBit( 0, out.y, out.x, ch[out.y] & mask );
+    }
+  }
+}
+
+void showCharWipe( int size, int y, int x, unsigned char *ch, int vert, int dir )
+{
+  int is, ii, js, ji;
+
+  for ( int i = 0; i < size; i ++ ) {
+    for ( int j = 0; j < size; j ++ ) {
+
+      unsigned char mask;
+      unsigned char bit;
+
+      if ( vert ) {
+        if ( dir ) {
+          mask = 1 << ( size - 1 - i );
+          bit = ch[ j ] & mask;
+          setBit( 0, j, i, bit );
+        } else {
+          mask = 1 << ( i );
+          bit = ch[ j ] & mask;
+          setBit( 0, j, size - 1 - i, bit );
+        }
+      } else {
+        if ( dir ) {
+          mask = 1 << ( size - 1 - j );
+          bit = ch[ i ] & mask;
+          setBit( 0, i, j, bit );
+        } else {
+          mask = 1 << ( j );
+          bit = ch[ size - 1 - i ] & mask;
+          setBit( 0, size - 1 - i, size - 1 - j, bit );
+        }
+      }
+    }
+
+    delay( delaytime );
+  }
+}
+
+
+void writeArduinoOnMatrix() {
+
+  int i, j, b;
+
+  lc.setIntensity(0,12);
+
+  for ( i = 0; i < 59; i ++ ) {
+    showCharSpiral( 8, font[i] );
+    delay( delaytime * 10 );
+    showChar( 8, font[0] );
+    delay( delaytime );
+    showCharWipe( 8, 1, 7, font[i], i % 4 / 2, (i % 4) % 2 );
+    delay( delaytime * 10 );
+  }
+}
+
+/*
+  This function lights up a some LEDs in a row.
+ The pattern will be repeated on every row.
+ The pattern will blink along with the row-number.
+ row number 4 (index==3) will blink 4 times etc.
+ */
+void rows() {
+  for(int row=0;row<8;row++) {
+    delay(delaytime);
+    lc.setRow(0,row,B10100000);
+    delay(delaytime);
+    lc.setRow(0,row,(byte)0);
+    for(int i=0;i<row;i++) {
+      delay(delaytime);
+      lc.setRow(0,row,B10100000);
+      delay(delaytime);
+      lc.setRow(0,row,(byte)0);
+    }
+  }
+}
+
+/*
+  This function lights up a some LEDs in a column.
+ The pattern will be repeated on every column.
+ The pattern will blink along with the column-number.
+ column number 4 (index==3) will blink 4 times etc.
+ */
+void columns() {
+  for(int col=0;col<8;col++) {
+    delay(delaytime);
+    lc.setColumn(0,col,B10100000);
+    delay(delaytime);
+    lc.setColumn(0,col,(byte)0);
+    for(int i=0;i<col;i++) {
+      delay(delaytime);
+      lc.setColumn(0,col,B10100000);
+      delay(delaytime);
+      lc.setColumn(0,col,(byte)0);
+    }
+  }
+}
+
+/*
+ This function will light up every LED on the matrix.
+ The led will blink along with the row-number.
+ row number 4 (index==3) will blink 4 times etc.
+ */
+void single() {
+  for(int row=0;row<8;row++) {
+    for(int col=0;col<8;col++) {
+      delay(delaytime);
+      lc.setLed(0,row,col,true);
+      delay(delaytime);
+      for(int i=0;i<col;i++) {
+        lc.setLed(0,row,col,false);
+        delay(delaytime * 10);
+        lc.setLed(0,row,col,true);
+        delay(delaytime);
+      }
+    }
+  }
+}
+
+void loop() {
+
+  lc.clearDisplay(0);
+
+  //testSpiral();
+  
+  writeArduinoOnMatrix();
+
+  //rows();
+  //columns();
+  //single();
+}
+
