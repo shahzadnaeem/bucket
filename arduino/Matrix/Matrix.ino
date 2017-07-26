@@ -161,11 +161,8 @@ void showChar( int size, byte *ch ) {
 void setBit( int d, int y, int x, int b )
 {
   lc.setLed(d, y, x, 1 );
-  delay( delaytime / 20 );
-  lc.setLed(d, y, x, 0 );
-  delay( delaytime / 20 );
+  delay( delaytime / 50 );
   lc.setLed(d, y, x, b );
-  delay( delaytime / 20 );
 }
 
 void showCharSpiral( int size, byte *ch )
@@ -186,8 +183,6 @@ void showCharSpiral( int size, byte *ch )
 
 void showCharWipe( int size, int y, int x, unsigned char *ch, int vert, int dir )
 {
-  int is, ii, js, ji;
-
   for ( int i = 0; i < size; i ++ ) {
     for ( int j = 0; j < size; j ++ ) {
 
