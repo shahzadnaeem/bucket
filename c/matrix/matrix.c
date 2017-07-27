@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 
 // -----------------------------------------------------------------------------
@@ -52,6 +53,10 @@ unsigned char font[][8] = {
 
 // -----------------------------------------------------------------------------
 
+#define FONT(c) font[(c - 'A' + 2)]
+
+// -----------------------------------------------------------------------------
+
 typedef struct pos { int x; int y; } pos_t;
 
 // -----------------------------------------------------------------------------
@@ -91,12 +96,6 @@ pos_t spiral( int size, pos_t in )
     if ( iter.x == size ) {
       iter.x = 0;
       iter.y ++;
-
-      if ( iter.y == size ) {
-        printf( "SPLAT!!!\n" );
-        endwin();
-        exit(1);
-      }
     }
   }
 
@@ -131,6 +130,58 @@ void showChar( int size, int y, int x, unsigned char *ch )
       refresh();
     }
   }
+}
+
+void showCharFast( int size, int y, int x, unsigned char *ch )
+{
+  for ( int i = 0; i < size; i ++ ) {
+    for ( int j = 0; j < size; j ++ ) {
+
+      unsigned char mask = 1 << ( size - 1 - j );
+
+      unsigned char bit = ch[i] & mask;
+
+      move( y * size + i, x * size + j );
+
+      printw( bit ? "#" : "." );
+    }
+  }
+
+  refresh();
+}
+
+void showScroll( int size, int y, int x, int pos, unsigned char *ch1, unsigned char *ch2 )
+{
+  unsigned char newChar[size];
+
+  for ( int i = 0; i < size; i ++ ) {
+    newChar[i] = ( ( ch1[i] << pos ) | ( ch2[i] >> ( size - pos ) ) & 0xFF );
+ }
+
+  showCharFast( size, y, x, newChar );
+}
+
+void scrollString( int size, int y, int x, int width, char* string )
+{
+  int len     = strlen( string );
+  int pos     = 0;
+  int lastPos = len - width;
+
+  if ( lastPos < 0 ) {
+    lastPos = pos;
+  }
+
+  int i = 0;
+  do {
+    for ( int p = 0; p < size; p ++ ) {
+      for ( int j = 0; j < width; j ++ ) {
+        showScroll( size, y, x + j, p, FONT(string[i+j]), FONT(string[i+j+1]) );
+      }
+      usleep( 50000 );
+    }
+
+    i ++;
+  } while ( i < lastPos );
 }
 
 void showCharSpiral( int size, int y, int x, unsigned char *ch )
@@ -216,12 +267,25 @@ void testSpiral()
 
 // -----------------------------------------------------------------------------
 
-#define FONT(c) font[(c - 'A' + 2)]
-
-// -----------------------------------------------------------------------------
-
 void demo()
 {
+  int res = -1;
+  int i   = 0;
+
+  scrollString( 8, 1, 2, 4, "????HELLO?JENNY?JENNY??????BYE!" );
+
+  while ( res == -1 ) {
+
+    for ( i = 0; i <= 8; i ++ ) {
+      showScroll( 8, 0, 1, i, FONT('J'), font[1] );
+
+      usleep( 200000 );
+    }
+
+    timeout( 1000 );
+    res = getch();
+  }
+
   showChar( 8, 1, 3, chA );
   showChar( 8, 1, 4, chB );
 
@@ -236,9 +300,6 @@ void demo()
   showCharWipe( 8, 1, 5, ch_SPC, 1, 0 );
   showCharWipe( 8, 1, 5, ch_ALL, 1, 1 );
   showCharWipe( 8, 1, 5, ch_SPC, 0, 0 );
-
-  int res = -1;
-  int i   = 0;
 
   while ( res == -1 ) {
 
@@ -383,9 +444,9 @@ int main()
   initscr();
   curs_set(0);
 
-  jennyDemo();
+  // jennyDemo();
 
-  //demo();
+  demo();
 
   endwin();
 }
