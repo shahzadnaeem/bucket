@@ -10,3 +10,6 @@ fix_font: fix_font.c
 	gcc $< -o $@
 	./$@
 
+rand: rand.c
+	gcc $< -o $@
+	./$@

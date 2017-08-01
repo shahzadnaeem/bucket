@@ -242,8 +242,39 @@ void showCharWipe( int size, int y, int x, unsigned char *ch, int vert, int dir 
       printw( bit ? "#" : "." );
     }
 
-    usleep( SyncDelay * size );
+    usleep( SyncDelay / size );
     refresh();
+  }
+}
+
+void showCharRand( int size, int y, int x, unsigned char *ch )
+{
+  int a = 0;
+
+  for ( int c = 0; c < size * size; c ++ ) {
+
+    int i = a / 8;
+    int j = a % size;
+
+    unsigned char mask = 1 << ( size - 1 - j );
+    unsigned char bit = ch[i] & mask;
+
+    move( y * size + i, x * size + j );
+
+    printw( bit ? "#" : "." );
+
+    usleep( SyncDelay );
+    refresh();
+
+    if ( c != 0 ) {
+      do
+      {
+        int newbit = (((a >> 6) ^ (a >> 5)) & 1);
+        a = ((a << 1) | newbit) & 0x7f;
+      } while ( a >= size * size );
+    } else {
+      a = 61;
+    }
   }
 }
 
@@ -271,6 +302,13 @@ void demo()
 {
   int res = -1;
   int i   = 0;
+
+  
+  showCharRand( 8, 0, 1, FONT('J') );
+  showCharRand( 8, 0, 1, FONT('E') );
+  showCharRand( 8, 0, 1, FONT('N') );
+  showCharRand( 8, 0, 1, FONT('N') );
+  showCharRand( 8, 0, 1, FONT('Y') );
 
   scrollString( 8, 1, 2, 4, "????HELLO?JENNY?JENNY??????BYE!" );
 
