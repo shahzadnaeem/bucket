@@ -2,6 +2,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+// https://en.wikipedia.org/wiki/Linear-feedback_shift_register
+
 uint32_t prbsGen( uint32_t n, uint32_t mask, int numTaps, int taps[] )
 {
   uint32_t xor = 0;
