@@ -240,10 +240,9 @@ void showCharWipe( int size, int y, int x, unsigned char *ch, int vert, int dir 
       }
 
       printw( bit ? "#" : "." );
+      usleep( SyncDelay );
+      refresh();
     }
-
-    usleep( SyncDelay / size );
-    refresh();
   }
 }
 
@@ -339,6 +338,7 @@ void demo()
   showCharWipe( 8, 1, 5, ch_ALL, 1, 1 );
   showCharWipe( 8, 1, 5, ch_SPC, 0, 0 );
 
+  res = -1;
   while ( res == -1 ) {
 
     showCharSpiral( 8, 1, 6, font[i] );
