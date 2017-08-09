@@ -1,0 +1,7 @@
+1,2,3 #doh!
+3,4,7
+100,200,300
+1,0,1
+2,2,4  #bad boy!
+0,0,0
+-1,-1,-2  #Line can't end with newline!
