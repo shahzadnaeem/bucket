@@ -1,21 +1,25 @@
 #include <LedControl.h>
 
-LedControl lc=LedControl(2,3,4,1);
+#define DEVICES 4
+
+LedControl lc=LedControl(2,3,4, DEVICES);
 
 unsigned long delaytime = 100;
 
 void setup() {
 
   Serial.begin(115200);
-  
-  // Wake up  
-  lc.shutdown(0,false);
 
-  // Med brighness
-  lc.setIntensity(0,8);
+  for ( int d = 0; d < DEVICES; d ++ ) {
+    // Wake up  
+    lc.shutdown(d,false);
 
-  // Clear
-  lc.clearDisplay(0);
+    // Med brighness
+    lc.setIntensity(d,1+4*d);
+
+    // Clear
+    lc.clearDisplay(d);
+  }
 }
 
 byte font[128][8] = 
@@ -304,6 +308,18 @@ void fastShowChar( int size, byte *ch ) {
   }
 }
 
+void fastShowCharN( int size, int n, byte *ch ) {
+
+  int r;
+
+  for ( r = 0; r < size; r ++ ) {
+
+    lc.setRow( n, r, ch[r] );
+  }
+}
+
+
+
 void setBit( int d, int y, int x, int b )
 {
   lc.setLed(d, y, x, 1 );
@@ -468,7 +484,7 @@ void bigCounter() {
   }
 }
 
-void showScroll( int size, int pos, byte *ch1, byte *ch2 )
+void showScroll( int size, int pos, int n, byte *ch1, byte *ch2 )
 {
   byte newChar[size];
 
@@ -476,7 +492,7 @@ void showScroll( int size, int pos, byte *ch1, byte *ch2 )
     newChar[i] = ( ( ch1[i] << pos ) | ( ch2[i] >> ( size - pos ) ) );
  }
 
-  fastShowChar( SIZE, newChar );
+  fastShowCharN( SIZE, n, newChar );
 }
 
 void showScrollAnimation( int size, int frames, int pos, byte *ch1[], byte *ch2[] )
@@ -517,7 +533,7 @@ void scrollString( int size, int width, const char *string )
   do {
     for ( int p = 0; p < size; p ++ ) {
       for ( int j = 0; j < width; j ++ ) {
-        showScroll( size, p, font[string[i+j]], font[string[i+j+1]] );
+        showScroll( size, p, width - j - 1, font[string[i+j]], font[string[i+j+1]] );
       }
       delay( delaytime );
     }
@@ -531,9 +547,35 @@ void animateString( const char *string, int delayTime )
   int len = strlen( string );
 
   for ( int i = 0; i <len; i ++ ) {
-    fastShowChar( SIZE, font[string[i]] );
+    for ( int n = 0; n < DEVICES; n ++ ) {
+      fastShowCharN( SIZE, n, font[string[i]] );
+    }
     delay( delayTime );
   }
+}
+
+void nowServing()
+{
+  int now = 100;
+
+  do
+  {
+    char msg[60];
+
+    sprintf( msg, "   Now serving:%d", now );
+
+    scrollString( SIZE, DEVICES, msg );
+
+    int del = random( 10 ) + 1;
+    delay( 1000 * del );
+
+    if ( random( 10 ) <= 2 ) {
+      now += ( random( 3 ) + 1 );
+    }
+
+    now ++;
+    
+  } while ( true );
 }
 
 
@@ -545,30 +587,34 @@ void loop() {
 
   //bigCounter();
 
-  //scrollString( SIZE, 1, " Hello there Iman IMAN Iman BYE! " );
+  nowServing();
+  
+  scrollString( SIZE, DEVICES, "Hello there Jenny, hello there Iman!" );
 
   //scrollAnimation();
 
+  if ( 1 ) {
   for ( int i = 1; i < 20; i ++ ) {
     char buf[20];
 
-    sprintf( buf, "d=%dms", i );
-    scrollString( SIZE, 1, buf );
+    sprintf( buf, " d=%dms ", i );
+    scrollString( SIZE, DEVICES, buf );
 
     const char *msg = "\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0d\x0e\x0f";
     int len = strlen( msg );
     const char *msg2 = "\x10\x11\x12\x13\x14\x15\x16\x17";
 
     int d = i * 10;
-    int j = 5000 / ( d * len );
+    int j = 1000 / ( d * len );
 
     do {
-      animateString( msg, d );
+      //animateString( msg, d );
 
       animateString( msg2, d );
 
       j --;
     } while ( j >= 0 );
+  }
   }
 
   //writeArduinoOnMatrix();
