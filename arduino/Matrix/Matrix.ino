@@ -1,6 +1,10 @@
 #include <LedControl.h>
 
+// Number of LED matrices
 #define DEVICES 4
+
+// LED matrix cell size
+#define SIZE 8
 
 LedControl lc=LedControl(2,3,4, DEVICES);
 
@@ -15,7 +19,7 @@ void setup() {
     lc.shutdown(d,false);
 
     // Med brighness
-    lc.setIntensity(d,1+4*d);
+    lc.setIntensity(d,1+d*d);
 
     // Clear
     lc.clearDisplay(d);
@@ -154,72 +158,6 @@ byte font[128][8] =
   { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }   // 007f
 };
 
-
-
-/*
-byte font[][8] = { {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}, // SPACE
-                   {0x10,0x18,0x18,0x18,0x18,0x00,0x18,0x18}, // EXCL
-                   {0x28,0x28,0x08,0x00,0x00,0x00,0x00,0x00}, // QUOT
-                   {0xFF,0x81,0x81,0x81,0x81,0x81,0x81,0xFF}, // # - SQUARE
-                   {0x10,0x38,0x54,0x70,0x1c,0x54,0x38,0x10}, // $
-                   {0x00,0x60,0x66,0x08,0x10,0x66,0x06,0x00}, // %
-                   {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF}, // ALL-ON
-                   {0x00,0x10,0x18,0x18,0x08,0x00,0x00,0x00}, // '
-                   {0x02,0x04,0x08,0x08,0x08,0x08,0x08,0x04}, // (
-                   {0x40,0x20,0x10,0x10,0x10,0x10,0x10,0x20}, // )
-                   {0x00,0x10,0x54,0x38,0x10,0x38,0x54,0x10}, // *
-                   {0x00,0x08,0x08,0x08,0x7f,0x08,0x08,0x08}, // +
-                   {0x00,0x00,0x00,0x00,0x00,0x18,0x18,0x08}, // COMMA
-                   {0x00,0x00,0x00,0x00,0x7e,0x00,0x00,0x00}, // -
-                   {0x00,0x00,0x00,0x00,0x00,0x00,0x06,0x06}, // DOT
-                   {0x00,0x04,0x04,0x08,0x10,0x20,0x40,0x40}, // /
-                   {0x00,0x38,0x44,0x4c,0x54,0x64,0x44,0x38}, // 0
-                   {0x04,0x0c,0x14,0x24,0x04,0x04,0x04,0x04}, // 1
-                   {0x00,0x30,0x48,0x04,0x04,0x38,0x40,0x7c}, // 2
-                   {0x00,0x38,0x04,0x04,0x18,0x04,0x44,0x38}, // 3
-                   {0x00,0x04,0x0c,0x14,0x24,0x7e,0x04,0x04}, // 4
-                   {0x00,0x7c,0x40,0x40,0x78,0x04,0x04,0x38}, // 5
-                   {0x00,0x38,0x40,0x40,0x78,0x44,0x44,0x38}, // 6
-                   {0x00,0x7c,0x04,0x04,0x08,0x08,0x10,0x10}, // 7
-                   {0x00,0x3c,0x44,0x44,0x38,0x44,0x44,0x78}, // 8
-                   {0x00,0x38,0x44,0x44,0x3c,0x04,0x04,0x78}, // 9
-                   {0x00,0x18,0x18,0x00,0x00,0x18,0x18,0x00}, // :
-                   {0x00,0x18,0x18,0x00,0x00,0x18,0x18,0x08}, // ;
-                   {0x00,0x10,0x20,0x40,0x80,0x40,0x20,0x10}, // <
-                   {0x00,0x00,0x7e,0x00,0x00,0xfc,0x00,0x00}, // =
-                   {0x00,0x08,0x04,0x02,0x01,0x02,0x04,0x08}, // >
-                   {0x00,0x38,0x44,0x04,0x08,0x10,0x00,0x10}, // ?
-                   {0x00,0x30,0x48,0xba,0xba,0x84,0x78,0x00}, // @
-                   {0x00,0x1c,0x22,0x42,0x42,0x7e,0x42,0x42}, // A
-                   {0x00,0x78,0x44,0x44,0x78,0x44,0x44,0x7c}, // B
-                   {0x00,0x3c,0x44,0x40,0x40,0x40,0x44,0x7c}, // C
-                   {0x00,0x7c,0x42,0x42,0x42,0x42,0x44,0x78}, // D
-                   {0x00,0x78,0x40,0x40,0x70,0x40,0x40,0x7c}, // E
-                   {0x00,0x7c,0x40,0x40,0x78,0x40,0x40,0x40}, // F
-                   {0x00,0x3c,0x40,0x40,0x5c,0x44,0x44,0x78}, // G
-                   {0x00,0x42,0x42,0x42,0x7e,0x42,0x42,0x42}, // H
-                   {0x00,0x7c,0x10,0x10,0x10,0x10,0x10,0x7e}, // I
-                   {0x00,0x7e,0x02,0x02,0x02,0x02,0x04,0x38}, // J
-                   {0x00,0x44,0x48,0x50,0x60,0x50,0x48,0x44}, // K
-                   {0x00,0x40,0x40,0x40,0x40,0x40,0x40,0x7c}, // L
-                   {0x00,0x82,0xc6,0xaa,0x92,0x82,0x82,0x82}, // M
-                   {0x00,0x42,0x42,0x62,0x52,0x4a,0x46,0x42}, // N
-                   {0x00,0x3c,0x42,0x42,0x42,0x42,0x44,0x38}, // O
-                   {0x00,0x78,0x44,0x44,0x48,0x70,0x40,0x40}, // P
-                   {0x00,0x3c,0x42,0x42,0x52,0x4a,0x44,0x3a}, // Q
-                   {0x00,0x78,0x44,0x44,0x78,0x50,0x48,0x44}, // R
-                   {0x00,0x38,0x40,0x40,0x38,0x04,0x04,0x78}, // S
-                   {0x00,0x7e,0x90,0x10,0x10,0x10,0x10,0x10}, // T
-                   {0x00,0x42,0x42,0x42,0x42,0x42,0x42,0x3e}, // U
-                   {0x00,0x42,0x42,0x42,0x42,0x44,0x28,0x10}, // V
-                   {0x80,0x82,0x82,0x92,0x92,0x92,0x94,0x78}, // W
-                   {0x00,0x42,0x42,0x24,0x18,0x24,0x42,0x42}, // X
-                   {0x00,0x44,0x44,0x28,0x10,0x10,0x10,0x10}, // Y
-                   {0x00,0x7c,0x04,0x08,0x7c,0x20,0x40,0xfe}, // Z
-                   // (the font does not contain any lower case letters. you can add your own.)
-};
-*/
-
 struct pos { int x; int y; };
 
 struct pos spiral( int size, struct pos in )
@@ -285,49 +223,46 @@ void testSpiral()
     }
 }
 
-void showChar( int size, byte *ch ) {
-
+void showCharN( int size, int n, byte *ch )
+{
   int x, y;
 
   for ( y = 0; y < size; y ++ ) {
     for ( x = 0; x < size; x ++ ) {
       byte mask = 1 << ( size - 1 - x );
 
-      lc.setLed(0, y, x, ch[y] & mask );
+      lc.setLed(n, y, x, ch[y] & mask );
     }
-  }
+  }  
 }
 
-void fastShowChar( int size, byte *ch ) {
-
-  int r;
-
-  for ( r = 0; r < size; r ++ ) {
-
-    lc.setRow( 0, r, ch[r] );
-  }
+void showChar( int size, byte *ch ) {
+  showCharN( size, 0, ch );
 }
 
-void fastShowCharN( int size, int n, byte *ch ) {
-
+void fastShowCharN( int size, int n, byte *ch )
+{
   int r;
 
-  for ( r = 0; r < size; r ++ ) {
-
+  for ( r = 0; r < size; r ++ )
+  {
     lc.setRow( n, r, ch[r] );
   }
 }
 
-
-
-void setBit( int d, int y, int x, int b )
+void fastShowChar( int size, byte *ch )
 {
-  lc.setLed(d, y, x, 1 );
-  delay( delaytime / 50 );
-  lc.setLed(d, y, x, b );
+  fastShowCharN( 0, size, ch );
 }
 
-void showCharSpiral( int size, byte *ch )
+void setBit( int n, int y, int x, int b )
+{
+  lc.setLed(n, y, x, 1 );
+  delay( delaytime / 50 );
+  lc.setLed(n, y, x, b );
+}
+
+void showCharSpiralN( int size, int n, byte *ch )
 {
   for ( int y = 0; y < size; y ++ ) {
 
@@ -339,12 +274,17 @@ void showCharSpiral( int size, byte *ch )
 
       byte mask = 1 << ( size - 1 - out.x );
 
-      setBit( 0, out.y, out.x, ch[out.y] & mask );
+      setBit( n, out.y, out.x, ch[out.y] & mask );
     }
   }
 }
 
-void showCharWipe( int size, int y, int x, unsigned char *ch, int vert, int dir )
+void showCharSpiral( int size, byte *ch )
+{
+  showCharSpiralN( size, 0, ch );
+}
+
+void showCharWipeN( int size, int n, int y, int x, unsigned char *ch, int vert, int dir )
 {
   for ( int i = 0; i < size; i ++ ) {
     for ( int j = 0; j < size; j ++ ) {
@@ -356,110 +296,55 @@ void showCharWipe( int size, int y, int x, unsigned char *ch, int vert, int dir 
         if ( dir ) {
           mask = 1 << ( size - 1 - i );
           bit = ch[ j ] & mask;
-          setBit( 0, j, i, bit );
+          setBit( n, j, i, bit );
         } else {
           mask = 1 << ( i );
           bit = ch[ j ] & mask;
-          setBit( 0, j, size - 1 - i, bit );
+          setBit( n, j, size - 1 - i, bit );
         }
       } else {
         if ( dir ) {
           mask = 1 << ( size - 1 - j );
           bit = ch[ i ] & mask;
-          setBit( 0, i, j, bit );
+          setBit( n, i, j, bit );
         } else {
           mask = 1 << ( j );
           bit = ch[ size - 1 - i ] & mask;
-          setBit( 0, size - 1 - i, size - 1 - j, bit );
+          setBit( n, size - 1 - i, size - 1 - j, bit );
         }
       }
     }
-
-    delay( delaytime );
   }
 }
 
+void showCharWipe( int size, int n, int y, int x, unsigned char *ch, int vert, int dir )
+{
+  showCharWipeN( size, 0, y, x, ch, vert, dir );
+}
 
-void writeArduinoOnMatrix() {
-
+void writeArduinoOnMatrix()
+{
   int i, j, b;
 
-  lc.setIntensity(0,12);
+  //lc.setIntensity(0,12);
 
   for ( i = 32; i < 128; i ++ ) {
-    showCharSpiral( 8, font[i] );
+    for ( int n = 0; n < DEVICES; n ++ ) {
+      showCharSpiralN( SIZE, n, font[i] );
+    }
     delay( delaytime * 10 );
-    showChar( 8, font[0] );
+    
+    for ( int n = 0; n < DEVICES; n ++ ) {
+      showCharN( SIZE, n, font[0] );
+    }
     delay( delaytime );
-    showCharWipe( 8, 1, 7, font[i], i % 4 / 2, (i % 4) % 2 );
+    
+    for ( int n = 0; n < DEVICES; n ++ ) {
+      showCharWipeN( SIZE, n, 1, 7, font[i], i % 4 / 2, (i % 4) % 2 );
+    }
     delay( delaytime * 10 );
   }
 }
-
-/*
-  This function lights up a some LEDs in a row.
- The pattern will be repeated on every row.
- The pattern will blink along with the row-number.
- row number 4 (index==3) will blink 4 times etc.
- */
-void rows() {
-  for(int row=0;row<8;row++) {
-    delay(delaytime);
-    lc.setRow(0,row,B10100000);
-    delay(delaytime);
-    lc.setRow(0,row,(byte)0);
-    for(int i=0;i<row;i++) {
-      delay(delaytime);
-      lc.setRow(0,row,B10100000);
-      delay(delaytime);
-      lc.setRow(0,row,(byte)0);
-    }
-  }
-}
-
-/*
-  This function lights up a some LEDs in a column.
- The pattern will be repeated on every column.
- The pattern will blink along with the column-number.
- column number 4 (index==3) will blink 4 times etc.
- */
-void columns() {
-  for(int col=0;col<8;col++) {
-    delay(delaytime);
-    lc.setColumn(0,col,B10100000);
-    delay(delaytime);
-    lc.setColumn(0,col,(byte)0);
-    for(int i=0;i<col;i++) {
-      delay(delaytime);
-      lc.setColumn(0,col,B10100000);
-      delay(delaytime);
-      lc.setColumn(0,col,(byte)0);
-    }
-  }
-}
-
-/*
- This function will light up every LED on the matrix.
- The led will blink along with the row-number.
- row number 4 (index==3) will blink 4 times etc.
- */
-void single() {
-  for(int row=0;row<8;row++) {
-    for(int col=0;col<8;col++) {
-      delay(delaytime);
-      lc.setLed(0,row,col,true);
-      delay(delaytime);
-      for(int i=0;i<col;i++) {
-        lc.setLed(0,row,col,false);
-        delay(delaytime * 10);
-        lc.setLed(0,row,col,true);
-        delay(delaytime);
-      }
-    }
-  }
-}
-
-#define SIZE 8
 
 void bigCounter() {
 
@@ -471,14 +356,16 @@ void bigCounter() {
     big[i] = 0;
   }
 
-  lc.setIntensity(0,15);
+  //lc.setIntensity(0,15);
 
   while (1) {
 
     int i = 0;
     while ( i < SIZE && ( ++big[i++] == 0 ));
 
-    fastShowChar( SIZE, big );
+    for ( int n = 0; n < DEVICES; n ++ ) {
+      fastShowCharN( SIZE, n, big );
+    }
 
     //delay( delaytime );
   }
@@ -587,13 +474,13 @@ void loop() {
 
   //bigCounter();
 
-  nowServing();
+  //nowServing();
   
   scrollString( SIZE, DEVICES, "Hello there Jenny, hello there Iman!" );
 
   //scrollAnimation();
 
-  if ( 1 ) {
+  if ( 0 ) {
   for ( int i = 1; i < 20; i ++ ) {
     char buf[20];
 
@@ -618,9 +505,5 @@ void loop() {
   }
 
   //writeArduinoOnMatrix();
-
-  //rows();
-  //columns();
-  //single();
 }
 
