@@ -19,7 +19,10 @@ void setup() {
     lc.shutdown(d,false);
 
     // Med brighness
-    lc.setIntensity(d,1+d*d);
+    lc.setIntensity(d,12);
+
+    // Fade brigthness
+    //lc.setIntensity(d,1+d*d);
 
     // Clear
     lc.clearDisplay(d);
@@ -441,27 +444,80 @@ void animateString( const char *string, int delayTime )
   }
 }
 
+int limit( int v, int min, int max )
+{
+  if ( v < min ) return min;
+  if ( v > max ) return max;
+  return v;
+}
+
+void setDisplay( int intensity )
+{
+  for ( int d = 0; d <= DEVICES; d ++ )
+  {
+    lc.setIntensity( d, intensity );   
+  }
+}
+
+void fadeDisplay( int times, int start, int fin, int del )
+{
+  int s = limit( start, 0, 15 );
+  int e = limit( fin, 0, 15 );
+
+  if ( times % 2 == 1 ) times ++;
+
+  for ( int t = 0; t < times; t ++ )
+  {
+    int inc = 1;
+    
+    if ( s > e ) inc = -1; 
+    
+    for ( int b = s; b != e; b = b + inc ) {
+      for ( int d = 0; d <= DEVICES; d ++ )
+      {
+        lc.setIntensity( d, b );   
+      }
+      delay( del );
+    }
+
+    int tmp = s;
+    s = e;
+    e = tmp;
+  }
+}
+
 void nowServing()
 {
   int now = 100;
+
+  int intensity = 12;
 
   do
   {
     char msg[60];
 
-    sprintf( msg, "   Now serving:%d", now );
+    sprintf( msg, "    ... Now serving>%3d", now );
+
+    setDisplay( intensity );
 
     scrollString( SIZE, DEVICES, msg );
 
-    int del = random( 10 ) + 1;
-    delay( 1000 * del );
+    int del = random( 3 ) * 3 + 1;
 
-    if ( random( 10 ) <= 2 ) {
-      now += ( random( 3 ) + 1 );
+    int inc = 1;
+
+    if ( random( 10 ) <= 3 ) {
+      inc += ( random( 3 ) + 1 );
     }
 
-    now ++;
-    
+    fadeDisplay( del * inc, intensity, 1, 80 );
+
+    now += inc;
+
+    if ( now > 999 ) {
+      now = 42;
+    }
+
   } while ( true );
 }
 
@@ -474,9 +530,9 @@ void loop() {
 
   //bigCounter();
 
-  //nowServing();
+  nowServing();
   
-  scrollString( SIZE, DEVICES, "Hello there Jenny, hello there Iman!" );
+  //scrollString( SIZE, DEVICES, "Hello there Jenny, hello there Iman!, Yo POPS :)" );
 
   //scrollAnimation();
 
