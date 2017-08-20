@@ -7,6 +7,48 @@
 
 // -----------------------------------------------------------------------------
 
+#define ASCII_NUL  0
+#define ASCII_US   31
+#define ASCII_SPC  32
+#define ASCII_LAST 126
+
+char *ascii_ctl[] = {
+  "NUL",
+  "SOH",
+  "STX",
+  "ETX",
+	"EOT",
+  "ENQ",
+  "ACK",
+  "BEL",
+  "BS",
+	"TAB",
+  "LF",
+  "VT",
+  "FF",
+  "CR",
+  "SO",
+	"SI",
+  "DLE",
+  "DC1",
+  "DC2",
+  "DC3",
+  "DC4",
+  "NAK",
+  "SYN",
+  "ETB",
+  "CAN",
+  "EM",
+  "SUB",
+  "ESC",
+  "FS",
+  "GS",
+  "RS",
+  "US"
+};
+
+// -----------------------------------------------------------------------------
+
 char font8x8_basic[128][8] = {
     { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},   // U+0000 (nul)
     { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},   // U+0001
@@ -179,13 +221,16 @@ void fix_font( char (*font)[8], int num )
 
     printf ( " }" );
     if ( ( i + 1 ) < num ) {
-      if ( i > 32 ) {
+      if ( i >= ASCII_NUL && i <= ASCII_US ) {
+        printf( ",  // %.4x |%3s|\n", i, ascii_ctl[i] );
+      } 
+      else if ( i >= ASCII_SPC && i <= ASCII_LAST ) {
         printf( ",  // %.4x '%c'\n", i, i );
       } else {
         printf( ",  // %.4x\n", i );
       }
     } else {
-      printf( "   // %.4x\n", i );
+      printf( "   // %.4x |DEL|\n", i );
     }
   }
 
