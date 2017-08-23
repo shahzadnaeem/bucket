@@ -1,7 +1,12 @@
 #include <LedControl.h>
 
+/* #define __DUE__ */
+#ifdef __DUE__
+#include <DueTimer.h>
+#endif
+
 // Number of LED matrices
-#define DEVICES 4
+#define DEVICES 1
 
 // LED matrix cell size
 #define SIZE 8
@@ -49,7 +54,7 @@ byte font[128][8] =
   { 0x81, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },  // 000f
   { 0x00, 0x00, 0x00, 0x18, 0x18, 0x00, 0x00, 0x00 },  // 0010
   { 0x00, 0x00, 0x18, 0x3c, 0x3c, 0x18, 0x00, 0x00 },  // 0011
-  { 0x00, 0x18, 0x3c, 0x7e, 0x73, 0x3c, 0x18, 0x00 },  // 0012
+  { 0x00, 0x18, 0x3c, 0x7e, 0x7e, 0x3c, 0x18, 0x00 },  // 0012
   { 0x18, 0x3c, 0x7e, 0xff, 0xff, 0x7e, 0x3c, 0x18 },  // 0013
   { 0x18, 0x24, 0x42, 0x81, 0x81, 0x42, 0x24, 0x18 },  // 0014
   { 0x00, 0x18, 0x24, 0x42, 0x42, 0x24, 0x18, 0x00 },  // 0015
@@ -255,7 +260,7 @@ void fastShowCharN( int size, int n, byte *ch )
 
 void fastShowChar( int size, byte *ch )
 {
-  fastShowCharN( 0, size, ch );
+  fastShowCharN( size, 0, ch );
 }
 
 void setBit( int n, int y, int x, int b )
@@ -349,6 +354,29 @@ void writeArduinoOnMatrix()
   }
 }
 
+#ifdef __DUE__
+long fire = 0;
+
+void fireNow()
+{
+  fire = 1;
+}
+
+int setupTimer( long t )
+{
+  Timer3.attachInterrupt( fireNow ).start( t );
+
+  return 1;
+}
+#else
+long fire = 1;
+
+int setupTimer( long t )
+{
+  return 0;
+}
+#endif
+
 void bigCounter() {
 
   unsigned char big[SIZE];
@@ -359,18 +387,27 @@ void bigCounter() {
     big[i] = 0;
   }
 
+  int haveTimer = setupTimer( 1000000 / 25 );
+  
   //lc.setIntensity(0,15);
 
-  while (1) {
+  long n = 0;
 
+  while (1) {
     int i = 0;
     while ( i < SIZE && ( ++big[i++] == 0 ));
 
-    for ( int n = 0; n < DEVICES; n ++ ) {
-      fastShowCharN( SIZE, n, big );
+    n++;
+
+    if ( fire ) {
+      for ( int n = 0; n < DEVICES; n ++ ) {
+        fastShowCharN( SIZE, n, big );
+      }
+
+      if ( haveTimer ) fire = 0;
     }
 
-    //delay( delaytime );
+    if ( ! haveTimer ) delay( delaytime );
   }
 }
 
@@ -400,12 +437,15 @@ void showScrollAnimation( int size, int frames, int pos, byte *ch1[], byte *ch2[
 
 void scrollAnimation()
 {
-  byte *ch1[] = { font['a'], font['b'] };
-  byte *ch2[] = { font['A'], font['B'] };
+  byte *ch1[] = { font[0x10], font[0x11], font[0x12], font[0x13], font[0x14], font[0x15], font[0x16] };
+  byte *ch2[] = { font[0x10], font[0x11], font[0x12], font[0x13], font[0x14], font[0x15], font[0x16] };
 
   for ( int p = 0; p < SIZE; p ++ ) {
-    showScrollAnimation( SIZE, 2, p, ch1, ch2 );
-    delay( 10 * delaytime );
+    showScrollAnimation( SIZE, 7, p, ch1, ch2 );
+
+    //showScroll( SIZE, p, 0, ch1[0], ch2[0] );
+
+    delay( 60 );
   }
 }
 
@@ -530,11 +570,11 @@ void loop() {
 
   //bigCounter();
 
-  nowServing();
+  //nowServing();
   
   //scrollString( SIZE, DEVICES, "Hello there Jenny, hello there Iman!, Yo POPS :)" );
 
-  //scrollAnimation();
+  scrollAnimation();
 
   if ( 0 ) {
   for ( int i = 1; i < 20; i ++ ) {
@@ -551,7 +591,7 @@ void loop() {
     int j = 1000 / ( d * len );
 
     do {
-      //animateString( msg, d );
+      animateString( msg, d );
 
       animateString( msg2, d );
 
