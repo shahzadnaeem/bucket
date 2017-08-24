@@ -1,4 +1,5 @@
-#include <LedControl.h>
+#include <LedControl.h> 
+#include <DHT.h>
 
 /* #define __DUE__ */
 #ifdef __DUE__
@@ -11,7 +12,15 @@
 // LED matrix cell size
 #define SIZE 8
 
-LedControl lc=LedControl(2,3,4, DEVICES);
+#define LED_DATA 2
+#define LED_CLK  3
+#define LED_CS   4
+
+LedControl lc=LedControl(LED_DATA, LED_CLK, LED_CS, DEVICES);
+
+#define TEMP_DATA 6
+
+DHT dht( TEMP_DATA, DHT11 );
 
 unsigned long delaytime = 100;
 
@@ -163,7 +172,7 @@ byte font[128][8] =
   { 0x18, 0x18, 0x18, 0x00, 0x18, 0x18, 0x18, 0x00 },  // 007c '|'
   { 0xe0, 0x30, 0x30, 0x1c, 0x30, 0x30, 0xe0, 0x00 },  // 007d '}'
   { 0x76, 0xdc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },  // 007e '~'
-  { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }   // 007f
+  { 0x60, 0x90, 0x90, 0x66, 0x09, 0x08, 0x09, 0x06 }   // 007f
 };
 
 struct pos { int x; int y; };
@@ -470,6 +479,12 @@ void scrollString( int size, int width, const char *string )
 
     i ++;
   } while ( i < lastPos );
+
+  // Final position
+  for ( int j = 0; j < width; j ++ ) {
+    showScroll( size, 0, width - j - 1, font[string[i+j]], font[string[i+j+1]] );    
+  }
+  delay( delaytime );
 }
 
 void animateString( const char *string, int delayTime )
@@ -562,6 +577,34 @@ void nowServing()
 }
 
 
+void tempAndHumidity()
+{
+  const int oneSec = 1000;
+  const int preReadDelay = 2 * oneSec;
+
+  delay( preReadDelay );
+
+  dht.read();
+
+  float temp = dht.readTemperature();
+  float humidity = dht.readHumidity();
+
+  char msg[64];
+
+  if ( isnan( temp ) || isnan(humidity) )
+  {
+    sprintf( msg, "Bad read!" );
+    scrollString( SIZE, DEVICES, msg );
+  } else {
+    sprintf( msg, "t=%2.0f\x7f", temp );
+    scrollString( SIZE, DEVICES, msg );
+    delay(oneSec);
+    sprintf( msg, "h=%2.0f%%", humidity );
+    scrollString( SIZE, DEVICES, msg );
+  }
+  delay(oneSec);
+}
+
 void loop() {
 
   lc.clearDisplay(0);
@@ -574,7 +617,11 @@ void loop() {
   
   //scrollString( SIZE, DEVICES, "Hello there Jenny, hello there Iman!, Yo POPS :)" );
 
-  scrollAnimation();
+  for ( int l = 0; l <= 10; l ++ ) {
+    scrollAnimation();
+  }
+
+  tempAndHumidity();
 
   if ( 0 ) {
   for ( int i = 1; i < 20; i ++ ) {
