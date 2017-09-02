@@ -26,7 +26,7 @@ unsigned long delaytime = 100;
 
 #define ADD_NOISE 0
 
-#define BOUNDS 1
+#define BOUNDS 0
 
 void setup() {
 
@@ -685,21 +685,109 @@ void scrollAnimationLoop( int n )
 }
 
 #define SET_CELL( b, x, y ) b[y] = b[y] | ( 1 << ( SIZE - x - 1 ) )
-#define CLR_CELL( b, x, y ) b[y] = b[y] & ^( 1 << ( SIZE - x - 1 ) )
-#define CELL_ISSET( b, x, y ) !( !( b[y] & ( 1 << ( SIZE - x - 1 ) ) ) )
+#define CLR_CELL( b, x, y ) b[y] = b[y] & ( ~( 1 << ( SIZE - x - 1 ) ) & 0xFF )
+#define CELL_ISSET( b, x, y ) ( ( b[y] & ( 1 << ( SIZE - x - 1 ) ) ) != 0 )
+
+int lifeBoardEmpty( byte b[8] )
+{
+  for ( int i = 0; i < SIZE; i ++ )
+  {
+    if ( b[i] ) return 0;
+  }
+
+  return 1;
+}
+
+int lifeBoardCopy( byte from[8], byte to[8] )
+{
+  for ( int i = 0; i < SIZE; i ++ )
+  {
+    to[i] = from[i];
+  }
+}
+
+int lifeBoardsSame( byte b1[8], byte b2[8] ) {
+  
+  for ( int i = 0; i < SIZE; i ++ )
+  {
+    if ( b1[i] != b2[i] ) return 0;
+  }
+
+  return 1;
+}
+
+int lifeNeighbours( byte b[8], int x, int y )
+{
+  int res = 0;
+
+  for ( int r = y - 1; r < y + 2; r ++ ) {
+    for ( int c = x - 1; c < x + 2; c++ ) {
+      if ( ( r >= 0 && r < SIZE ) && ( c >= 0 && c < SIZE ) ) {
+        if ( CELL_ISSET( b, c, r ) ) {
+          res ++;
+        }
+      }
+    }
+  }
+
+  if ( CELL_ISSET( b, x, y ) ) {
+    res --;
+  }
+
+  return res;
+}
 
 void gameOfLife()
 {
-  byte b[8] =  { 0, 0, 0, 0, 0, 0, 0, 0 };
+  byte b[8] =  { 0, 0, 0x70, 0, 0, 0x07, 0, 0 };
+  byte oldB[8];
 
   for ( int i = 0; i < SIZE; i ++ )
   {
-    SET_CELL( b, i, i );  
+    //SET_CELL( b, i, i );
+
+    b[i] = random( 256 );
   }
 
   fastShowChar( SIZE, b );
 
-  delay( 2000 );
+  delay( 1000 );
+
+  int iterations = 100;
+  int done = 0;
+
+  while ( !done && !lifeBoardEmpty( b ) && iterations )
+  {
+    lifeBoardCopy( b, oldB );
+
+    for ( int y = 0; y < SIZE; y ++ ) {
+      for ( int x = 0; x < SIZE; x ++ ) {
+        int nbs = lifeNeighbours( oldB, x, y );
+        int live = CELL_ISSET( oldB, x, y );
+
+        if ( live ) {
+          if ( ( nbs < 2 ) || ( nbs > 3 ) ) {
+            CLR_CELL( b, x, y );
+          }
+        } else {
+          if ( nbs == 3 ) {
+            SET_CELL( b, x, y );
+          }
+        }
+      }
+    }
+
+    fastShowChar( SIZE, b );
+
+    delay( 60 );
+
+    done = lifeBoardsSame( b, oldB );
+    
+    iterations --;
+  }
+
+  delay( 1000 );
+
 
   int setCount = 0;
 
@@ -712,10 +800,10 @@ void gameOfLife()
   }
 
   char msg[65];
-  sprintf( msg, "cell count=%d", setCount );
+  sprintf( msg, "#=%d", setCount );
   scrollString( SIZE, DEVICES, msg );
 
-  delay( 3000 );
+  delay( 1000 );
 }
 
 void loop() {
@@ -728,7 +816,7 @@ void loop() {
   
   //scrollString( SIZE, DEVICES, "Hello there Jenny, hello there Iman!, Yo POPS :)" );
 
-  tempAndHumidity();
+  //tempAndHumidity();
 
   //scrollAnimationLoop( 10 );
 
