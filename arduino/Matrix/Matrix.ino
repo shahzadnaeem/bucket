@@ -24,6 +24,10 @@ DHT dht( TEMP_DATA, DHT11 );
 
 unsigned long delaytime = 100;
 
+#define ADD_NOISE 0
+
+#define BOUNDS 1
+
 void setup() {
 
   Serial.begin(115200);
@@ -263,7 +267,21 @@ void fastShowCharN( int size, int n, byte *ch )
 
   for ( r = 0; r < size; r ++ )
   {
-    lc.setRow( n, r, ch[r] );
+    byte noise = 0;
+
+    if ( ADD_NOISE )
+    {
+      noise = ( random( ADD_NOISE ) & random( ADD_NOISE ) & random( ADD_NOISE ) & random( ADD_NOISE ) ) & 0xFF;
+    }
+
+    byte c = ch[r] ^ noise;
+
+    if ( BOUNDS )
+    {
+      if ( r == 0 || r == 7 ) c = c | 0x81;  
+    }
+
+    lc.setRow( n, r, c );
   }
 }
 
@@ -426,7 +444,7 @@ void showScroll( int size, int pos, int n, byte *ch1, byte *ch2 )
 
   for ( int i = 0; i < size; i ++ ) {
     newChar[i] = ( ( ch1[i] << pos ) | ( ch2[i] >> ( size - pos ) ) );
- }
+  }
 
   fastShowCharN( SIZE, n, newChar );
 }
@@ -468,21 +486,23 @@ void scrollString( int size, int width, const char *string )
     lastPos = pos;
   }
 
-  int i = 0;
-  do {
-    for ( int p = 0; p < size; p ++ ) {
-      for ( int j = 0; j < width; j ++ ) {
-        showScroll( size, p, width - j - 1, font[string[i+j]], font[string[i+j+1]] );
+  if ( len > width ) {
+    int i = 0;
+    do {
+      for ( int p = 0; p < size; p ++ ) {
+        for ( int j = 0; j < width; j ++ ) {
+          showScroll( size, p, width - j - 1, font[string[i+j]], font[string[i+j+1]] );
+        }
+        delay( delaytime );
       }
-      delay( delaytime );
-    }
-
-    i ++;
-  } while ( i < lastPos );
+      
+      i ++;
+    } while ( i < lastPos );
+  }
 
   // Final position
   for ( int j = 0; j < width; j ++ ) {
-    showScroll( size, 0, width - j - 1, font[string[i+j]], font[string[i+j+1]] );    
+    showScroll( size, 0, width - j - 1, font[string[len-(width-j)]], font[string[len-(width-j)]] );    
   }
   delay( delaytime );
 }
@@ -577,6 +597,33 @@ void nowServing()
 }
 
 
+void phpIs()
+{
+  char *whats[] =
+  {
+    "Shit",
+    "ACE!",
+    "Okay",
+    "Duff"  
+  };
+
+  int delayTime = 2000;
+
+  int numWhats = sizeof( whats ) / sizeof( *whats );
+
+  char msg[64];
+
+  sprintf( msg, "PHP is ..." );
+  scrollString( SIZE, DEVICES, msg );
+  delay( delayTime );
+
+  int what = random( numWhats );
+  scrollString( SIZE, DEVICES, whats[what] );
+  delay( delayTime );
+  
+}
+
+
 void tempAndHumidity()
 {
   const int oneSec = 1000;
@@ -605,25 +652,8 @@ void tempAndHumidity()
   delay(oneSec);
 }
 
-void loop() {
-
-  lc.clearDisplay(0);
-
-  //testSpiral();
-
-  //bigCounter();
-
-  //nowServing();
-  
-  //scrollString( SIZE, DEVICES, "Hello there Jenny, hello there Iman!, Yo POPS :)" );
-
-  for ( int l = 0; l <= 10; l ++ ) {
-    scrollAnimation();
-  }
-
-  tempAndHumidity();
-
-  if ( 0 ) {
+void animationTest()
+{
   for ( int i = 1; i < 20; i ++ ) {
     char buf[20];
 
@@ -645,7 +675,68 @@ void loop() {
       j --;
     } while ( j >= 0 );
   }
+}
+
+void scrollAnimationLoop( int n )
+{
+  for ( int l = 0; l <= n; l ++ ) {
+    scrollAnimation();
   }
+}
+
+#define SET_CELL( b, x, y ) b[y] = b[y] | ( 1 << ( SIZE - x - 1 ) )
+#define CLR_CELL( b, x, y ) b[y] = b[y] & ^( 1 << ( SIZE - x - 1 ) )
+#define CELL_ISSET( b, x, y ) !( !( b[y] & ( 1 << ( SIZE - x - 1 ) ) ) )
+
+void gameOfLife()
+{
+  byte b[8] =  { 0, 0, 0, 0, 0, 0, 0, 0 };
+
+  for ( int i = 0; i < SIZE; i ++ )
+  {
+    SET_CELL( b, i, i );  
+  }
+
+  fastShowChar( SIZE, b );
+
+  delay( 2000 );
+
+  int setCount = 0;
+
+  for ( int y = 0; y < SIZE; y ++ ) {
+    for ( int x = 0; x < SIZE; x ++ ) {
+      if ( CELL_ISSET( b, x, y ) ) {
+        setCount ++;
+      }
+    }
+  }
+
+  char msg[65];
+  sprintf( msg, "cell count=%d", setCount );
+  scrollString( SIZE, DEVICES, msg );
+
+  delay( 3000 );
+}
+
+void loop() {
+
+  //testSpiral();
+
+  //bigCounter();
+
+  //nowServing();
+  
+  //scrollString( SIZE, DEVICES, "Hello there Jenny, hello there Iman!, Yo POPS :)" );
+
+  tempAndHumidity();
+
+  //scrollAnimationLoop( 10 );
+
+  //phpIs();
+
+  //animationTest();
+
+  gameOfLife();
 
   //writeArduinoOnMatrix();
 }
