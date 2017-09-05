@@ -800,7 +800,7 @@ void gameOfLife()
   }
 
   char msg[65];
-  sprintf( msg, "#=%d", setCount );
+  sprintf( msg, "#=%d i=%d", setCount, 100-iterations );
   scrollString( SIZE, DEVICES, msg );
 
   delay( 1000 );
