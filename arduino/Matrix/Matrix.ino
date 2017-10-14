@@ -816,7 +816,7 @@ void loop() {
   
   //scrollString( SIZE, DEVICES, "Hello there Jenny, hello there Iman!, Yo POPS :)" );
 
-  //tempAndHumidity();
+  tempAndHumidity();
 
   //scrollAnimationLoop( 10 );
 
