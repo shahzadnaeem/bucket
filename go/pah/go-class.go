@@ -3,20 +3,35 @@ package main
 import "fmt"
 
 type iPahEr interface {
-	pah(i int)
+	pah()
 }
 
 type PahEr struct {
-	i int
+	I int
+	J float64
 }
 
+type BlahEr struct {
+	P PahEr
+}
+
+type PahErAlias = PahEr;
+
 func (p *PahEr) pah() {
-	fmt.Printf("i = %d\n", p.i)
+	fmt.Printf("*p = %v\n", p)
+}
+
+func (b BlahEr) pah() {
+	fmt.Printf("b = %v\n", b)
 }
 
 func main() {
 	var num int = 120
-	p := &PahEr{i: num}
+	var pah = PahEr{I: num, J: float64(num)/3.0}
+	var p_pah = &pah
 
-	p.pah()
+	p_pah.pah()
+
+	var blah = BlahEr{ P: pah }
+	blah.pah()
 }
