@@ -49,3 +49,6 @@ Steps - on Fedora (probably CentOS7 too)
  kubectl delete service hello-node
  kubectl delete deployment hello-node
  minikube stop
+ 
+eval $(minikube docker-env -u)
+
