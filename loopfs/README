@@ -1,0 +1,52 @@
+
+Using a file as a filesystem - Loop device
+
+All as root
+
+
+  # Create a file somewhere
+  cd /data/
+  df -h .
+  mkdir LOOP-FSs
+  cd LOOP-FSs
+  dd if=/dev/zero of=./disk.loop.1GB bs=1024 count=1024000
+
+  # Find an available loop device
+  losetup --find
+
+  # Add loop device to file
+  losetup /dev/loop2 /data/LOOP-FSs/disk.loop.1GB 
+  losetup --list
+
+  # Create a filesystem and mount it
+  mkfs.ext4 -v /dev/loop2
+  ls /mnt
+  mkdir /mnt/loop.ext4.1GB
+  mount /dev/loop2 /mnt/loop.ext4.1GB
+
+  df -h
+
+  # Do some stuff
+  mkdir /mnt/loop.ext4.1GB/shahzad
+  ls -l /home/shahzad
+  chown shahzad.shahzad /mnt/loop.ext4.1GB/shahzad
+
+  # We are done, tidy up
+  umount /mnt/loop.ext4.1GB
+
+  df -h
+
+  # Remove loop device
+  losetup -l
+  losetup -d /dev/loop2
+  losetup --find
+
+  # Tidy up, leave file around for now
+
+  cd /data/
+  ls
+  cd LOOP-FSs/
+  mkdir data mnt
+  mv disk.loop.1GB data
+
+
