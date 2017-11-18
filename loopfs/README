@@ -55,3 +55,11 @@ This causes file to be setup as loop device before the mount
 /data/LOOP-FSs/data/disk.loop.btrfs.1GB	/data/LOOP-FSs/mnt/btrfs.1GB	btrfs	loop,rw,relatime,compress=lzo,space_cache,subvolid=5,subvol=/ 0 0
 /data/LOOP-FSs/data/disk.loop.ext4.1GB	/data/LOOP-FSs/mnt/ext4.1GB	ext4	loop,rw,relatime,data=ordered 0 0
 
+Bonus - btrfs compression
+
+Both loop fs above have same 500MiB file
+
+Filesystem   Size   Used  Avail Use% Mounted on
+/dev/loop2   1000M *33M*  868M   4%  /data/LOOP-FSs/mnt/btrfs.1GB
+/dev/loop3    969M  492M  412M  55%  /data/LOOP-FSs/mnt/ext4.1GB
+
