@@ -3,7 +3,6 @@ Using a file as a filesystem - Loop device
 
 All as root
 
-
   # Create a file somewhere
   cd /data/
   df -h .
@@ -49,4 +48,10 @@ All as root
   mkdir data mnt
   mv disk.loop.1GB data
 
+Adding to /etc/fstab - needs loop option prepended to fs options
+This causes file to be setup as loop device before the mount
+
+# Loop filesystems - on /data -- 'loop' option does initial loop device setup
+/data/LOOP-FSs/data/disk.loop.btrfs.1GB	/data/LOOP-FSs/mnt/btrfs.1GB	btrfs	loop,rw,relatime,compress=lzo,space_cache,subvolid=5,subvol=/ 0 0
+/data/LOOP-FSs/data/disk.loop.ext4.1GB	/data/LOOP-FSs/mnt/ext4.1GB	ext4	loop,rw,relatime,data=ordered 0 0
 
