@@ -1,0 +1,10 @@
+
+Wine (Run Windows programs on Unix)
+
+HeidiSQL
+========
+Seems to work just fine.
+
+Installing    wine ~/Downloads/HeidiSQL_9.4.0.5125_Setup.exe    // 32bit EXE
+Running       hsql (bash alias: alias hsql='wine "c:\\Program Files (x86)\\HeidiSQL\\heidisql.exe"')
+
