@@ -43,39 +43,51 @@ outputFile="${OUTPUT}.${size}"
 
 command="time $TIMEOPTS wget $WGETOPTS --output-document=$outputFile $getFile"
 
-echo -e "\n# Starting '${count}' wgets of size '$size' ...\n";
-sleep 1 
 
-i=1
+# ==============================================================================
 
-while [[ $i -le $count ]]
-do
+function do_test
+{
+  echo -e "\n# Starting '${count}' wgets of size '$size' ...\n";
+  sleep 1 
 
- result=`$command 2>&1`
+  i=1
 
- status=$?
+  while [[ $i -le $count ]]
+  do
 
- echo -e "START: `date`\n  CMD: $command\n  STATUS: $status\n  SIZE: $size\n  TIME: $result" >> $RESULTS
- if [[ $status -eq 0 ]]
-  then
-   dnsTime=`grep '^+ DNS' $LOG | sed -e 's/^[^=]*= //'`
-   connectTime=`grep '^+ Connect' $LOG | sed -e 's/^[^=]*= //'`
+    result=`$command 2>&1`
 
-   bandwidth=`grep saved $LOG | sed -e 's/^.*(\([^)]*\)).*$/\1/'`
+    status=$?
 
-   echo "  DNS: $dnsTime"          >> $RESULTS
-   echo "  CONNECT: $connectTime"  >> $RESULTS
-   echo "  RATE: $bandwidth"       >> $RESULTS
-   echo "  COUNT: ${i}/${count}"   >> $RESULTS
- fi
+    echo -e "START: `date`\n  CMD: $command\n  STATUS: $status\n  SIZE: $size\n  TIME: $result" >> $RESULTS
+    if [[ $status -eq 0 ]]
+    then
+      dnsTime=`grep '^+ DNS' $LOG | sed -e 's/^[^=]*= //'`
+      connectTime=`grep '^+ Connect' $LOG | sed -e 's/^[^=]*= //'`
 
- if [[ $status -eq 0 ]]
-  then
-   echo -e "#${i} Test ran successfully for '$getFile' in $result"
- else
-   echo -e "Failure running test - see '$LOG' for details\n  $result"
-   exit $status
- fi
+      bandwidth=`grep saved $LOG | sed -e 's/^.*(\([^)]*\)).*$/\1/'`
 
- ((i++))
-done
+      echo "  DNS: $dnsTime"          >> $RESULTS
+      echo "  CONNECT: $connectTime"  >> $RESULTS
+      echo "  RATE: $bandwidth"       >> $RESULTS
+      echo "  COUNT: ${i}/${count}"   >> $RESULTS
+    fi
+
+    if [[ $status -eq 0 ]]
+    then
+      echo -e "#${i} Test ran successfully for '$getFile' in $result"
+    else
+      echo -e "Failure running test - see '$LOG' for details\n  $result"
+      exit $status
+    fi
+
+    ((i++))
+  done
+}
+
+# ==============================================================================
+
+do_test
+
+# ==============================================================================
