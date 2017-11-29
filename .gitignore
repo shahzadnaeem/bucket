@@ -3,4 +3,4 @@ c/atomic/atomic
 c/matrix/fix_font
 c/matrix/matrix
 go/pah/go-class
-mysql/test_db_master/*
+mysql/test_db-master/**
