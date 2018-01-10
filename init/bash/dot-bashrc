@@ -71,6 +71,7 @@ alias gs='git status'
 alias gc='git commit'
 alias gd='git diff'
 alias gph='git push'
+alias gphm='GIT_SSH_COMMAND="ssh -i ~/.ssh/shahzadnaeem" git push'
 alias gitas="alias | grep -e \"='git\" | sed -e \"s/^alias /  /\""
 
 # gulp - local deploy needed
