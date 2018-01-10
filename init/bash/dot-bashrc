@@ -33,7 +33,7 @@ alias p='cd ~/projects'
 
 # Misc aliases
 alias a='atom &'
-alias e='xemacs &'
+alias e='emacs &'
 alias x='clear'
 alias h='history'
 alias mhz='grep MHz /proc/cpuinfo'
@@ -69,9 +69,12 @@ alias gcl='git clone'
 alias gui='gitk'
 alias gs='git status'
 alias gc='git commit'
+alias gd='git diff'
 alias gph='git push'
 alias gitas="alias | grep -e \"='git\" | sed -e \"s/^alias /  /\""
 
+# gulp - local deploy needed
+alias gulp='./node_modules/gulp/bin/gulp.js'
 
 # HeidiSQL
 alias hsql='wine "c:\\Program Files (x86)\\HeidiSQL\\heidisql.exe"'
