@@ -819,16 +819,16 @@ void checkPir()
 
   pirRead = digitalRead( PIR_DATA );
   
-  if ( pirRead ) {
+  if ( pirRead == HIGH ) {
     digitalWrite( PIR_SHOW_LED, HIGH );
   } else {
     digitalWrite( PIR_SHOW_LED, LOW );    
   }
 
-  if ( pirRead ) {
-    fastShowChar( SIZE, font['Y'] );
+  if ( pirRead == HIGH ) {
+    scrollString( SIZE, DEVICES, "Stop THIEF!" );
   } else {
-    fastShowChar( SIZE, font['N'] );  
+    animateString( "|/-\\", 200 );
   }
 
   delay( delayTime );
@@ -846,7 +846,7 @@ void loop() {
   
   //scrollString( SIZE, DEVICES, "Hello there Jenny, hello there Iman!, Yo POPS :)" );
 
-  tempAndHumidity();
+  //tempAndHumidity();
 
   //scrollAnimationLoop( 10 );
 

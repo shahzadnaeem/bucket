@@ -11,6 +11,8 @@
 #   test.log     current wget output
 #   results.log  historical log of all runs
 
+# ==============================================================================
+
 MYHOME="$HOME/wget"
 
 if [[ ! -d $MYHOME ]]
@@ -25,6 +27,8 @@ TIMEOUT=10
 OUTPUT=$MYHOME/downloaded.file
 RESULTS=$MYHOME/results.log      # This script's log
 
+# ==============================================================================
+
 URL="http://ipv4.download.thinkbroadband.com"
 
 SMALL="10MB.zip"
@@ -35,6 +39,8 @@ HUGE="1GB.zip"
 size=$MEDIUM
 count=2
 
+# ==============================================================================
+
 WGETOPTS="--output-file=$LOG --verbose --tries=$TRIES --timeout=$TIMEOUT --server-response"
 TIMEOPTS="--format %Es"
 
@@ -43,6 +49,14 @@ outputFile="${OUTPUT}.${size}"
 
 command="time $TIMEOPTS wget $WGETOPTS --output-document=$outputFile $getFile"
 
+# ==============================================================================
+
+# Option parsing
+
+if [[ "x$1" != "x" ]]
+then
+
+fi
 
 # ==============================================================================
 
