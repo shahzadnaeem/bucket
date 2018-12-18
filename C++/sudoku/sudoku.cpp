@@ -1,9 +1,12 @@
 // ==============================================================================
 
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include <sstream>
+#include <string>
 #include <algorithm>
+#include <regex>
 
 #include <boost/tokenizer.hpp>
 #include <boost/lexical_cast.hpp>
@@ -35,8 +38,49 @@ Board::Board( const string& stringIn ) : tPlaced(0), tAttempts( 0 ), tSolutions(
   typedef tokenizer<Separator> Tokenizer;
   typedef Tokenizer::iterator  Iter;
 
+  string board;
+
+  // Load file 
+  ifstream ifs(stringIn);
+
+  if ( ifs.good() )
+  {
+    getline( ifs, board );
+  }
+  else {
+    board = stringIn;
+  }
+ 
+  int len    = board.length();
+  int commas = count( board.begin(), board.end(), ',' );
+
+  //x cout << "Length: " << len << ", #Commas: " << commas << endl;
+
+  if ( commas != ((len - 1)/2) )
+  {
+    cout << "No commas in supplied board! - fixing ..." << endl;
+
+    string fixedBoard;
+
+    for ( auto c = board.begin(); c != board.end(); c ++ )
+    {
+      if ( c != board.begin() ) {
+        fixedBoard.push_back( ',' );
+      }
+
+      fixedBoard.push_back( *c );
+    }
+
+    board = fixedBoard;
+  }
+
+  regex dot("\\.");
+  board = regex_replace( board, dot, "0" );
+
+  //x cout << "Board: " << board << endl;
+
   Separator sep( ",", "", boost::keep_empty_tokens );
-  Tokenizer tokens( stringIn, sep );
+  Tokenizer tokens( board, sep );
 
   int items = distance( tokens.begin(), tokens.end() );
 
@@ -547,6 +591,8 @@ ostringstream& Board::displayLine( ostringstream& os ) const
     os << "+---";
   }
   os << "+";
+
+  return os;
 }
 
 // ==============================================================================

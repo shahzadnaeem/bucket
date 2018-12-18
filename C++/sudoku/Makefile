@@ -1,6 +1,6 @@
 
 COMP=g++
-OPTS=-I. -g
+OPTS=-std=c++11 -I. -g
 
 GPP=$(COMP) $(OPTS)
 
