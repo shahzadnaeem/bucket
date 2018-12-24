@@ -4,19 +4,14 @@ OPTS=-std=c++11 -I. -g
 
 GPP=$(COMP) $(OPTS)
 
-main: sudoku.o colour.o boardrunner.o main.cpp
-	$(GPP) -c main.cpp
-	$(GPP) -o main main.o boardrunner.o sudoku.o colour.o
+main: main.o
+	$(GPP) -o main main.o
 
-sudoku.o: sudoku.h sudoku.cpp
-	$(GPP) -c sudoku.cpp
+main.o: main.cpp
+	$(GPP) -c -o $(@) $(<)
 
-boardrunner.o: boardrunner.h boardrunner.cpp
-	$(GPP) -c boardrunner.cpp
-
-colour.o: colour.h colour.cpp
-	$(GPP) -c colour.cpp
-
+object.o: object.cpp object.h
+	$(GPP) -c -o $(@) $(<)
 
 clean:
 	-rm -f main *.o
