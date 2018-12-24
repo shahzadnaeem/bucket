@@ -28,7 +28,7 @@ int main( int argc, char *argv[] )
 
   boardRunner.run();
 
-  exit( 0 );
+  //exit( 0 );
 
   if ( argc > 1 )
   {

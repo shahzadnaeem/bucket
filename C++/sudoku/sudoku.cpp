@@ -616,7 +616,7 @@ string Board::toDisplay() const
 
       if ( tOrigBoard[ i ] )
       {
-        os << Colour( Colour::RED );
+        os << Colour( Colour::YELLOW );
       }
       else
       {
