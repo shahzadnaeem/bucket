@@ -7,7 +7,7 @@ GPP=$(COMP) $(OPTS)
 main: main.o
 	$(GPP) -o main main.o
 
-main.o: main.cpp object.h
+main.o: main.cpp object.h benchmarks.h
 	$(GPP) -c -o $(@) $(<)
 
 object.o: object.cpp object.h
