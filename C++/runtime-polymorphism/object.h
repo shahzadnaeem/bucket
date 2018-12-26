@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+#include <memory>
+
 using namespace std;
 
 void draw( const int& x, ostream& out, size_t pos  )
@@ -14,16 +16,36 @@ void draw( const int& x, ostream& out, size_t pos  )
 
 class object_t {
   public:
-    object_t( const int& x) : self_(x)
+    object_t( const int& x) : self_(make_unique<int_model_t>(x))
     {}
+
+    object_t( const object_t& x) : self_(make_unique<int_model_t>(*x.self_))
+    {}
+
+    object_t& operator=( const object_t& x)
+    {
+        object_t tmp(x); self_ = move(tmp.self_); return *this;
+    }
 
     friend void draw( const object_t& x, ostream& out, size_t pos )
     {
-        draw( x.self_, out, pos );
+        x.self_->draw( out, pos );
     }
 
   private:
-    int self_;
+    struct int_model_t {
+        int_model_t( const int& x ) : data_(x)
+        {}
+
+        void draw( ostream& out, size_t pos ) const
+        {
+            ::draw( data_, out, pos );
+        }
+
+        int data_;
+    };
+
+    unique_ptr<int_model_t> self_;
 };
 
 using document_t = vector<object_t>;

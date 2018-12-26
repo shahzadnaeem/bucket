@@ -1,13 +1,13 @@
 
 COMP=g++
-OPTS=-std=c++11 -I. -g
+OPTS=-std=c++14 -I. -g
 
 GPP=$(COMP) $(OPTS)
 
 main: main.o
 	$(GPP) -o main main.o
 
-main.o: main.cpp
+main.o: main.cpp object.h
 	$(GPP) -c -o $(@) $(<)
 
 object.o: object.cpp object.h
