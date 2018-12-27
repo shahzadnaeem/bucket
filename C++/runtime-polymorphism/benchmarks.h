@@ -14,7 +14,7 @@ class Benchmark
 {
     public:
     typedef std::chrono::high_resolution_clock HiResClock;
-    long run( int times = 10000 )
+    long run( int times = 10'000 )
     {
         auto t0 = HiResClock::now();
 
@@ -62,20 +62,21 @@ class StringToIntVec : public Benchmark
     }
 };
 
-template <typename T>
+template <typename T, int count = 10'000'000>
 void runTest()
 {
     T t;
+    auto const nsecToSecs = 1'000'000'000.0;
 
     regex re("^[0-9]*(.*)$");
     auto name = typeid(t).name();
     auto classname = regex_replace( name, re, "$1" );
 
-    cout << "Running..." << classname;
+    cout << "Running: " << classname << ", " << count << " times..." << flush;
 
-    auto dur = t.run(10'000'000);
+    auto dur = t.run(count);
 
-    float durf = dur / 1'000'000'000.0;
+    float durf = dur / nsecToSecs;
 
     cout << endl;
 
