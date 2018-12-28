@@ -10,7 +10,7 @@ main: main.o
 main.o: main.cpp object.h benchmarks.h
 	$(GPP) -c -o $(@) $(<)
 
-misc: misc.cpp
+misc: misc.cpp misc.h
 	$(GPP) -o $(@) $(<)
 
 clean:
