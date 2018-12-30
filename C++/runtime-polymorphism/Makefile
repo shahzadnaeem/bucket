@@ -13,8 +13,11 @@ main.o: main.cpp object.h benchmarks.h
 misc: misc.cpp misc.h
 	$(GPP) -o $(@) $(<)
 
+nth: nth.cpp
+	$(GPP) -o $(@) $(<)
+
 clean:
-	-rm -f misc main *.o
+	-rm -f nth misc main *.o
 
 
 
