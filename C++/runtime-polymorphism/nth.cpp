@@ -26,6 +26,12 @@ void show_nth( vector<int>& vi, int n )
 static int cmp_count  = 0;
 static int swap_count = 0;
 
+void reset_counts()
+{
+    cmp_count = 0;
+    swap_count = 0;
+}
+
 template <typename Iter1, typename Iter2>
 void my_swap( Iter1 a, Iter2 b )
 {
@@ -50,7 +56,7 @@ void nth_sort( vector<int>& vi, int n )
     }
 }
 
-int main( int argc, char *argv[])
+void run_nth( int argc, char *argv[] )
 {
     vector<int> vi { 10, 9, 1, 2, 3, 5, 7, 10, 8, 6};
     int n = 3;
@@ -65,4 +71,31 @@ int main( int argc, char *argv[])
     show_nth( vi, n );
 
     cout << "Length: " << vi.size() << ", Swaps: " << swap_count << ", compares: " << cmp_count << endl;
+}
+
+void run_reverse( int argc, char *argv[] )
+{
+    vector<string> args( argv + 1, argv + argc );
+
+    for( auto arg : args  )
+    {
+        cout << arg << " => ";
+
+        auto b = arg.begin();
+        auto e = arg.end();
+
+        while ( ( b != e ) && (b != --e) )
+        {
+            my_swap(b, e);
+            b++;
+        }
+
+        //reverse( arg.begin(), arg.end() );
+        cout << arg << endl;
+    }
+}
+
+int main( int argc, char *argv[])
+{
+    run_reverse( argc, argv );
 }
