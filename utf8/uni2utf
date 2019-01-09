@@ -8,8 +8,9 @@ use Encode;
 #   uni2utf 01f4a9 01f600 f7 | bash
 
 foreach (@ARGV) {
-    my $s;
-    $s = unpack('H*', encode('utf8', chr(hex($_))));
-    $s =~ s/(..)/\\x$1/g;
-    say "echo -e '$s'";
+    my ($s, $x);
+    $s = encode('utf8', chr(hex($_)));
+    $x = unpack('H*', $s);
+    $x =~ s/(..)/\\x$1/g;
+    say "echo -e '$x'  # '$s'";
 }
