@@ -37,7 +37,7 @@ void setup() {
     lc.shutdown(d,false);
 
     // Med brighness
-    lc.setIntensity(d,12);
+    lc.setIntensity(d,7);
 
     // Fade brigthness
     //lc.setIntensity(d,1+d*d);
@@ -639,7 +639,7 @@ void heyMiguel()
 
   char msg[64];
 
-  sprintf( msg, "    Hey Miguel!" );
+  sprintf( msg, "    Hey Stefan!" );
   scrollString( SIZE, DEVICES, msg );
   delay( delayTime );
 

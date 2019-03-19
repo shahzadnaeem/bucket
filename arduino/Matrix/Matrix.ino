@@ -826,7 +826,7 @@ void checkPir()
   }
 
   if ( pirRead == HIGH ) {
-    scrollString( SIZE, DEVICES, "Stop THIEF!" );
+    scrollString( SIZE, DEVICES, "Oi! Wot U up to?" );
   } else {
     animateString( "|/-\\", 200 );
   }
