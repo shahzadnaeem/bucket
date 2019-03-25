@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>wikidb Database</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <!-- Bootstrap 3.3.5 -->
+  <link rel="stylesheet" href="bower/admin-lte/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="bower/ionicons/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="bower/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="bower/datatables.net-buttons-bs/css/buttons.bootstrap.min.css">
+  <!-- Code Mirror -->
+  <link rel="stylesheet" href="bower/codemirror/codemirror.css">
+  <!-- Fonts -->
+  <link href='fonts/indieflower/indie-flower.css' rel='stylesheet' type='text/css'>
+  <link href='fonts/source-sans-pro/source-sans-pro.css' rel='stylesheet' type='text/css'>
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="bower/admin-lte/dist/css/AdminLTE.min.css">
+  <!-- Salvattore -->
+  <link rel="stylesheet" href="bower/salvattore/salvattore.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="bower/admin-lte/dist/css/skins/_all-skins.min.css">
+  <!-- SchemaSpy -->
+  <link rel="stylesheet" href="schemaSpy.css">
+  
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="bower/html5shiv/html5shiv.min.js"></script>
+  <script src="bower/respond/respond.min.js"></script>
+  <![endif]-->
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+  <header class="main-header">
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="index.html" class="navbar-brand"><b>wikidb</b> Database</a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Tables <span class="sr-only">(current)</span></a></li>
+			<li><a href="columns.html" title="All of the columns in the schema">Columns</a></li>
+			<li><a href="constraints.html" title="Useful for diagnosing error messages that just give constraint name or number">Constraints</a></li>
+			<li><a href="relationships.html" title="Diagram of table relationships">Relationships</a></li>
+			<li><a href="orphans.html" title="View of tables with neither parents nor children">Orphan&nbsp;Tables</a></li>				
+			<li><a href="anomalies.html" title="Things that might not be quite right">Anomalies</a></li>
+			<li><a href="routines.html" title="Procedures and functions">Routines</a></li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+        <!-- Navbar Right Menu -->
+
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+  </header>
+  <!-- Main content -->
+  <!-- Full Width Column -->
+  <div class="content-wrapper">
+          <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>Utility Tables</h1>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+              <i class="fa fa-code-fork"></i>
+              <h3 class="box-title">Orphan Tables</h3>
+            </div>			
+            <div class="box-body">
+			<div id="grid" data-columns>
+				<div class="item">
+					<img src='diagrams/orphans/valid_tag.1degree.png' usemap='#valid_tag' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/querycache_info.1degree.png' usemap='#querycache_info' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/updatelog.1degree.png' usemap='#updatelog' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/user_former_groups.1degree.png' usemap='#user_former_groups' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/imagelinks.1degree.png' usemap='#imagelinks' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/iwlinks.1degree.png' usemap='#iwlinks' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/l10n_cache.1degree.png' usemap='#l10n_cache' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/langlinks.1degree.png' usemap='#langlinks' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/log_search.1degree.png' usemap='#log_search' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/module_deps.1degree.png' usemap='#module_deps' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/objectcache.1degree.png' usemap='#objectcache' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/searchindex.1degree.png' usemap='#searchindex' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/site_identifiers.1degree.png' usemap='#site_identifiers' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/text.1degree.png' usemap='#text' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/transcache.1degree.png' usemap='#transcache' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/user_groups.1degree.png' usemap='#user_groups' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/user_newtalk.1degree.png' usemap='#user_newtalk' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/user_properties.1degree.png' usemap='#user_properties' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/page_props.1degree.png' usemap='#page_props' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/pagelinks.1degree.png' usemap='#pagelinks' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/querycache.1degree.png' usemap='#querycache' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/templatelinks.1degree.png' usemap='#templatelinks' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/category.1degree.png' usemap='#category' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/externallinks.1degree.png' usemap='#externallinks' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/redirect.1degree.png' usemap='#redirect' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/tag_summary.1degree.png' usemap='#tag_summary' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/watchlist.1degree.png' usemap='#watchlist' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/bot_passwords.1degree.png' usemap='#bot_passwords' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/change_tag.1degree.png' usemap='#change_tag' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/interwiki.1degree.png' usemap='#interwiki' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/querycachetwo.1degree.png' usemap='#querycachetwo' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/categorylinks.1degree.png' usemap='#categorylinks' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/page_restrictions.1degree.png' usemap='#page_restrictions' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/protected_titles.1degree.png' usemap='#protected_titles' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/site_stats.1degree.png' usemap='#site_stats' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/job.1degree.png' usemap='#job' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/sites.1degree.png' usemap='#sites' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/logging.1degree.png' usemap='#logging' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/page.1degree.png' usemap='#page' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/image.1degree.png' usemap='#image' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/revision.1degree.png' usemap='#revision' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/user.1degree.png' usemap='#user' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/oldimage.1degree.png' usemap='#oldimage' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/uploadstash.1degree.png' usemap='#uploadstash' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/ipblocks.1degree.png' usemap='#ipblocks' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/archive.1degree.png' usemap='#archive' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/filearchive.1degree.png' usemap='#filearchive' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+				<div class="item">
+					<img src='diagrams/orphans/recentchanges.1degree.png' usemap='#recentchanges' style="max-width:100%;" border='0' alt='' align='top'></img>
+				</div>
+			</div>
+			<map id="valid_tag" name="valid_tag">
+<area shape="rect" id="node1" href="tables/valid_tag.html" title="valid_tag" alt="" coords="5,5,249,104">
+</map>
+<map id="querycache_info" name="querycache_info">
+<area shape="rect" id="node1" href="tables/querycache_info.html" title="querycache_info" alt="" coords="5,5,320,133">
+</map>
+<map id="updatelog" name="updatelog">
+<area shape="rect" id="node1" href="tables/updatelog.html" title="updatelog" alt="" coords="5,5,259,133">
+</map>
+<map id="user_former_groups" name="user_former_groups">
+<area shape="rect" id="node1" href="tables/user_former_groups.html" title="user_former_groups" alt="" coords="5,5,376,133">
+</map>
+<map id="imagelinks" name="imagelinks">
+<area shape="rect" id="node1" href="tables/imagelinks.html" title="imagelinks" alt="" coords="5,5,368,163">
+</map>
+<map id="iwlinks" name="iwlinks">
+<area shape="rect" id="node1" href="tables/iwlinks.html" title="iwlinks" alt="" coords="5,5,284,163">
+</map>
+<map id="l10n_cache" name="l10n_cache">
+<area shape="rect" id="node1" href="tables/l10n_cache.html" title="l10n_cache" alt="" coords="5,5,371,163">
+</map>
+<map id="langlinks" name="langlinks">
+<area shape="rect" id="node1" href="tables/langlinks.html" title="langlinks" alt="" coords="5,5,279,163">
+</map>
+<map id="log_search" name="log_search">
+<area shape="rect" id="node1" href="tables/log_search.html" title="log_search" alt="" coords="5,5,292,163">
+</map>
+<map id="module_deps" name="module_deps">
+<area shape="rect" id="node1" href="tables/module_deps.html" title="module_deps" alt="" coords="5,5,375,163">
+</map>
+<map id="objectcache" name="objectcache">
+<area shape="rect" id="node1" href="tables/objectcache.html" title="objectcache" alt="" coords="5,5,364,163">
+</map>
+<map id="searchindex" name="searchindex">
+<area shape="rect" id="node1" href="tables/searchindex.html" title="searchindex" alt="" coords="5,5,363,163">
+</map>
+<map id="site_identifiers" name="site_identifiers">
+<area shape="rect" id="node1" href="tables/site_identifiers.html" title="site_identifiers" alt="" coords="5,5,331,163">
+</map>
+<map id="text" name="text">
+<area shape="rect" id="node1" href="tables/text.html" title="text" alt="" coords="5,5,345,163">
+</map>
+<map id="transcache" name="transcache">
+<area shape="rect" id="node1" href="tables/transcache.html" title="transcache" alt="" coords="5,5,287,163">
+</map>
+<map id="user_groups" name="user_groups">
+<area shape="rect" id="node1" href="tables/user_groups.html" title="user_groups" alt="" coords="5,5,307,163">
+</map>
+<map id="user_newtalk" name="user_newtalk">
+<area shape="rect" id="node1" href="tables/user_newtalk.html" title="user_newtalk" alt="" coords="5,5,383,163">
+</map>
+<map id="user_properties" name="user_properties">
+<area shape="rect" id="node1" href="tables/user_properties.html" title="user_properties" alt="" coords="5,5,324,163">
+</map>
+<map id="page_props" name="page_props">
+<area shape="rect" id="node1" href="tables/page_props.html" title="page_props" alt="" coords="5,5,295,192">
+</map>
+<map id="pagelinks" name="pagelinks">
+<area shape="rect" id="node1" href="tables/pagelinks.html" title="pagelinks" alt="" coords="5,5,373,192">
+</map>
+<map id="querycache" name="querycache">
+<area shape="rect" id="node1" href="tables/querycache.html" title="querycache" alt="" coords="5,5,328,192">
+</map>
+<map id="templatelinks" name="templatelinks">
+<area shape="rect" id="node1" href="tables/templatelinks.html" title="templatelinks" alt="" coords="5,5,371,192">
+</map>
+<map id="category" name="category">
+<area shape="rect" id="node1" href="tables/category.html" title="category" alt="" coords="5,5,303,221">
+</map>
+<map id="externallinks" name="externallinks">
+<area shape="rect" id="node1" href="tables/externallinks.html" title="externallinks" alt="" coords="5,5,315,221">
+</map>
+<map id="redirect" name="redirect">
+<area shape="rect" id="node1" href="tables/redirect.html" title="redirect" alt="" coords="5,5,325,221">
+</map>
+<map id="tag_summary" name="tag_summary">
+<area shape="rect" id="node1" href="tables/tag_summary.html" title="tag_summary" alt="" coords="5,5,317,221">
+</map>
+<map id="watchlist" name="watchlist">
+<area shape="rect" id="node1" href="tables/watchlist.html" title="watchlist" alt="" coords="5,5,425,221">
+</map>
+<map id="bot_passwords" name="bot_passwords">
+<area shape="rect" id="node1" href="tables/bot_passwords.html" title="bot_passwords" alt="" coords="5,5,308,251">
+</map>
+<map id="change_tag" name="change_tag">
+<area shape="rect" id="node1" href="tables/change_tag.html" title="change_tag" alt="" coords="5,5,300,251">
+</map>
+<map id="interwiki" name="interwiki">
+<area shape="rect" id="node1" href="tables/interwiki.html" title="interwiki" alt="" coords="5,5,245,251">
+</map>
+<map id="querycachetwo" name="querycachetwo">
+<area shape="rect" id="node1" href="tables/querycachetwo.html" title="querycachetwo" alt="" coords="5,5,371,251">
+</map>
+<map id="categorylinks" name="categorylinks">
+<area shape="rect" id="node1" href="tables/categorylinks.html" title="categorylinks" alt="" coords="5,5,348,280">
+</map>
+<map id="page_restrictions" name="page_restrictions">
+<area shape="rect" id="node1" href="tables/page_restrictions.html" title="page_restrictions" alt="" coords="5,5,353,280">
+</map>
+<map id="protected_titles" name="protected_titles">
+<area shape="rect" id="node1" href="tables/protected_titles.html" title="protected_titles" alt="" coords="5,5,340,280">
+</map>
+<map id="site_stats" name="site_stats">
+<area shape="rect" id="node1" href="tables/site_stats.html" title="site_stats" alt="" coords="5,5,368,280">
+</map>
+<map id="job" name="job">
+<area shape="rect" id="node1" href="tables/job.html" title="job" alt="" coords="5,5,389,397">
+</map>
+<map id="sites" name="sites">
+<area shape="rect" id="node1" href="tables/sites.html" title="sites" alt="" coords="5,5,333,397">
+</map>
+<map id="logging" name="logging">
+<area shape="rect" id="node1" href="tables/logging.html" title="logging" alt="" coords="5,5,353,427">
+</map>
+<map id="page" name="page">
+<area shape="rect" id="node1" href="tables/page.html" title="page" alt="" coords="5,5,415,456">
+</map>
+<map id="image" name="image">
+<area shape="rect" id="node1" href="tables/image.html" title="image" alt="" coords="5,5,408,485">
+</map>
+<map id="revision" name="revision">
+<area shape="rect" id="node1" href="tables/revision.html" title="revision" alt="" coords="5,5,391,485">
+</map>
+<map id="user" name="user">
+<area shape="rect" id="node1" href="tables/user.html" title="user" alt="" coords="5,5,428,515">
+</map>
+<map id="oldimage" name="oldimage">
+<area shape="rect" id="node1" href="tables/oldimage.html" title="oldimage" alt="" coords="5,5,405,544">
+</map>
+<map id="uploadstash" name="uploadstash">
+<area shape="rect" id="node1" href="tables/uploadstash.html" title="uploadstash" alt="" coords="5,5,376,573">
+</map>
+<map id="ipblocks" name="ipblocks">
+<area shape="rect" id="node1" href="tables/ipblocks.html" title="ipblocks" alt="" coords="5,5,391,603">
+</map>
+<map id="archive" name="archive">
+<area shape="rect" id="node1" href="tables/archive.html" title="archive" alt="" coords="5,5,421,632">
+</map>
+<map id="filearchive" name="filearchive">
+<area shape="rect" id="node1" href="tables/filearchive.html" title="filearchive" alt="" coords="5,5,456,720">
+</map>
+<map id="recentchanges" name="recentchanges">
+<area shape="rect" id="node1" href="tables/recentchanges.html" title="recentchanges" alt="" coords="5,5,348,779">
+</map>
+
+			</div>
+		</div>			
+      </section>    
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div>
+      <div class="pull-right hidden-xs">
+        <a href="https://github.com/schemaspy/schemaspy" title="GitHub for SchemaSpy"><i class="fa fa-github-square fa-2x"></i></a>
+        <a href="http://stackoverflow.com/questions/tagged/schemaspy" title="StackOverflow for SchemaSpy"><i class="fa fa-stack-overflow fa-2x"></i></a>
+      </div>
+      <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.0.0</a></strong>
+    </div>
+    <!-- /.container -->
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.2.3 -->
+<script src="bower/admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="bower/admin-lte/plugins/jQueryUI/jquery-ui.min.js"></script>
+<!-- Bootstrap 3.3.5 -->
+<script src="bower/admin-lte/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="bower/datatables.net/jquery.dataTables.min.js"></script>
+<script src="bower/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="bower/datatables.net-buttons/dataTables.buttons.min.js"></script>
+<script src="bower/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+<script src="bower/datatables.net-buttons/buttons.html5.min.js"></script>
+<script src="bower/datatables.net-buttons/buttons.print.min.js"></script>
+<script src="bower/datatables.net-buttons/buttons.colVis.min.js"></script>
+<!-- SheetJS -->
+<script src="bower/js-xlsx/xlsx.full.min.js"></script>
+<!-- pdfmake -->
+<script src="bower/pdfmake/pdfmake.min.js"></script>
+<script src="bower/pdfmake/vfs_fonts.js"></script>
+<!-- SlimScroll -->
+<script src="bower/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="bower/admin-lte/plugins/fastclick/fastclick.js"></script>
+<!-- Salvattore -->
+<script src="bower/salvattore/salvattore.min.js"></script>
+<!-- AnchorJS -->
+<script src="bower/anchor-js/anchor.min.js"></script>
+<!-- CodeMirror -->
+<script src="bower/codemirror/codemirror.js"></script>
+<script src="bower/codemirror/sql.js"></script>
+<!-- AdminLTE App -->
+<script src="bower/admin-lte/dist/js/app.min.js"></script>
+<script src=""></script>
+<script src="schemaSpy.js"></script>
+</body>
+</html>

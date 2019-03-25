@@ -1,0 +1,3995 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>wikidb Database</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <!-- Bootstrap 3.3.5 -->
+  <link rel="stylesheet" href="bower/admin-lte/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="bower/ionicons/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="bower/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="bower/datatables.net-buttons-bs/css/buttons.bootstrap.min.css">
+  <!-- Code Mirror -->
+  <link rel="stylesheet" href="bower/codemirror/codemirror.css">
+  <!-- Fonts -->
+  <link href='fonts/indieflower/indie-flower.css' rel='stylesheet' type='text/css'>
+  <link href='fonts/source-sans-pro/source-sans-pro.css' rel='stylesheet' type='text/css'>
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="bower/admin-lte/dist/css/AdminLTE.min.css">
+  <!-- Salvattore -->
+  <link rel="stylesheet" href="bower/salvattore/salvattore.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="bower/admin-lte/dist/css/skins/_all-skins.min.css">
+  <!-- SchemaSpy -->
+  <link rel="stylesheet" href="schemaSpy.css">
+  
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="bower/html5shiv/html5shiv.min.js"></script>
+  <script src="bower/respond/respond.min.js"></script>
+  <![endif]-->
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+  <header class="main-header">
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="index.html" class="navbar-brand"><b>wikidb</b> Database</a>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Tables <span class="sr-only">(current)</span></a></li>
+			<li><a href="columns.html" title="All of the columns in the schema">Columns</a></li>
+			<li><a href="constraints.html" title="Useful for diagnosing error messages that just give constraint name or number">Constraints</a></li>
+			<li><a href="relationships.html" title="Diagram of table relationships">Relationships</a></li>
+			<li><a href="orphans.html" title="View of tables with neither parents nor children">Orphan&nbsp;Tables</a></li>				
+			<li><a href="anomalies.html" title="Things that might not be quite right">Anomalies</a></li>
+			<li><a href="routines.html" title="Procedures and functions">Routines</a></li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+        <!-- Navbar Right Menu -->
+
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+  </header>
+  <!-- Main content -->
+  <!-- Full Width Column -->
+  <div class="content-wrapper">
+          <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>Columns</h1>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+			  <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+              <h3 class="box-title">Columns</h3>
+            </div>	
+            <div class="box-body">
+				<div class="row">
+					<div id="button_group_one" class="col-md-3 col-sm-6"></div>
+					<div id="button_group_two" class="col-md-2 col-sm-4 pull-right text-right"></div>
+				</div>
+				<table id="column_table" class="table table-bordered table-striped dataTable" role="grid">
+				<thead align='left'>
+					<tr>
+					  <th>Table</th>
+					  <th>Type</th>
+					  <th>Column</th>
+					  <th>Type</th>
+					  <th>Size</th>
+					  <th title='Are nulls allowed?'>Nulls</th>
+					  <th title='Is column automatically updated?'>Auto</th>
+					  <th title='Default value'>Default</th>
+					  <th title='Comments' class="toggle"><span>Comments</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					 <td>interwiki</td>
+					 <td>Table</td>
+					 <td>iw_trans</td>
+					 <td>TINYINT</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>text</td>
+					 <td>Table</td>
+					 <td>old_text</td>
+					 <td>MEDIUMBLOB</td>
+					 <td>16777215</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td>ipb_deleted</td>
+					 <td>BIT</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>log_search</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ls_value</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>image</td>
+					 <td>Table</td>
+					 <td>img_width</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>log_search</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ls_log_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>category</td>
+					 <td>Table</td>
+					 <td>cat_subcats</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>categorylinks</td>
+					 <td>Table</td>
+					 <td>cl_sortkey_prefix</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>updatelog</td>
+					 <td>Table</td>
+					 <td>ul_value</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page_props</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pp_sortkey</td>
+					 <td>FLOAT</td>
+					 <td>12</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>imagelinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>il_from</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>page_random</td>
+					 <td>DOUBLE UNSIGNED</td>
+					 <td>22</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>image</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>img_media_type</td>
+					 <td>enum(&#39;UNKNOWN&#39;, &#39;BITMAP&#39;, &#39;DRAWING&#39;, &#39;AUDIO&#39;, &#39;VIDEO&#39;, &#39;MULTIMEDIA&#39;, &#39;OFFICE&#39;, &#39;TEXT&#39;, &#39;EXECUTABLE&#39;, &#39;ARCHIVE&#39;)</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ar_user_text</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>page_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>user_name</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>sites</td>
+					 <td>Table</td>
+					 <td>site_data</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td>user_token</td>
+					 <td>BINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rc_cur_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>site_identifiers</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>si_type</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>querycachetwo</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>qcc_value</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>watchlist</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>wl_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td>fa_width</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>updatelog</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ul_key</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>transcache</td>
+					 <td>Table</td>
+					 <td>tc_contents</td>
+					 <td>TEXT</td>
+					 <td>65535</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user_groups</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ug_expiry</td>
+					 <td>VARBINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>pagelinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pl_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>oi_archive_name</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>templatelinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>tl_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>page_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>fa_timestamp</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>&#39;\0\0\0\0\0\0\0\0\0\0\0\0\0\0&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>querycache</td>
+					 <td>Table</td>
+					 <td>qc_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td>fa_bits</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>user_email_token</td>
+					 <td>BINARY</td>
+					 <td>32</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>langlinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ll_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>categorylinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>cl_from</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td>fa_media_type</td>
+					 <td>enum(&#39;UNKNOWN&#39;, &#39;BITMAP&#39;, &#39;DRAWING&#39;, &#39;AUDIO&#39;, &#39;VIDEO&#39;, &#39;MULTIMEDIA&#39;, &#39;OFFICE&#39;, &#39;TEXT&#39;, &#39;EXECUTABLE&#39;, &#39;ARCHIVE&#39;)</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>interwiki</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>iw_prefix</td>
+					 <td>VARCHAR</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td>user_real_name</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>image</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>img_user</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rc_ip</td>
+					 <td>VARBINARY</td>
+					 <td>40</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td>us_image_height</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ipb_expiry</td>
+					 <td>VARBINARY</td>
+					 <td>14</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td>oi_major_mime</td>
+					 <td>enum(&#39;unknown&#39;, &#39;application&#39;, &#39;audio&#39;, &#39;image&#39;, &#39;text&#39;, &#39;video&#39;, &#39;message&#39;, &#39;model&#39;, &#39;multipart&#39;, &#39;chemical&#39;)</td>
+					 <td>11</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;unknown&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>site_stats</td>
+					 <td>Table</td>
+					 <td>ss_total_edits</td>
+					 <td>BIGINT UNSIGNED</td>
+					 <td>20</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td>fa_user</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>revision</td>
+					 <td>Table</td>
+					 <td>rev_content_model</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ipb_parent_block_id</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>querycachetwo</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>qcc_type</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>protected_titles</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pt_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>categorylinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>cl_collation</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td>rc_minor</td>
+					 <td>TINYINT UNSIGNED</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user_newtalk</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>user_ip</td>
+					 <td>VARBINARY</td>
+					 <td>40</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>revision</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rev_page</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td>us_path</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page</td>
+					 <td>Table</td>
+					 <td>page_links_updated</td>
+					 <td>VARBINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>oi_user_text</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td>rc_this_oldid</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td>rc_comment</td>
+					 <td>VARBINARY</td>
+					 <td>767</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>bot_passwords</td>
+					 <td>Table</td>
+					 <td>bp_restrictions</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td>rc_source</td>
+					 <td>VARCHAR</td>
+					 <td>16</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td>oi_bits</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ar_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td>rc_user</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td>user_email_token_expires</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>fa_deleted_timestamp</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>&#39;\0\0\0\0\0\0\0\0\0\0\0\0\0\0&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ipb_user</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td>fa_archive_name</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td>user_newpass_time</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>objectcache</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>keyname</td>
+					 <td>VARBINARY</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>image</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>img_sha1</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td>user_email_authenticated</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page_props</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pp_propname</td>
+					 <td>VARBINARY</td>
+					 <td>60</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>protected_titles</td>
+					 <td>Table</td>
+					 <td>pt_create_perm</td>
+					 <td>VARBINARY</td>
+					 <td>60</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>querycache_info</td>
+					 <td>Table</td>
+					 <td>qci_timestamp</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;19700101000000&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page</td>
+					 <td>Table</td>
+					 <td>page_is_new</td>
+					 <td>TINYINT UNSIGNED</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>job</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>job_params</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>watchlist</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>wl_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>langlinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ll_lang</td>
+					 <td>VARBINARY</td>
+					 <td>20</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>querycache_info</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>qci_type</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>transcache</td>
+					 <td>Table</td>
+					 <td>tc_time</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>externallinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>el_to</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>logging</td>
+					 <td>Table</td>
+					 <td>log_deleted</td>
+					 <td>TINYINT UNSIGNED</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>logging</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>log_user_text</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page_props</td>
+					 <td>Table</td>
+					 <td>pp_value</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>page_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>rc_id</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td>rc_old_len</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>protected_titles</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pt_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>redirect</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rd_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>change_tag</td>
+					 <td>Table</td>
+					 <td>ct_params</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>logging</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>log_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>querycache</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>qc_value</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>objectcache</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>exptime</td>
+					 <td>DATETIME</td>
+					 <td>19</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page_restrictions</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pr_type</td>
+					 <td>VARBINARY</td>
+					 <td>60</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td>rc_new_len</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>bot_passwords</td>
+					 <td>Table</td>
+					 <td>bp_token</td>
+					 <td>BINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td>rc_params</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>querycachetwo</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>qcc_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td>fa_height</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td>fa_deleted</td>
+					 <td>TINYINT UNSIGNED</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>sites</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>site_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>redirect</td>
+					 <td>Table</td>
+					 <td>rd_fragment</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>querycachetwo</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>qcc_namespacetwo</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>watchlist</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>wl_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>interwiki</td>
+					 <td>Table</td>
+					 <td>iw_wikiid</td>
+					 <td>VARCHAR</td>
+					 <td>64</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td>rc_bot</td>
+					 <td>TINYINT UNSIGNED</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>protected_titles</td>
+					 <td>Table</td>
+					 <td>pt_reason</td>
+					 <td>VARBINARY</td>
+					 <td>767</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user_newtalk</td>
+					 <td>Table</td>
+					 <td>user_last_timestamp</td>
+					 <td>VARBINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>redirect</td>
+					 <td>Table</td>
+					 <td>rd_interwiki</td>
+					 <td>VARCHAR</td>
+					 <td>32</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user_properties</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>up_property</td>
+					 <td>VARBINARY</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rc_type</td>
+					 <td>TINYINT UNSIGNED</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>module_deps</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>md_module</td>
+					 <td>VARBINARY</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>module_deps</td>
+					 <td>Table</td>
+					 <td>md_deps</td>
+					 <td>MEDIUMBLOB</td>
+					 <td>16777215</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rc_new</td>
+					 <td>TINYINT UNSIGNED</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td>user_password</td>
+					 <td>TINYBLOB</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page_restrictions</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pr_level</td>
+					 <td>VARBINARY</td>
+					 <td>60</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>user_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user_former_groups</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ufg_group</td>
+					 <td>VARBINARY</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td>ar_sha1</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td>rc_log_action</td>
+					 <td>VARBINARY</td>
+					 <td>255</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>protected_titles</td>
+					 <td>Table</td>
+					 <td>pt_user</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>revision</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rev_timestamp</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;\0\0\0\0\0\0\0\0\0\0\0\0\0\0&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>interwiki</td>
+					 <td>Table</td>
+					 <td>iw_api</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>sites</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>site_group</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>change_tag</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ct_rev_id</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>site_stats</td>
+					 <td>Table</td>
+					 <td>ss_total_pages</td>
+					 <td>BIGINT</td>
+					 <td>19</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>-1</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rc_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>image</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>img_minor_mime</td>
+					 <td>VARBINARY</td>
+					 <td>100</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;unknown&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>job</td>
+					 <td>Table</td>
+					 <td>job_attempts</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>sites</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>site_domain</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ar_rev_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td>oi_width</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page</td>
+					 <td>Table</td>
+					 <td>page_touched</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;\0\0\0\0\0\0\0\0\0\0\0\0\0\0&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td>fa_description</td>
+					 <td>VARBINARY</td>
+					 <td>767</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ipb_timestamp</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;\0\0\0\0\0\0\0\0\0\0\0\0\0\0&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td>ipb_by_text</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>tag_summary</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ts_log_id</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>revision</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rev_user</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>us_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>site_stats</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ss_row_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>l10n_cache</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>lc_key</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page</td>
+					 <td>Table</td>
+					 <td>page_lang</td>
+					 <td>VARBINARY</td>
+					 <td>35</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>interwiki</td>
+					 <td>Table</td>
+					 <td>iw_url</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>job</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>job_cmd</td>
+					 <td>VARBINARY</td>
+					 <td>60</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user_newtalk</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>user_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>logging</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>log_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>sites</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>site_forward</td>
+					 <td>BIT</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>change_tag</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ct_tag</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td>fa_size</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>bot_passwords</td>
+					 <td>Table</td>
+					 <td>bp_grants</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>revision</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rev_user_text</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page_restrictions</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pr_page</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>templatelinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>tl_from_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ar_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>protected_titles</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pt_timestamp</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>category</td>
+					 <td>Table</td>
+					 <td>cat_files</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>revision</td>
+					 <td>Table</td>
+					 <td>rev_minor_edit</td>
+					 <td>TINYINT UNSIGNED</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>image</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>img_size</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>revision</td>
+					 <td>Table</td>
+					 <td>rev_content_format</td>
+					 <td>VARBINARY</td>
+					 <td>64</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>us_timestamp</td>
+					 <td>VARBINARY</td>
+					 <td>14</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>tag_summary</td>
+					 <td>Table</td>
+					 <td>ts_tags</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td>user_editcount</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>iwlinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>iwl_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td>user_newpassword</td>
+					 <td>TINYBLOB</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>querycachetwo</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>qcc_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td>ar_text</td>
+					 <td>MEDIUMBLOB</td>
+					 <td>16777215</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>site_stats</td>
+					 <td>Table</td>
+					 <td>ss_good_articles</td>
+					 <td>BIGINT UNSIGNED</td>
+					 <td>20</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>watchlist</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>wl_notificationtimestamp</td>
+					 <td>VARBINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>pagelinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pl_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td>oi_size</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td>ipb_reason</td>
+					 <td>VARBINARY</td>
+					 <td>767</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>revision</td>
+					 <td>Table</td>
+					 <td>rev_len</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>job</td>
+					 <td>Table</td>
+					 <td>job_token_timestamp</td>
+					 <td>VARBINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td>fa_deleted_user</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>categorylinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>cl_timestamp</td>
+					 <td>TIMESTAMP</td>
+					 <td>19</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>current_timestamp()</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>image</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>img_user_text</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>categorylinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>cl_sortkey</td>
+					 <td>VARBINARY</td>
+					 <td>230</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>revision</td>
+					 <td>Table</td>
+					 <td>rev_deleted</td>
+					 <td>TINYINT UNSIGNED</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td>us_chunk_inx</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>searchindex</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>si_text</td>
+					 <td>MEDIUMTEXT</td>
+					 <td>16777215</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>revision</td>
+					 <td>Table</td>
+					 <td>rev_text_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td>ipb_allow_usertalk</td>
+					 <td>BIT</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>sites</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>site_type</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>externallinks</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>el_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user_properties</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>up_user</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>imagelinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>il_to</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>job</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>job_timestamp</td>
+					 <td>VARBINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>oi_sha1</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page</td>
+					 <td>Table</td>
+					 <td>page_content_model</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>valid_tag</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>vt_tag</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>site_identifiers</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>si_site</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>revision</td>
+					 <td>Table</td>
+					 <td>rev_parent_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td>fa_minor_mime</td>
+					 <td>VARBINARY</td>
+					 <td>100</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>&#39;unknown&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rc_patrolled</td>
+					 <td>TINYINT UNSIGNED</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>tag_summary</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ts_rev_id</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td>rc_last_oldid</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td>ar_len</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>image</td>
+					 <td>Table</td>
+					 <td>img_metadata</td>
+					 <td>MEDIUMBLOB</td>
+					 <td>16777215</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>image</td>
+					 <td>Table</td>
+					 <td>img_bits</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>externallinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>el_index</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>logging</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>log_timestamp</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;19700101000000&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>category</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>cat_pages</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>page_len</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td>oi_metadata</td>
+					 <td>MEDIUMBLOB</td>
+					 <td>16777215</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>oi_name</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td>us_media_type</td>
+					 <td>enum(&#39;UNKNOWN&#39;, &#39;BITMAP&#39;, &#39;DRAWING&#39;, &#39;AUDIO&#39;, &#39;VIDEO&#39;, &#39;MULTIMEDIA&#39;, &#39;OFFICE&#39;, &#39;TEXT&#39;, &#39;EXECUTABLE&#39;, &#39;ARCHIVE&#39;)</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>tag_summary</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ts_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td>ar_text_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>image</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>img_major_mime</td>
+					 <td>enum(&#39;unknown&#39;, &#39;application&#39;, &#39;audio&#39;, &#39;image&#39;, &#39;text&#39;, &#39;video&#39;, &#39;message&#39;, &#39;model&#39;, &#39;multipart&#39;, &#39;chemical&#39;)</td>
+					 <td>11</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;unknown&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td>ar_user</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>imagelinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>il_from_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td>us_orig_path</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page_props</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pp_page</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>l10n_cache</td>
+					 <td>Table</td>
+					 <td>lc_value</td>
+					 <td>MEDIUMBLOB</td>
+					 <td>16777215</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td>user_registration</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>tag_summary</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ts_rc_id</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>revision</td>
+					 <td>Table</td>
+					 <td>rev_comment</td>
+					 <td>VARBINARY</td>
+					 <td>767</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>job</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>job_token</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td>oi_height</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td>oi_deleted</td>
+					 <td>TINYINT UNSIGNED</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>categorylinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>cl_to</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>logging</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>log_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>change_tag</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ct_log_id</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>pagelinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pl_from_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>site_stats</td>
+					 <td>Table</td>
+					 <td>ss_images</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td>rc_logid</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>site_stats</td>
+					 <td>Table</td>
+					 <td>ss_active_users</td>
+					 <td>BIGINT</td>
+					 <td>19</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>-1</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>querycache</td>
+					 <td>Table</td>
+					 <td>qc_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>querycachetwo</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>qcc_titletwo</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td>ipb_enable_autoblock</td>
+					 <td>BIT</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>1</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rc_user_text</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>querycache</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>qc_type</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>site_stats</td>
+					 <td>Table</td>
+					 <td>ss_users</td>
+					 <td>BIGINT</td>
+					 <td>19</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>-1</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td>rc_log_type</td>
+					 <td>VARBINARY</td>
+					 <td>255</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>sites</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>site_language</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td>ipb_create_account</td>
+					 <td>BIT</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>1</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>revision</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>rev_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td>fa_major_mime</td>
+					 <td>enum(&#39;unknown&#39;, &#39;application&#39;, &#39;audio&#39;, &#39;image&#39;, &#39;text&#39;, &#39;video&#39;, &#39;message&#39;, &#39;model&#39;, &#39;multipart&#39;, &#39;chemical&#39;)</td>
+					 <td>11</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>&#39;unknown&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ipb_range_start</td>
+					 <td>TINYBLOB</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>bot_passwords</td>
+					 <td>Table</td>
+					 <td>bp_password</td>
+					 <td>TINYBLOB</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rc_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page</td>
+					 <td>Table</td>
+					 <td>page_latest</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td>us_props</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td>user_password_expires</td>
+					 <td>VARBINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>templatelinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>tl_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>categorylinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>cl_type</td>
+					 <td>enum(&#39;page&#39;, &#39;subcat&#39;, &#39;file&#39;)</td>
+					 <td>6</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;page&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td>oi_minor_mime</td>
+					 <td>VARBINARY</td>
+					 <td>100</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;unknown&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>us_user</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>fa_storage_key</td>
+					 <td>VARBINARY</td>
+					 <td>64</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>searchindex</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>si_page</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ipb_auto</td>
+					 <td>BIT</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td>ar_minor_edit</td>
+					 <td>TINYINT</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>job</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>job_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>logging</td>
+					 <td>Table</td>
+					 <td>log_comment</td>
+					 <td>VARBINARY</td>
+					 <td>767</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>category</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>cat_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td>ipb_by</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>text</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>old_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td>ipb_block_email</td>
+					 <td>BIT</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ar_page_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td>fa_deleted_reason</td>
+					 <td>VARBINARY</td>
+					 <td>767</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ipb_range_end</td>
+					 <td>TINYBLOB</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td>ar_deleted</td>
+					 <td>TINYINT UNSIGNED</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>langlinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ll_from</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td>us_mime</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td>ar_flags</td>
+					 <td>TINYBLOB</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td>us_status</td>
+					 <td>VARCHAR</td>
+					 <td>50</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>fa_sha1</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>category</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>cat_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>logging</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>log_user</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td>us_image_width</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td>rc_deleted</td>
+					 <td>TINYINT UNSIGNED</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td>ar_comment</td>
+					 <td>VARBINARY</td>
+					 <td>767</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page_restrictions</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>pr_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ipb_id</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>job</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>job_sha1</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td>oi_user</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>externallinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>el_from</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td>oi_description</td>
+					 <td>VARBINARY</td>
+					 <td>767</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>module_deps</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>md_skin</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>user_email</td>
+					 <td>TINYTEXT</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>sites</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>site_source</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>searchindex</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>si_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>bot_passwords</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>bp_app_id</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td>ar_parent_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>fa_user_text</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td>us_size</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>iwlinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>iwl_prefix</td>
+					 <td>VARBINARY</td>
+					 <td>20</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>logging</td>
+					 <td>Table</td>
+					 <td>log_params</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>image</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>img_name</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>objectcache</td>
+					 <td>Table</td>
+					 <td>value</td>
+					 <td>MEDIUMBLOB</td>
+					 <td>16777215</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>change_tag</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ct_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>image</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>img_timestamp</td>
+					 <td>VARBINARY</td>
+					 <td>14</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user_groups</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ug_group</td>
+					 <td>VARBINARY</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>protected_titles</td>
+					 <td>Table</td>
+					 <td>pt_expiry</td>
+					 <td>VARBINARY</td>
+					 <td>14</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>page_is_redirect</td>
+					 <td>TINYINT UNSIGNED</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>watchlist</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>wl_user</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user</td>
+					 <td>Table</td>
+					 <td>user_touched</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;\0\0\0\0\0\0\0\0\0\0\0\0\0\0&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td>us_sha1</td>
+					 <td>VARCHAR</td>
+					 <td>31</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td>us_source_type</td>
+					 <td>VARCHAR</td>
+					 <td>50</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user_former_groups</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ufg_user</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>fa_storage_group</td>
+					 <td>VARBINARY</td>
+					 <td>16</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td>fa_metadata</td>
+					 <td>MEDIUMBLOB</td>
+					 <td>16777215</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page</td>
+					 <td>Table</td>
+					 <td>page_restrictions</td>
+					 <td>TINYBLOB</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>revision</td>
+					 <td>Table</td>
+					 <td>rev_sha1</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>text</td>
+					 <td>Table</td>
+					 <td>old_flags</td>
+					 <td>TINYBLOB</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user_properties</td>
+					 <td>Table</td>
+					 <td>up_value</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>sites</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>site_global_key</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>redirect</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>rd_from</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>user_groups</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ug_user</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>recentchanges</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rc_timestamp</td>
+					 <td>VARBINARY</td>
+					 <td>14</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ipb_anon_only</td>
+					 <td>BIT</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>transcache</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>tc_url</td>
+					 <td>VARBINARY</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page_restrictions</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pr_cascade</td>
+					 <td>TINYINT</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>sites</td>
+					 <td>Table</td>
+					 <td>site_config</td>
+					 <td>BLOB</td>
+					 <td>65535</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>redirect</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>rd_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>us_key</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>l10n_cache</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>lc_lang</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page_restrictions</td>
+					 <td>Table</td>
+					 <td>pr_expiry</td>
+					 <td>VARBINARY</td>
+					 <td>14</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>templatelinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>tl_from</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>logging</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>log_type</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>logging</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>log_page</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>oi_timestamp</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;\0\0\0\0\0\0\0\0\0\0\0\0\0\0&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>uploadstash</td>
+					 <td>Table</td>
+					 <td>us_image_bits</td>
+					 <td>SMALLINT UNSIGNED</td>
+					 <td>5</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>change_tag</td>
+					 <td>Table</td>
+					 <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>ct_rc_id</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>page_restrictions</td>
+					 <td>Table</td>
+					 <td>pr_user</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>job</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>job_id</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>fa_id</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title='Automatically updated by the database'>√</td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>oldimage</td>
+					 <td>Table</td>
+					 <td>oi_media_type</td>
+					 <td>enum(&#39;UNKNOWN&#39;, &#39;BITMAP&#39;, &#39;DRAWING&#39;, &#39;AUDIO&#39;, &#39;VIDEO&#39;, &#39;MULTIMEDIA&#39;, &#39;OFFICE&#39;, &#39;TEXT&#39;, &#39;EXECUTABLE&#39;, &#39;ARCHIVE&#39;)</td>
+					 <td>10</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>pagelinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>pl_from</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>image</td>
+					 <td>Table</td>
+					 <td>img_description</td>
+					 <td>VARBINARY</td>
+					 <td>767</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>site_identifiers</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>si_key</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td>ar_content_model</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>log_search</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ls_field</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>job</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>job_random</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>bot_passwords</td>
+					 <td>Table</td>
+					 <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i>bp_user</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>ipblocks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ipb_address</td>
+					 <td>TINYBLOB</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>filearchive</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>fa_name</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ar_title</td>
+					 <td>VARCHAR</td>
+					 <td>255</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>image</td>
+					 <td>Table</td>
+					 <td>img_height</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>ar_timestamp</td>
+					 <td>BINARY</td>
+					 <td>14</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;\0\0\0\0\0\0\0\0\0\0\0\0\0\0&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>job</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>job_namespace</td>
+					 <td>INT</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>iwlinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>iwl_from</td>
+					 <td>INT UNSIGNED</td>
+					 <td>10</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>0</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>sites</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>site_protocol</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>archive</td>
+					 <td>Table</td>
+					 <td>ar_content_format</td>
+					 <td>VARBINARY</td>
+					 <td>64</td>
+					 <td title='nullable'>√</td>
+					 <td title=''></td>
+					 <td>NULL</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>logging</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>log_action</td>
+					 <td>VARBINARY</td>
+					 <td>32</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>externallinks</td>
+					 <td>Table</td>
+					 <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i>el_index_60</td>
+					 <td>VARBINARY</td>
+					 <td>60</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>&#39;&#39;</td>
+					 <td></td>
+					</tr>
+					<tr>
+					 <td>interwiki</td>
+					 <td>Table</td>
+					 <td>iw_local</td>
+					 <td>BIT</td>
+					 <td>3</td>
+					 <td title=''></td>
+					 <td title=''></td>
+					 <td>null</td>
+					 <td></td>
+					</tr>
+								</tbody>
+				</table>				
+			</div>
+		</div>	
+      </section>
+	  <script>
+          var config = {
+	          pagination: true
+          }
+	  </script>    
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <div>
+      <div class="pull-right hidden-xs">
+        <a href="https://github.com/schemaspy/schemaspy" title="GitHub for SchemaSpy"><i class="fa fa-github-square fa-2x"></i></a>
+        <a href="http://stackoverflow.com/questions/tagged/schemaspy" title="StackOverflow for SchemaSpy"><i class="fa fa-stack-overflow fa-2x"></i></a>
+      </div>
+      <strong>Generated by <a href="http://schemaspy.org/" class="logo-text"><i class="fa fa-database"></i> SchemaSpy 6.0.0</a></strong>
+    </div>
+    <!-- /.container -->
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 2.2.3 -->
+<script src="bower/admin-lte/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="bower/admin-lte/plugins/jQueryUI/jquery-ui.min.js"></script>
+<!-- Bootstrap 3.3.5 -->
+<script src="bower/admin-lte/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="bower/datatables.net/jquery.dataTables.min.js"></script>
+<script src="bower/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="bower/datatables.net-buttons/dataTables.buttons.min.js"></script>
+<script src="bower/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+<script src="bower/datatables.net-buttons/buttons.html5.min.js"></script>
+<script src="bower/datatables.net-buttons/buttons.print.min.js"></script>
+<script src="bower/datatables.net-buttons/buttons.colVis.min.js"></script>
+<!-- SheetJS -->
+<script src="bower/js-xlsx/xlsx.full.min.js"></script>
+<!-- pdfmake -->
+<script src="bower/pdfmake/pdfmake.min.js"></script>
+<script src="bower/pdfmake/vfs_fonts.js"></script>
+<!-- SlimScroll -->
+<script src="bower/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="bower/admin-lte/plugins/fastclick/fastclick.js"></script>
+<!-- Salvattore -->
+<script src="bower/salvattore/salvattore.min.js"></script>
+<!-- AnchorJS -->
+<script src="bower/anchor-js/anchor.min.js"></script>
+<!-- CodeMirror -->
+<script src="bower/codemirror/codemirror.js"></script>
+<script src="bower/codemirror/sql.js"></script>
+<!-- AdminLTE App -->
+<script src="bower/admin-lte/dist/js/app.min.js"></script>
+<script src="column.js"></script>
+<script src="schemaSpy.js"></script>
+</body>
+</html>

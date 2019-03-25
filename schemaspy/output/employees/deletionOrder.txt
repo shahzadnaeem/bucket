@@ -1,0 +1,6 @@
+dept_manager
+dept_emp
+titles
+salaries
+departments
+employees
