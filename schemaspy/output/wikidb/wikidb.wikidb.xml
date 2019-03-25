@@ -1,0 +1,1135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="wikidb" schema="wikidb" type="MariaDB - 10.3.12-MariaDB-log">
+   <tables>
+      <table catalog="wikidb" name="archive" numRows="5" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="ar_id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="1" name="ar_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="2" name="ar_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="ar_text" nullable="false" remarks="" size="16777215" type="MEDIUMBLOB"/>
+         <column autoUpdated="false" digits="0" id="4" name="ar_comment" nullable="false" remarks="" size="767" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="5" name="ar_user" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="6" name="ar_user_text" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="'\0\0\0\0\0\0\0\0\0\0\0\0\0\0'" digits="0" id="7" name="ar_timestamp" nullable="false" remarks="" size="14" type="BINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="8" name="ar_minor_edit" nullable="false" remarks="" size="3" type="TINYINT"/>
+         <column autoUpdated="false" digits="0" id="9" name="ar_flags" nullable="false" remarks="" size="255" type="TINYBLOB"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="10" name="ar_rev_id" nullable="true" remarks="" size="10" type="INT UNSIGNED">
+            <parent catalog="wikidb" column="rev_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="revision"/>
+         </column>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="11" name="ar_text_id" nullable="true" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="12" name="ar_deleted" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="13" name="ar_len" nullable="true" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="14" name="ar_page_id" nullable="true" remarks="" size="10" type="INT UNSIGNED">
+            <parent catalog="wikidb" column="page_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="page"/>
+         </column>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="15" name="ar_parent_id" nullable="true" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="16" name="ar_sha1" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="17" name="ar_content_model" nullable="true" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="18" name="ar_content_format" nullable="true" remarks="" size="64" type="VARBINARY"/>
+         <primaryKey column="ar_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="ar_id"/>
+         </index>
+         <index name="ar_revid" unique="false">
+            <column ascending="true" name="ar_rev_id"/>
+         </index>
+         <index name="name_title_timestamp" unique="false">
+            <column ascending="true" name="ar_namespace"/>
+            <column ascending="true" name="ar_title"/>
+            <column ascending="true" name="ar_timestamp"/>
+         </index>
+         <index name="usertext_timestamp" unique="false">
+            <column ascending="true" name="ar_user_text"/>
+            <column ascending="true" name="ar_timestamp"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="bot_passwords" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="bp_user" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="bp_app_id" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="2" name="bp_password" nullable="false" remarks="" size="255" type="TINYBLOB"/>
+         <column autoUpdated="false" defaultValue="'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'" digits="0" id="3" name="bp_token" nullable="false" remarks="" size="32" type="BINARY"/>
+         <column autoUpdated="false" digits="0" id="4" name="bp_restrictions" nullable="false" remarks="" size="65535" type="BLOB"/>
+         <column autoUpdated="false" digits="0" id="5" name="bp_grants" nullable="false" remarks="" size="65535" type="BLOB"/>
+         <primaryKey column="bp_app_id" sequenceNumberInPK="1"/>
+         <primaryKey column="bp_user" sequenceNumberInPK="2"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="bp_user"/>
+            <column ascending="true" name="bp_app_id"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="category" numRows="2" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="cat_id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="1" name="cat_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="2" name="cat_pages" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="3" name="cat_subcats" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="4" name="cat_files" nullable="false" remarks="" size="10" type="INT"/>
+         <primaryKey column="cat_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="cat_id"/>
+         </index>
+         <index name="cat_pages" unique="false">
+            <column ascending="true" name="cat_pages"/>
+         </index>
+         <index name="cat_title" unique="true">
+            <column ascending="true" name="cat_title"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="categorylinks" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="cl_from" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="1" name="cl_to" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="2" name="cl_sortkey" nullable="false" remarks="" size="230" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="3" name="cl_sortkey_prefix" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="current_timestamp()" digits="0" id="4" name="cl_timestamp" nullable="false" remarks="" size="19" type="TIMESTAMP"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="5" name="cl_collation" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="'page'" digits="0" id="6" name="cl_type" nullable="false" remarks="" size="6" type="enum('page', 'subcat', 'file')"/>
+         <index name="cl_collation_ext" unique="false">
+            <column ascending="true" name="cl_collation"/>
+            <column ascending="true" name="cl_to"/>
+            <column ascending="true" name="cl_type"/>
+            <column ascending="true" name="cl_from"/>
+         </index>
+         <index name="cl_from" unique="true">
+            <column ascending="true" name="cl_from"/>
+            <column ascending="true" name="cl_to"/>
+         </index>
+         <index name="cl_sortkey" unique="false">
+            <column ascending="true" name="cl_to"/>
+            <column ascending="true" name="cl_type"/>
+            <column ascending="true" name="cl_sortkey"/>
+            <column ascending="true" name="cl_from"/>
+         </index>
+         <index name="cl_timestamp" unique="false">
+            <column ascending="true" name="cl_to"/>
+            <column ascending="true" name="cl_timestamp"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="change_tag" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="ct_id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="1" name="ct_rc_id" nullable="true" remarks="" size="10" type="INT">
+            <parent catalog="wikidb" column="rc_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="recentchanges"/>
+         </column>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="2" name="ct_log_id" nullable="true" remarks="" size="10" type="INT">
+            <parent catalog="wikidb" column="log_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="logging"/>
+         </column>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="3" name="ct_rev_id" nullable="true" remarks="" size="10" type="INT">
+            <parent catalog="wikidb" column="rev_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="revision"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="ct_tag" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="5" name="ct_params" nullable="true" remarks="" size="65535" type="BLOB"/>
+         <primaryKey column="ct_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="ct_id"/>
+         </index>
+         <index name="change_tag_log_tag" unique="true">
+            <column ascending="true" name="ct_log_id"/>
+            <column ascending="true" name="ct_tag"/>
+         </index>
+         <index name="change_tag_rc_tag" unique="true">
+            <column ascending="true" name="ct_rc_id"/>
+            <column ascending="true" name="ct_tag"/>
+         </index>
+         <index name="change_tag_rev_tag" unique="true">
+            <column ascending="true" name="ct_rev_id"/>
+            <column ascending="true" name="ct_tag"/>
+         </index>
+         <index name="change_tag_tag_id" unique="false">
+            <column ascending="true" name="ct_tag"/>
+            <column ascending="true" name="ct_rc_id"/>
+            <column ascending="true" name="ct_rev_id"/>
+            <column ascending="true" name="ct_log_id"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="externallinks" numRows="45" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="el_id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="1" name="el_from" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="2" name="el_to" nullable="false" remarks="" size="65535" type="BLOB"/>
+         <column autoUpdated="false" digits="0" id="3" name="el_index" nullable="false" remarks="" size="65535" type="BLOB"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="4" name="el_index_60" nullable="false" remarks="" size="60" type="VARBINARY"/>
+         <primaryKey column="el_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="el_id"/>
+         </index>
+         <index name="el_from" unique="false">
+            <column ascending="true" name="el_from"/>
+            <column ascending="true" name="el_to"/>
+         </index>
+         <index name="el_from_index_60" unique="false">
+            <column ascending="true" name="el_from"/>
+            <column ascending="true" name="el_index_60"/>
+            <column ascending="true" name="el_id"/>
+         </index>
+         <index name="el_index" unique="false">
+            <column ascending="true" name="el_index"/>
+         </index>
+         <index name="el_index_60" unique="false">
+            <column ascending="true" name="el_index_60"/>
+            <column ascending="true" name="el_id"/>
+         </index>
+         <index name="el_to" unique="false">
+            <column ascending="true" name="el_to"/>
+            <column ascending="true" name="el_from"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="filearchive" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="fa_id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="1" name="fa_name" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="2" name="fa_archive_name" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="3" name="fa_storage_group" nullable="true" remarks="" size="16" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="4" name="fa_storage_key" nullable="true" remarks="" size="64" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="5" name="fa_deleted_user" nullable="true" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="'\0\0\0\0\0\0\0\0\0\0\0\0\0\0'" digits="0" id="6" name="fa_deleted_timestamp" nullable="true" remarks="" size="14" type="BINARY"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="7" name="fa_deleted_reason" nullable="true" remarks="" size="767" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="8" name="fa_size" nullable="true" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="9" name="fa_width" nullable="true" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="10" name="fa_height" nullable="true" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="11" name="fa_metadata" nullable="true" remarks="" size="16777215" type="MEDIUMBLOB"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="12" name="fa_bits" nullable="true" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="13" name="fa_media_type" nullable="true" remarks="" size="10" type="enum('UNKNOWN', 'BITMAP', 'DRAWING', 'AUDIO', 'VIDEO', 'MULTIMEDIA', 'OFFICE', 'TEXT', 'EXECUTABLE', 'ARCHIVE')"/>
+         <column autoUpdated="false" defaultValue="'unknown'" digits="0" id="14" name="fa_major_mime" nullable="true" remarks="" size="11" type="enum('unknown', 'application', 'audio', 'image', 'text', 'video', 'message', 'model', 'multipart', 'chemical')"/>
+         <column autoUpdated="false" defaultValue="'unknown'" digits="0" id="15" name="fa_minor_mime" nullable="true" remarks="" size="100" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="16" name="fa_description" nullable="true" remarks="" size="767" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="17" name="fa_user" nullable="true" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="18" name="fa_user_text" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="'\0\0\0\0\0\0\0\0\0\0\0\0\0\0'" digits="0" id="19" name="fa_timestamp" nullable="true" remarks="" size="14" type="BINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="20" name="fa_deleted" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="21" name="fa_sha1" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <primaryKey column="fa_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="fa_id"/>
+         </index>
+         <index name="fa_deleted_timestamp" unique="false">
+            <column ascending="true" name="fa_deleted_timestamp"/>
+         </index>
+         <index name="fa_name" unique="false">
+            <column ascending="true" name="fa_name"/>
+            <column ascending="true" name="fa_timestamp"/>
+         </index>
+         <index name="fa_sha1" unique="false">
+            <column ascending="true" name="fa_sha1"/>
+         </index>
+         <index name="fa_storage_group" unique="false">
+            <column ascending="true" name="fa_storage_group"/>
+            <column ascending="true" name="fa_storage_key"/>
+         </index>
+         <index name="fa_user_timestamp" unique="false">
+            <column ascending="true" name="fa_user_text"/>
+            <column ascending="true" name="fa_timestamp"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="image" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="''" digits="0" id="0" name="img_name" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="1" name="img_size" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="2" name="img_width" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="3" name="img_height" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="4" name="img_metadata" nullable="false" remarks="" size="16777215" type="MEDIUMBLOB"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="5" name="img_bits" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="6" name="img_media_type" nullable="true" remarks="" size="10" type="enum('UNKNOWN', 'BITMAP', 'DRAWING', 'AUDIO', 'VIDEO', 'MULTIMEDIA', 'OFFICE', 'TEXT', 'EXECUTABLE', 'ARCHIVE')"/>
+         <column autoUpdated="false" defaultValue="'unknown'" digits="0" id="7" name="img_major_mime" nullable="false" remarks="" size="11" type="enum('unknown', 'application', 'audio', 'image', 'text', 'video', 'message', 'model', 'multipart', 'chemical')"/>
+         <column autoUpdated="false" defaultValue="'unknown'" digits="0" id="8" name="img_minor_mime" nullable="false" remarks="" size="100" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="9" name="img_description" nullable="false" remarks="" size="767" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="10" name="img_user" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="11" name="img_user_text" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="12" name="img_timestamp" nullable="false" remarks="" size="14" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="13" name="img_sha1" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <primaryKey column="img_name" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="img_name"/>
+         </index>
+         <index name="img_media_mime" unique="false">
+            <column ascending="true" name="img_media_type"/>
+            <column ascending="true" name="img_major_mime"/>
+            <column ascending="true" name="img_minor_mime"/>
+         </index>
+         <index name="img_sha1" unique="false">
+            <column ascending="true" name="img_sha1"/>
+         </index>
+         <index name="img_size" unique="false">
+            <column ascending="true" name="img_size"/>
+         </index>
+         <index name="img_timestamp" unique="false">
+            <column ascending="true" name="img_timestamp"/>
+         </index>
+         <index name="img_user_timestamp" unique="false">
+            <column ascending="true" name="img_user"/>
+            <column ascending="true" name="img_timestamp"/>
+         </index>
+         <index name="img_usertext_timestamp" unique="false">
+            <column ascending="true" name="img_user_text"/>
+            <column ascending="true" name="img_timestamp"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="imagelinks" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="il_from" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="1" name="il_from_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="2" name="il_to" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <index name="il_backlinks_namespace" unique="false">
+            <column ascending="true" name="il_from_namespace"/>
+            <column ascending="true" name="il_to"/>
+            <column ascending="true" name="il_from"/>
+         </index>
+         <index name="il_from" unique="true">
+            <column ascending="true" name="il_from"/>
+            <column ascending="true" name="il_to"/>
+         </index>
+         <index name="il_to" unique="false">
+            <column ascending="true" name="il_to"/>
+            <column ascending="true" name="il_from"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="interwiki" numRows="66" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="iw_prefix" nullable="false" remarks="" size="32" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="1" name="iw_url" nullable="false" remarks="" size="65535" type="BLOB"/>
+         <column autoUpdated="false" digits="0" id="2" name="iw_api" nullable="false" remarks="" size="65535" type="BLOB"/>
+         <column autoUpdated="false" digits="0" id="3" name="iw_wikiid" nullable="false" remarks="" size="64" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="iw_local" nullable="false" remarks="" size="3" type="BIT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="5" name="iw_trans" nullable="false" remarks="" size="3" type="TINYINT"/>
+         <index name="iw_prefix" unique="true">
+            <column ascending="true" name="iw_prefix"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="ipblocks" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="ipb_id" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="ipb_address" nullable="false" remarks="" size="255" type="TINYBLOB"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="2" name="ipb_user" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="3" name="ipb_by" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="4" name="ipb_by_text" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="5" name="ipb_reason" nullable="false" remarks="" size="767" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="'\0\0\0\0\0\0\0\0\0\0\0\0\0\0'" digits="0" id="6" name="ipb_timestamp" nullable="false" remarks="" size="14" type="BINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="7" name="ipb_auto" nullable="false" remarks="" size="3" type="BIT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="8" name="ipb_anon_only" nullable="false" remarks="" size="3" type="BIT"/>
+         <column autoUpdated="false" defaultValue="1" digits="0" id="9" name="ipb_create_account" nullable="false" remarks="" size="3" type="BIT"/>
+         <column autoUpdated="false" defaultValue="1" digits="0" id="10" name="ipb_enable_autoblock" nullable="false" remarks="" size="3" type="BIT"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="11" name="ipb_expiry" nullable="false" remarks="" size="14" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="12" name="ipb_range_start" nullable="false" remarks="" size="255" type="TINYBLOB"/>
+         <column autoUpdated="false" digits="0" id="13" name="ipb_range_end" nullable="false" remarks="" size="255" type="TINYBLOB"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="14" name="ipb_deleted" nullable="false" remarks="" size="3" type="BIT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="15" name="ipb_block_email" nullable="false" remarks="" size="3" type="BIT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="16" name="ipb_allow_usertalk" nullable="false" remarks="" size="3" type="BIT"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="17" name="ipb_parent_block_id" nullable="true" remarks="" size="10" type="INT"/>
+         <primaryKey column="ipb_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="ipb_id"/>
+         </index>
+         <index name="ipb_address" unique="true">
+            <column ascending="true" name="ipb_address"/>
+            <column ascending="true" name="ipb_user"/>
+            <column ascending="true" name="ipb_auto"/>
+            <column ascending="true" name="ipb_anon_only"/>
+         </index>
+         <index name="ipb_expiry" unique="false">
+            <column ascending="true" name="ipb_expiry"/>
+         </index>
+         <index name="ipb_parent_block_id" unique="false">
+            <column ascending="true" name="ipb_parent_block_id"/>
+         </index>
+         <index name="ipb_range" unique="false">
+            <column ascending="true" name="ipb_range_start"/>
+            <column ascending="true" name="ipb_range_end"/>
+         </index>
+         <index name="ipb_timestamp" unique="false">
+            <column ascending="true" name="ipb_timestamp"/>
+         </index>
+         <index name="ipb_user" unique="false">
+            <column ascending="true" name="ipb_user"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="iwlinks" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="iwl_from" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="1" name="iwl_prefix" nullable="false" remarks="" size="20" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="2" name="iwl_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <index name="iwl_from" unique="true">
+            <column ascending="true" name="iwl_from"/>
+            <column ascending="true" name="iwl_prefix"/>
+            <column ascending="true" name="iwl_title"/>
+         </index>
+         <index name="iwl_prefix_from_title" unique="false">
+            <column ascending="true" name="iwl_prefix"/>
+            <column ascending="true" name="iwl_from"/>
+            <column ascending="true" name="iwl_title"/>
+         </index>
+         <index name="iwl_prefix_title_from" unique="false">
+            <column ascending="true" name="iwl_prefix"/>
+            <column ascending="true" name="iwl_title"/>
+            <column ascending="true" name="iwl_from"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="job" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="job_id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="1" name="job_cmd" nullable="false" remarks="" size="60" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="2" name="job_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="3" name="job_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="4" name="job_timestamp" nullable="true" remarks="" size="14" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="5" name="job_params" nullable="false" remarks="" size="65535" type="BLOB"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="job_random" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="7" name="job_attempts" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="8" name="job_token" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="9" name="job_token_timestamp" nullable="true" remarks="" size="14" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="10" name="job_sha1" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <primaryKey column="job_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="job_id"/>
+         </index>
+         <index name="job_cmd" unique="false">
+            <column ascending="true" name="job_cmd"/>
+            <column ascending="true" name="job_namespace"/>
+            <column ascending="true" name="job_title"/>
+            <column ascending="true" name="job_params"/>
+         </index>
+         <index name="job_cmd_token" unique="false">
+            <column ascending="true" name="job_cmd"/>
+            <column ascending="true" name="job_token"/>
+            <column ascending="true" name="job_random"/>
+         </index>
+         <index name="job_cmd_token_id" unique="false">
+            <column ascending="true" name="job_cmd"/>
+            <column ascending="true" name="job_token"/>
+            <column ascending="true" name="job_id"/>
+         </index>
+         <index name="job_sha1" unique="false">
+            <column ascending="true" name="job_sha1"/>
+         </index>
+         <index name="job_timestamp" unique="false">
+            <column ascending="true" name="job_timestamp"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="l10n_cache" numRows="13150" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="lc_lang" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="1" name="lc_key" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="lc_value" nullable="false" remarks="" size="16777215" type="MEDIUMBLOB"/>
+         <index name="lc_lang_key" unique="false">
+            <column ascending="true" name="lc_lang"/>
+            <column ascending="true" name="lc_key"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="langlinks" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="ll_from" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="1" name="ll_lang" nullable="false" remarks="" size="20" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="2" name="ll_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <index name="ll_from" unique="true">
+            <column ascending="true" name="ll_from"/>
+            <column ascending="true" name="ll_lang"/>
+         </index>
+         <index name="ll_lang" unique="false">
+            <column ascending="true" name="ll_lang"/>
+            <column ascending="true" name="ll_title"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="log_search" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="ls_field" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="1" name="ls_value" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="2" name="ls_log_id" nullable="false" remarks="" size="10" type="INT UNSIGNED">
+            <parent catalog="wikidb" column="log_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="logging"/>
+         </column>
+         <index name="ls_field_val" unique="true">
+            <column ascending="true" name="ls_field"/>
+            <column ascending="true" name="ls_value"/>
+            <column ascending="true" name="ls_log_id"/>
+         </index>
+         <index name="ls_log_id" unique="false">
+            <column ascending="true" name="ls_log_id"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="logging" numRows="201" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="log_id" nullable="false" remarks="" size="10" type="INT UNSIGNED">
+            <child catalog="wikidb" column="ct_log_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="change_tag"/>
+            <child catalog="wikidb" column="ls_log_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="log_search"/>
+            <child catalog="wikidb" column="ts_log_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="tag_summary"/>
+         </column>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="1" name="log_type" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="2" name="log_action" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="'19700101000000'" digits="0" id="3" name="log_timestamp" nullable="false" remarks="" size="14" type="BINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="4" name="log_user" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="5" name="log_user_text" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="log_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="7" name="log_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="8" name="log_page" nullable="true" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="9" name="log_comment" nullable="false" remarks="" size="767" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="10" name="log_params" nullable="false" remarks="" size="65535" type="BLOB"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="11" name="log_deleted" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED"/>
+         <primaryKey column="log_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="log_id"/>
+         </index>
+         <index name="log_page_id_time" unique="false">
+            <column ascending="true" name="log_page"/>
+            <column ascending="true" name="log_timestamp"/>
+         </index>
+         <index name="log_user_text_time" unique="false">
+            <column ascending="true" name="log_user_text"/>
+            <column ascending="true" name="log_timestamp"/>
+         </index>
+         <index name="log_user_text_type_time" unique="false">
+            <column ascending="true" name="log_user_text"/>
+            <column ascending="true" name="log_type"/>
+            <column ascending="true" name="log_timestamp"/>
+         </index>
+         <index name="log_user_type_time" unique="false">
+            <column ascending="true" name="log_user"/>
+            <column ascending="true" name="log_type"/>
+            <column ascending="true" name="log_timestamp"/>
+         </index>
+         <index name="page_time" unique="false">
+            <column ascending="true" name="log_namespace"/>
+            <column ascending="true" name="log_title"/>
+            <column ascending="true" name="log_timestamp"/>
+         </index>
+         <index name="times" unique="false">
+            <column ascending="true" name="log_timestamp"/>
+         </index>
+         <index name="type_action" unique="false">
+            <column ascending="true" name="log_type"/>
+            <column ascending="true" name="log_action"/>
+            <column ascending="true" name="log_timestamp"/>
+         </index>
+         <index name="type_time" unique="false">
+            <column ascending="true" name="log_type"/>
+            <column ascending="true" name="log_timestamp"/>
+         </index>
+         <index name="user_time" unique="false">
+            <column ascending="true" name="log_user"/>
+            <column ascending="true" name="log_timestamp"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="module_deps" numRows="20" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="md_module" nullable="false" remarks="" size="255" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="1" name="md_skin" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="2" name="md_deps" nullable="false" remarks="" size="16777215" type="MEDIUMBLOB"/>
+         <index name="md_module_skin" unique="true">
+            <column ascending="true" name="md_module"/>
+            <column ascending="true" name="md_skin"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="objectcache" numRows="68" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="''" digits="0" id="0" name="keyname" nullable="false" remarks="" size="255" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="1" name="value" nullable="true" remarks="" size="16777215" type="MEDIUMBLOB"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="2" name="exptime" nullable="true" remarks="" size="19" type="DATETIME"/>
+         <primaryKey column="keyname" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="keyname"/>
+         </index>
+         <index name="exptime" unique="false">
+            <column ascending="true" name="exptime"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="oldimage" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="''" digits="0" id="0" name="oi_name" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="1" name="oi_archive_name" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="2" name="oi_size" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="3" name="oi_width" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="4" name="oi_height" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="5" name="oi_bits" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="6" name="oi_description" nullable="false" remarks="" size="767" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="7" name="oi_user" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="8" name="oi_user_text" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="'\0\0\0\0\0\0\0\0\0\0\0\0\0\0'" digits="0" id="9" name="oi_timestamp" nullable="false" remarks="" size="14" type="BINARY"/>
+         <column autoUpdated="false" digits="0" id="10" name="oi_metadata" nullable="false" remarks="" size="16777215" type="MEDIUMBLOB"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="11" name="oi_media_type" nullable="true" remarks="" size="10" type="enum('UNKNOWN', 'BITMAP', 'DRAWING', 'AUDIO', 'VIDEO', 'MULTIMEDIA', 'OFFICE', 'TEXT', 'EXECUTABLE', 'ARCHIVE')"/>
+         <column autoUpdated="false" defaultValue="'unknown'" digits="0" id="12" name="oi_major_mime" nullable="false" remarks="" size="11" type="enum('unknown', 'application', 'audio', 'image', 'text', 'video', 'message', 'model', 'multipart', 'chemical')"/>
+         <column autoUpdated="false" defaultValue="'unknown'" digits="0" id="13" name="oi_minor_mime" nullable="false" remarks="" size="100" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="14" name="oi_deleted" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="15" name="oi_sha1" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <index name="oi_name_archive_name" unique="false">
+            <column ascending="true" name="oi_name"/>
+            <column ascending="true" name="oi_archive_name"/>
+         </index>
+         <index name="oi_name_timestamp" unique="false">
+            <column ascending="true" name="oi_name"/>
+            <column ascending="true" name="oi_timestamp"/>
+         </index>
+         <index name="oi_sha1" unique="false">
+            <column ascending="true" name="oi_sha1"/>
+         </index>
+         <index name="oi_usertext_timestamp" unique="false">
+            <column ascending="true" name="oi_user_text"/>
+            <column ascending="true" name="oi_timestamp"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="page" numRows="62" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="page_id" nullable="false" remarks="" size="10" type="INT UNSIGNED">
+            <child catalog="wikidb" column="ar_page_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="archive"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="page_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="2" name="page_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="page_restrictions" nullable="false" remarks="" size="255" type="TINYBLOB"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="4" name="page_is_redirect" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="5" name="page_is_new" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="6" name="page_random" nullable="false" remarks="" size="22" type="DOUBLE UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="'\0\0\0\0\0\0\0\0\0\0\0\0\0\0'" digits="0" id="7" name="page_touched" nullable="false" remarks="" size="14" type="BINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="8" name="page_links_updated" nullable="true" remarks="" size="14" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="9" name="page_latest" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="10" name="page_len" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="11" name="page_content_model" nullable="true" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="12" name="page_lang" nullable="true" remarks="" size="35" type="VARBINARY"/>
+         <primaryKey column="page_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="page_id"/>
+         </index>
+         <index name="name_title" unique="true">
+            <column ascending="true" name="page_namespace"/>
+            <column ascending="true" name="page_title"/>
+         </index>
+         <index name="page_len" unique="false">
+            <column ascending="true" name="page_len"/>
+         </index>
+         <index name="page_random" unique="false">
+            <column ascending="true" name="page_random"/>
+         </index>
+         <index name="page_redirect_namespace_len" unique="false">
+            <column ascending="true" name="page_is_redirect"/>
+            <column ascending="true" name="page_namespace"/>
+            <column ascending="true" name="page_len"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="page_props" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="pp_page" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="pp_propname" nullable="false" remarks="" size="60" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="2" name="pp_value" nullable="false" remarks="" size="65535" type="BLOB"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="3" name="pp_sortkey" nullable="true" remarks="" size="12" type="FLOAT"/>
+         <index name="pp_page_propname" unique="true">
+            <column ascending="true" name="pp_page"/>
+            <column ascending="true" name="pp_propname"/>
+         </index>
+         <index name="pp_propname_page" unique="true">
+            <column ascending="true" name="pp_propname"/>
+            <column ascending="true" name="pp_page"/>
+         </index>
+         <index name="pp_propname_sortkey_page" unique="true">
+            <column ascending="true" name="pp_propname"/>
+            <column ascending="true" name="pp_sortkey"/>
+            <column ascending="true" name="pp_page"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="page_restrictions" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="pr_id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="1" name="pr_page" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="2" name="pr_type" nullable="false" remarks="" size="60" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="3" name="pr_level" nullable="false" remarks="" size="60" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="4" name="pr_cascade" nullable="false" remarks="" size="3" type="TINYINT"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="5" name="pr_user" nullable="true" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="6" name="pr_expiry" nullable="true" remarks="" size="14" type="VARBINARY"/>
+         <primaryKey column="pr_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="pr_id"/>
+         </index>
+         <index name="pr_cascade" unique="false">
+            <column ascending="true" name="pr_cascade"/>
+         </index>
+         <index name="pr_level" unique="false">
+            <column ascending="true" name="pr_level"/>
+         </index>
+         <index name="pr_pagetype" unique="true">
+            <column ascending="true" name="pr_page"/>
+            <column ascending="true" name="pr_type"/>
+         </index>
+         <index name="pr_typelevel" unique="false">
+            <column ascending="true" name="pr_type"/>
+            <column ascending="true" name="pr_level"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="pagelinks" numRows="19" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="pl_from" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="1" name="pl_from_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="2" name="pl_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="3" name="pl_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <index name="pl_backlinks_namespace" unique="false">
+            <column ascending="true" name="pl_from_namespace"/>
+            <column ascending="true" name="pl_namespace"/>
+            <column ascending="true" name="pl_title"/>
+            <column ascending="true" name="pl_from"/>
+         </index>
+         <index name="pl_from" unique="true">
+            <column ascending="true" name="pl_from"/>
+            <column ascending="true" name="pl_namespace"/>
+            <column ascending="true" name="pl_title"/>
+         </index>
+         <index name="pl_namespace" unique="false">
+            <column ascending="true" name="pl_namespace"/>
+            <column ascending="true" name="pl_title"/>
+            <column ascending="true" name="pl_from"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="protected_titles" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="pt_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="pt_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="pt_user" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="3" name="pt_reason" nullable="true" remarks="" size="767" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="4" name="pt_timestamp" nullable="false" remarks="" size="14" type="BINARY"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="5" name="pt_expiry" nullable="false" remarks="" size="14" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="6" name="pt_create_perm" nullable="false" remarks="" size="60" type="VARBINARY"/>
+         <index name="pt_namespace_title" unique="true">
+            <column ascending="true" name="pt_namespace"/>
+            <column ascending="true" name="pt_title"/>
+         </index>
+         <index name="pt_timestamp" unique="false">
+            <column ascending="true" name="pt_timestamp"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="querycache" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="qc_type" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="1" name="qc_value" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="2" name="qc_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="3" name="qc_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <index name="qc_type" unique="false">
+            <column ascending="true" name="qc_type"/>
+            <column ascending="true" name="qc_value"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="querycache_info" numRows="1" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="''" digits="0" id="0" name="qci_type" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="'19700101000000'" digits="0" id="1" name="qci_timestamp" nullable="false" remarks="" size="14" type="BINARY"/>
+         <index name="qci_type" unique="true">
+            <column ascending="true" name="qci_type"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="querycachetwo" numRows="1" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="qcc_type" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="1" name="qcc_value" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="2" name="qcc_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="3" name="qcc_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="4" name="qcc_namespacetwo" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="5" name="qcc_titletwo" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <index name="qcc_title" unique="false">
+            <column ascending="true" name="qcc_type"/>
+            <column ascending="true" name="qcc_namespace"/>
+            <column ascending="true" name="qcc_title"/>
+         </index>
+         <index name="qcc_titletwo" unique="false">
+            <column ascending="true" name="qcc_type"/>
+            <column ascending="true" name="qcc_namespacetwo"/>
+            <column ascending="true" name="qcc_titletwo"/>
+         </index>
+         <index name="qcc_type" unique="false">
+            <column ascending="true" name="qcc_type"/>
+            <column ascending="true" name="qcc_value"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="recentchanges" numRows="21" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="rc_id" nullable="false" remarks="" size="10" type="INT">
+            <child catalog="wikidb" column="ct_rc_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="change_tag"/>
+            <child catalog="wikidb" column="ts_rc_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="tag_summary"/>
+         </column>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="1" name="rc_timestamp" nullable="false" remarks="" size="14" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="2" name="rc_user" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="3" name="rc_user_text" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="4" name="rc_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="5" name="rc_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="6" name="rc_comment" nullable="false" remarks="" size="767" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="7" name="rc_minor" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="8" name="rc_bot" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="9" name="rc_new" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="10" name="rc_cur_id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="11" name="rc_this_oldid" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="12" name="rc_last_oldid" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="13" name="rc_type" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="14" name="rc_source" nullable="false" remarks="" size="16" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="15" name="rc_patrolled" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="16" name="rc_ip" nullable="false" remarks="" size="40" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="17" name="rc_old_len" nullable="true" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="18" name="rc_new_len" nullable="true" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="19" name="rc_deleted" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="20" name="rc_logid" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="21" name="rc_log_type" nullable="true" remarks="" size="255" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="22" name="rc_log_action" nullable="true" remarks="" size="255" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="23" name="rc_params" nullable="true" remarks="" size="65535" type="BLOB"/>
+         <primaryKey column="rc_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="rc_id"/>
+         </index>
+         <index name="new_name_timestamp" unique="false">
+            <column ascending="true" name="rc_new"/>
+            <column ascending="true" name="rc_namespace"/>
+            <column ascending="true" name="rc_timestamp"/>
+         </index>
+         <index name="rc_cur_id" unique="false">
+            <column ascending="true" name="rc_cur_id"/>
+         </index>
+         <index name="rc_ip" unique="false">
+            <column ascending="true" name="rc_ip"/>
+         </index>
+         <index name="rc_name_type_patrolled_timestamp" unique="false">
+            <column ascending="true" name="rc_namespace"/>
+            <column ascending="true" name="rc_type"/>
+            <column ascending="true" name="rc_patrolled"/>
+            <column ascending="true" name="rc_timestamp"/>
+         </index>
+         <index name="rc_namespace_title" unique="false">
+            <column ascending="true" name="rc_namespace"/>
+            <column ascending="true" name="rc_title"/>
+         </index>
+         <index name="rc_ns_usertext" unique="false">
+            <column ascending="true" name="rc_namespace"/>
+            <column ascending="true" name="rc_user_text"/>
+         </index>
+         <index name="rc_timestamp" unique="false">
+            <column ascending="true" name="rc_timestamp"/>
+         </index>
+         <index name="rc_user_text" unique="false">
+            <column ascending="true" name="rc_user_text"/>
+            <column ascending="true" name="rc_timestamp"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="redirect" numRows="3" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="rd_from" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="1" name="rd_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="2" name="rd_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="3" name="rd_interwiki" nullable="true" remarks="" size="32" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="4" name="rd_fragment" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <primaryKey column="rd_from" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="rd_from"/>
+         </index>
+         <index name="rd_ns_title" unique="false">
+            <column ascending="true" name="rd_namespace"/>
+            <column ascending="true" name="rd_title"/>
+            <column ascending="true" name="rd_from"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="revision" numRows="243" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="rev_id" nullable="false" remarks="" size="10" type="INT UNSIGNED">
+            <child catalog="wikidb" column="ar_rev_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="archive"/>
+            <child catalog="wikidb" column="ct_rev_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="change_tag"/>
+            <child catalog="wikidb" column="ts_rev_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="tag_summary"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="rev_page" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="2" name="rev_text_id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="3" name="rev_comment" nullable="false" remarks="" size="767" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="4" name="rev_user" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="5" name="rev_user_text" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="'\0\0\0\0\0\0\0\0\0\0\0\0\0\0'" digits="0" id="6" name="rev_timestamp" nullable="false" remarks="" size="14" type="BINARY"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="7" name="rev_minor_edit" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="8" name="rev_deleted" nullable="false" remarks="" size="3" type="TINYINT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="9" name="rev_len" nullable="true" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="10" name="rev_parent_id" nullable="true" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="11" name="rev_sha1" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="12" name="rev_content_model" nullable="true" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="13" name="rev_content_format" nullable="true" remarks="" size="64" type="VARBINARY"/>
+         <primaryKey column="rev_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="rev_id"/>
+         </index>
+         <index name="page_timestamp" unique="false">
+            <column ascending="true" name="rev_page"/>
+            <column ascending="true" name="rev_timestamp"/>
+         </index>
+         <index name="page_user_timestamp" unique="false">
+            <column ascending="true" name="rev_page"/>
+            <column ascending="true" name="rev_user"/>
+            <column ascending="true" name="rev_timestamp"/>
+         </index>
+         <index name="rev_page_id" unique="false">
+            <column ascending="true" name="rev_page"/>
+            <column ascending="true" name="rev_id"/>
+         </index>
+         <index name="rev_timestamp" unique="false">
+            <column ascending="true" name="rev_timestamp"/>
+         </index>
+         <index name="user_timestamp" unique="false">
+            <column ascending="true" name="rev_user"/>
+            <column ascending="true" name="rev_timestamp"/>
+         </index>
+         <index name="usertext_timestamp" unique="false">
+            <column ascending="true" name="rev_user_text"/>
+            <column ascending="true" name="rev_timestamp"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="searchindex" numRows="62" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="si_page" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="1" name="si_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="si_text" nullable="false" remarks="" size="16777215" type="MEDIUMTEXT"/>
+         <index name="si_page" unique="true">
+            <column ascending="true" name="si_page"/>
+         </index>
+         <index name="si_text" unique="false">
+            <column ascending="true" name="si_text"/>
+         </index>
+         <index name="si_title" unique="false">
+            <column ascending="true" name="si_title"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="site_identifiers" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="si_site" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="1" name="si_type" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="2" name="si_key" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <index name="site_ids_key" unique="false">
+            <column ascending="true" name="si_key"/>
+         </index>
+         <index name="site_ids_site" unique="false">
+            <column ascending="true" name="si_site"/>
+         </index>
+         <index name="site_ids_type" unique="true">
+            <column ascending="true" name="si_type"/>
+            <column ascending="true" name="si_key"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="site_stats" numRows="1" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="ss_row_id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="1" name="ss_total_edits" nullable="true" remarks="" size="20" type="BIGINT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="2" name="ss_good_articles" nullable="true" remarks="" size="20" type="BIGINT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="-1" digits="0" id="3" name="ss_total_pages" nullable="true" remarks="" size="19" type="BIGINT"/>
+         <column autoUpdated="false" defaultValue="-1" digits="0" id="4" name="ss_users" nullable="true" remarks="" size="19" type="BIGINT"/>
+         <column autoUpdated="false" defaultValue="-1" digits="0" id="5" name="ss_active_users" nullable="true" remarks="" size="19" type="BIGINT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="6" name="ss_images" nullable="true" remarks="" size="10" type="INT"/>
+         <index name="ss_row_id" unique="true">
+            <column ascending="true" name="ss_row_id"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="sites" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="site_id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="1" name="site_global_key" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="2" name="site_type" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="3" name="site_group" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="4" name="site_source" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="5" name="site_language" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="6" name="site_protocol" nullable="false" remarks="" size="32" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="7" name="site_domain" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="8" name="site_data" nullable="false" remarks="" size="65535" type="BLOB"/>
+         <column autoUpdated="false" digits="0" id="9" name="site_forward" nullable="false" remarks="" size="3" type="BIT"/>
+         <column autoUpdated="false" digits="0" id="10" name="site_config" nullable="false" remarks="" size="65535" type="BLOB"/>
+         <primaryKey column="site_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="site_id"/>
+         </index>
+         <index name="sites_domain" unique="false">
+            <column ascending="true" name="site_domain"/>
+         </index>
+         <index name="sites_forward" unique="false">
+            <column ascending="true" name="site_forward"/>
+         </index>
+         <index name="sites_global_key" unique="true">
+            <column ascending="true" name="site_global_key"/>
+         </index>
+         <index name="sites_group" unique="false">
+            <column ascending="true" name="site_group"/>
+         </index>
+         <index name="sites_language" unique="false">
+            <column ascending="true" name="site_language"/>
+         </index>
+         <index name="sites_protocol" unique="false">
+            <column ascending="true" name="site_protocol"/>
+         </index>
+         <index name="sites_source" unique="false">
+            <column ascending="true" name="site_source"/>
+         </index>
+         <index name="sites_type" unique="false">
+            <column ascending="true" name="site_type"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="tag_summary" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="ts_id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="1" name="ts_rc_id" nullable="true" remarks="" size="10" type="INT">
+            <parent catalog="wikidb" column="rc_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="recentchanges"/>
+         </column>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="2" name="ts_log_id" nullable="true" remarks="" size="10" type="INT">
+            <parent catalog="wikidb" column="log_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="logging"/>
+         </column>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="3" name="ts_rev_id" nullable="true" remarks="" size="10" type="INT">
+            <parent catalog="wikidb" column="rev_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="revision"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="ts_tags" nullable="false" remarks="" size="65535" type="BLOB"/>
+         <primaryKey column="ts_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="ts_id"/>
+         </index>
+         <index name="tag_summary_log_id" unique="true">
+            <column ascending="true" name="ts_log_id"/>
+         </index>
+         <index name="tag_summary_rc_id" unique="true">
+            <column ascending="true" name="ts_rc_id"/>
+         </index>
+         <index name="tag_summary_rev_id" unique="true">
+            <column ascending="true" name="ts_rev_id"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="templatelinks" numRows="1" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="tl_from" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="1" name="tl_from_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="2" name="tl_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="3" name="tl_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <index name="tl_backlinks_namespace" unique="false">
+            <column ascending="true" name="tl_from_namespace"/>
+            <column ascending="true" name="tl_namespace"/>
+            <column ascending="true" name="tl_title"/>
+            <column ascending="true" name="tl_from"/>
+         </index>
+         <index name="tl_from" unique="true">
+            <column ascending="true" name="tl_from"/>
+            <column ascending="true" name="tl_namespace"/>
+            <column ascending="true" name="tl_title"/>
+         </index>
+         <index name="tl_namespace" unique="false">
+            <column ascending="true" name="tl_namespace"/>
+            <column ascending="true" name="tl_title"/>
+            <column ascending="true" name="tl_from"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="text" numRows="194" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="old_id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="1" name="old_text" nullable="false" remarks="" size="16777215" type="MEDIUMBLOB"/>
+         <column autoUpdated="false" digits="0" id="2" name="old_flags" nullable="false" remarks="" size="255" type="TINYBLOB"/>
+         <primaryKey column="old_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="old_id"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="transcache" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="tc_url" nullable="false" remarks="" size="255" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="1" name="tc_contents" nullable="true" remarks="" size="65535" type="TEXT"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="2" name="tc_time" nullable="true" remarks="" size="14" type="BINARY"/>
+         <index name="tc_url_idx" unique="true">
+            <column ascending="true" name="tc_url"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="updatelog" numRows="29" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="ul_key" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="1" name="ul_value" nullable="true" remarks="" size="65535" type="BLOB"/>
+         <primaryKey column="ul_key" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="ul_key"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="uploadstash" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="us_id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="1" name="us_user" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="2" name="us_key" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="us_orig_path" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="us_path" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="5" name="us_source_type" nullable="true" remarks="" size="50" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="6" name="us_timestamp" nullable="false" remarks="" size="14" type="VARBINARY"/>
+         <column autoUpdated="false" digits="0" id="7" name="us_status" nullable="false" remarks="" size="50" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="8" name="us_chunk_inx" nullable="true" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="9" name="us_props" nullable="true" remarks="" size="65535" type="BLOB"/>
+         <column autoUpdated="false" digits="0" id="10" name="us_size" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="11" name="us_sha1" nullable="false" remarks="" size="31" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="12" name="us_mime" nullable="true" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="13" name="us_media_type" nullable="true" remarks="" size="10" type="enum('UNKNOWN', 'BITMAP', 'DRAWING', 'AUDIO', 'VIDEO', 'MULTIMEDIA', 'OFFICE', 'TEXT', 'EXECUTABLE', 'ARCHIVE')"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="14" name="us_image_width" nullable="true" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="15" name="us_image_height" nullable="true" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="16" name="us_image_bits" nullable="true" remarks="" size="5" type="SMALLINT UNSIGNED"/>
+         <primaryKey column="us_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="us_id"/>
+         </index>
+         <index name="us_key" unique="true">
+            <column ascending="true" name="us_key"/>
+         </index>
+         <index name="us_timestamp" unique="false">
+            <column ascending="true" name="us_timestamp"/>
+         </index>
+         <index name="us_user" unique="false">
+            <column ascending="true" name="us_user"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="user" numRows="1" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="user_id" nullable="false" remarks="" size="10" type="INT UNSIGNED">
+            <child catalog="wikidb" column="user_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="user_newtalk"/>
+         </column>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="1" name="user_name" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="2" name="user_real_name" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="user_password" nullable="false" remarks="" size="255" type="TINYBLOB"/>
+         <column autoUpdated="false" digits="0" id="4" name="user_newpassword" nullable="false" remarks="" size="255" type="TINYBLOB"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="5" name="user_newpass_time" nullable="true" remarks="" size="14" type="BINARY"/>
+         <column autoUpdated="false" digits="0" id="6" name="user_email" nullable="false" remarks="" size="255" type="TINYTEXT"/>
+         <column autoUpdated="false" defaultValue="'\0\0\0\0\0\0\0\0\0\0\0\0\0\0'" digits="0" id="7" name="user_touched" nullable="false" remarks="" size="14" type="BINARY"/>
+         <column autoUpdated="false" defaultValue="'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'" digits="0" id="8" name="user_token" nullable="false" remarks="" size="32" type="BINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="9" name="user_email_authenticated" nullable="true" remarks="" size="14" type="BINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="10" name="user_email_token" nullable="true" remarks="" size="32" type="BINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="11" name="user_email_token_expires" nullable="true" remarks="" size="14" type="BINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="12" name="user_registration" nullable="true" remarks="" size="14" type="BINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="13" name="user_editcount" nullable="true" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="14" name="user_password_expires" nullable="true" remarks="" size="14" type="VARBINARY"/>
+         <primaryKey column="user_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="user_id"/>
+         </index>
+         <index name="user_email" unique="false">
+            <column ascending="true" name="user_email"/>
+         </index>
+         <index name="user_email_token" unique="false">
+            <column ascending="true" name="user_email_token"/>
+         </index>
+         <index name="user_name" unique="true">
+            <column ascending="true" name="user_name"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="user_former_groups" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="ufg_user" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="1" name="ufg_group" nullable="false" remarks="" size="255" type="VARBINARY"/>
+         <index name="ufg_user_group" unique="true">
+            <column ascending="true" name="ufg_user"/>
+            <column ascending="true" name="ufg_group"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="user_groups" numRows="2" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="ug_user" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="1" name="ug_group" nullable="false" remarks="" size="255" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="2" name="ug_expiry" nullable="true" remarks="" size="14" type="VARBINARY"/>
+         <primaryKey column="ug_group" sequenceNumberInPK="1"/>
+         <primaryKey column="ug_user" sequenceNumberInPK="2"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="ug_user"/>
+            <column ascending="true" name="ug_group"/>
+         </index>
+         <index name="ug_expiry" unique="false">
+            <column ascending="true" name="ug_expiry"/>
+         </index>
+         <index name="ug_group" unique="false">
+            <column ascending="true" name="ug_group"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="user_newtalk" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" defaultValue="0" digits="0" id="0" name="user_id" nullable="false" remarks="" size="10" type="INT UNSIGNED">
+            <parent catalog="wikidb" column="user_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="1" name="user_ip" nullable="false" remarks="" size="40" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="2" name="user_last_timestamp" nullable="true" remarks="" size="14" type="VARBINARY"/>
+         <index name="user_id" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+         <index name="user_ip" unique="false">
+            <column ascending="true" name="user_ip"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="user_properties" numRows="3" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="up_user" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="1" name="up_property" nullable="false" remarks="" size="255" type="VARBINARY"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="2" name="up_value" nullable="true" remarks="" size="65535" type="BLOB"/>
+         <index name="user_properties_property" unique="false">
+            <column ascending="true" name="up_property"/>
+         </index>
+         <index name="user_properties_user_property" unique="true">
+            <column ascending="true" name="up_user"/>
+            <column ascending="true" name="up_property"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="valid_tag" numRows="0" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="vt_tag" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <primaryKey column="vt_tag" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="vt_tag"/>
+         </index>
+      </table>
+      <table catalog="wikidb" name="watchlist" numRows="38" remarks="" type="TABLE">
+         <column autoUpdated="true" digits="0" id="0" name="wl_id" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" digits="0" id="1" name="wl_user" nullable="false" remarks="" size="10" type="INT UNSIGNED"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="2" name="wl_namespace" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" defaultValue="''" digits="0" id="3" name="wl_title" nullable="false" remarks="" size="255" type="VARCHAR"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="4" name="wl_notificationtimestamp" nullable="true" remarks="" size="14" type="VARBINARY"/>
+         <primaryKey column="wl_id" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="wl_id"/>
+         </index>
+         <index name="namespace_title" unique="false">
+            <column ascending="true" name="wl_namespace"/>
+            <column ascending="true" name="wl_title"/>
+         </index>
+         <index name="wl_user" unique="true">
+            <column ascending="true" name="wl_user"/>
+            <column ascending="true" name="wl_namespace"/>
+            <column ascending="true" name="wl_title"/>
+         </index>
+         <index name="wl_user_notificationtimestamp" unique="false">
+            <column ascending="true" name="wl_user"/>
+            <column ascending="true" name="wl_notificationtimestamp"/>
+         </index>
+      </table>
+   </tables>
+</database>

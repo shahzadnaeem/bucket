@@ -8,6 +8,7 @@
 #include <stdlib.h>
 
 #include "sudoku.h"
+#include "boardrunner.h"
 
 using namespace std;
 using namespace boost;
@@ -22,6 +23,12 @@ typedef Args::iterator ArgsIter;
 int main( int argc, char *argv[] )
 {
   int exitVal = EXIT_SUCCESS;
+
+  BoardRunner boardRunner( argc, argv );
+
+  boardRunner.run();
+
+  //exit( 0 );
 
   if ( argc > 1 )
   {

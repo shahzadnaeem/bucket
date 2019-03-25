@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="employees" schema="employees" type="MariaDB - 10.3.12-MariaDB-log">
+   <tables>
+      <table catalog="employees" name="current_dept_emp" numRows="0" remarks="" type="VIEW" viewSql="select `l`.`emp_no` AS `emp_no`,`d`.`dept_no` AS `dept_no`,`l`.`from_date` AS `from_date`,`l`.`to_date` AS `to_date` from (`employees`.`dept_emp` `d` join `employees`.`dept_emp_latest_date` `l` on(((`d`.`emp_no` = `l`.`emp_no`) and (`d`.`from_date` = `l`.`from_date`) and (`l`.`to_date` = `d`.`to_date`))))">
+         <column autoUpdated="false" digits="0" id="0" name="emp_no" nullable="false" remarks="" size="10" type="INT">
+            <parent catalog="employees" column="emp_no" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="employees"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dept_no" nullable="false" remarks="" size="4" type="CHAR">
+            <parent catalog="employees" column="dept_no" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="departments"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="from_date" nullable="true" remarks="" size="10" type="DATE"/>
+         <column autoUpdated="false" digits="0" id="3" name="to_date" nullable="true" remarks="" size="10" type="DATE"/>
+      </table>
+      <table catalog="employees" name="departments" numRows="9" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="dept_no" nullable="false" remarks="" size="4" type="CHAR">
+            <child catalog="employees" column="dept_no" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="current_dept_emp"/>
+            <child catalog="employees" column="dept_no" foreignKey="dept_emp_ibfk_2" implied="false" onDeleteCascade="true" table="dept_emp"/>
+            <child catalog="employees" column="dept_no" foreignKey="dept_manager_ibfk_2" implied="false" onDeleteCascade="true" table="dept_manager"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dept_name" nullable="false" remarks="" size="40" type="VARCHAR"/>
+         <primaryKey column="dept_no" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="dept_no"/>
+         </index>
+         <index name="dept_name" unique="true">
+            <column ascending="true" name="dept_name"/>
+         </index>
+      </table>
+      <table catalog="employees" name="dept_emp" numRows="323263" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="emp_no" nullable="false" remarks="" size="10" type="INT">
+            <parent catalog="employees" column="emp_no" foreignKey="dept_emp_ibfk_1" implied="false" onDeleteCascade="true" table="employees"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dept_no" nullable="false" remarks="" size="4" type="CHAR">
+            <parent catalog="employees" column="dept_no" foreignKey="dept_emp_ibfk_2" implied="false" onDeleteCascade="true" table="departments"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="from_date" nullable="false" remarks="" size="10" type="DATE"/>
+         <column autoUpdated="false" digits="0" id="3" name="to_date" nullable="false" remarks="" size="10" type="DATE"/>
+         <primaryKey column="dept_no" sequenceNumberInPK="1"/>
+         <primaryKey column="emp_no" sequenceNumberInPK="2"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="emp_no"/>
+            <column ascending="true" name="dept_no"/>
+         </index>
+         <index name="dept_no" unique="false">
+            <column ascending="true" name="dept_no"/>
+         </index>
+      </table>
+      <table catalog="employees" name="dept_emp_latest_date" numRows="0" remarks="" type="VIEW" viewSql="select `employees`.`dept_emp`.`emp_no` AS `emp_no`,max(`employees`.`dept_emp`.`from_date`) AS `from_date`,max(`employees`.`dept_emp`.`to_date`) AS `to_date` from `employees`.`dept_emp` group by `employees`.`dept_emp`.`emp_no`">
+         <column autoUpdated="false" digits="0" id="0" name="emp_no" nullable="false" remarks="" size="10" type="INT">
+            <parent catalog="employees" column="emp_no" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="employees"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="from_date" nullable="true" remarks="" size="10" type="DATE"/>
+         <column autoUpdated="false" digits="0" id="2" name="to_date" nullable="true" remarks="" size="10" type="DATE"/>
+      </table>
+      <table catalog="employees" name="dept_manager" numRows="24" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="emp_no" nullable="false" remarks="" size="10" type="INT">
+            <parent catalog="employees" column="emp_no" foreignKey="dept_manager_ibfk_1" implied="false" onDeleteCascade="true" table="employees"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="dept_no" nullable="false" remarks="" size="4" type="CHAR">
+            <parent catalog="employees" column="dept_no" foreignKey="dept_manager_ibfk_2" implied="false" onDeleteCascade="true" table="departments"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="from_date" nullable="false" remarks="" size="10" type="DATE"/>
+         <column autoUpdated="false" digits="0" id="3" name="to_date" nullable="false" remarks="" size="10" type="DATE"/>
+         <primaryKey column="dept_no" sequenceNumberInPK="1"/>
+         <primaryKey column="emp_no" sequenceNumberInPK="2"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="emp_no"/>
+            <column ascending="true" name="dept_no"/>
+         </index>
+         <index name="dept_no" unique="false">
+            <column ascending="true" name="dept_no"/>
+         </index>
+      </table>
+      <table catalog="employees" name="employees" numRows="291626" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="emp_no" nullable="false" remarks="" size="10" type="INT">
+            <child catalog="employees" column="emp_no" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="current_dept_emp"/>
+            <child catalog="employees" column="emp_no" foreignKey="dept_emp_ibfk_1" implied="false" onDeleteCascade="true" table="dept_emp"/>
+            <child catalog="employees" column="emp_no" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" table="dept_emp_latest_date"/>
+            <child catalog="employees" column="emp_no" foreignKey="dept_manager_ibfk_1" implied="false" onDeleteCascade="true" table="dept_manager"/>
+            <child catalog="employees" column="emp_no" foreignKey="salaries_ibfk_1" implied="false" onDeleteCascade="true" table="salaries"/>
+            <child catalog="employees" column="emp_no" foreignKey="titles_ibfk_1" implied="false" onDeleteCascade="true" table="titles"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="birth_date" nullable="false" remarks="" size="10" type="DATE"/>
+         <column autoUpdated="false" digits="0" id="2" name="first_name" nullable="false" remarks="" size="14" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="3" name="last_name" nullable="false" remarks="" size="16" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="4" name="gender" nullable="false" remarks="" size="1" type="enum('M', 'F')"/>
+         <column autoUpdated="false" digits="0" id="5" name="hire_date" nullable="false" remarks="" size="10" type="DATE"/>
+         <primaryKey column="emp_no" sequenceNumberInPK="1"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="emp_no"/>
+         </index>
+      </table>
+      <table catalog="employees" name="salaries" numRows="2838426" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="emp_no" nullable="false" remarks="" size="10" type="INT">
+            <parent catalog="employees" column="emp_no" foreignKey="salaries_ibfk_1" implied="false" onDeleteCascade="true" table="employees"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="salary" nullable="false" remarks="" size="10" type="INT"/>
+         <column autoUpdated="false" digits="0" id="2" name="from_date" nullable="false" remarks="" size="10" type="DATE"/>
+         <column autoUpdated="false" digits="0" id="3" name="to_date" nullable="false" remarks="" size="10" type="DATE"/>
+         <primaryKey column="emp_no" sequenceNumberInPK="1"/>
+         <primaryKey column="from_date" sequenceNumberInPK="2"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="emp_no"/>
+            <column ascending="true" name="from_date"/>
+         </index>
+      </table>
+      <table catalog="employees" name="titles" numRows="442129" remarks="" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="emp_no" nullable="false" remarks="" size="10" type="INT">
+            <parent catalog="employees" column="emp_no" foreignKey="titles_ibfk_1" implied="false" onDeleteCascade="true" table="employees"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="title" nullable="false" remarks="" size="50" type="VARCHAR"/>
+         <column autoUpdated="false" digits="0" id="2" name="from_date" nullable="false" remarks="" size="10" type="DATE"/>
+         <column autoUpdated="false" defaultValue="NULL" digits="0" id="3" name="to_date" nullable="true" remarks="" size="10" type="DATE"/>
+         <primaryKey column="emp_no" sequenceNumberInPK="1"/>
+         <primaryKey column="from_date" sequenceNumberInPK="2"/>
+         <primaryKey column="title" sequenceNumberInPK="3"/>
+         <index name="PRIMARY" unique="true">
+            <column ascending="true" name="emp_no"/>
+            <column ascending="true" name="title"/>
+            <column ascending="true" name="from_date"/>
+         </index>
+      </table>
+   </tables>
+</database>

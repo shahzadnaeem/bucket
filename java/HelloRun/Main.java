@@ -12,9 +12,20 @@ class Hello {
     }
 
     public void say() {
-        for ( int i = 0; i < this.times; i ++ ) {
+        
+        int times = Math.abs( this.times );
+
+        for ( int i = 0; i < times; i ++ ) {
             System.out.format( "%2d - %s\n", i, this.message );
         }
+
+        if ( this.times < 0 ) {
+            this.chuck();
+        }
+    }
+
+    private void chuck() {
+        throw new Error( "Whoa there" );
     }
 }
 

@@ -11,8 +11,14 @@ umask 022
 
 PATH=$HOME/bin:$PATH
 
+# Haskell cabal
+PATH=$HOME/.cabal/bin:$PATH
+
 export JAVA_HOME=/usr/java/latest
 PATH=$JAVA_HOME/bin:$PATH
+
+# Arduino
+PATH=$HOME/arduino-1.8.3:$PATH
 
 export COMMON_BUILD_TOOLS=~/projects/maxfocus-CommonBuildTools
 export ANT_HOME=$COMMON_BUILD_TOOLS/Software/Ant
@@ -27,15 +33,17 @@ alias p='cd ~/projects'
 
 # Misc aliases
 alias a='atom &'
-alias e='xemacs &'
+alias e='emacs &'
 alias x='clear'
 alias h='history'
 alias mhz='grep MHz /proc/cpuinfo'
 alias ltr='ls -ltr'
 
 alias t="watch -n 1 'banner \`date +%H:%M:%S\` | sed -e \"s/\(.\)/\1\1\1/g\" -e \"p\" | cowsay -n'"
+alias tm="tmux"
+alias tma="tmux attach"
 
-alias ard='cd Arduino'
+alias ard='cd ~/projects/bucket/arduino; ~/arduino-1.8.3/arduino &'
 
 # Subversion aliases
 alias w='cd ~/SVN-WORK'
@@ -48,6 +56,7 @@ alias vd='svn diff'
 alias vu='svn update'
 alias vc='svn commit'
 alias vm='svn merge'
+alias svnas="alias | grep -e \"='svn\" | sed -e \"s/^alias /  /\""
 
 # Git aliases
 alias ga='git add'
@@ -60,10 +69,30 @@ alias gcl='git clone'
 alias gui='gitk'
 alias gs='git status'
 alias gc='git commit'
+alias gd='git diff'
 alias gph='git push'
+alias gphm='GIT_SSH_COMMAND="ssh -i ~/.ssh/shahzadnaeem" git push'
+alias gitas="alias | grep -e \"='git\" | sed -e \"s/^alias /  /\""
+
+# gulp - local deploy needed
+alias gulp='./node_modules/gulp/bin/gulp.js'
+
+# HeidiSQL
+alias hsql='wine "c:\\Program Files (x86)\\HeidiSQL\\heidisql.exe"'
 
 # yum
 alias yu='sudo dnf update'
+alias dnfu='sudo dnf update'
+
+# go
+PATH=~/golang/go/bin:$PATH
+export GOPATH=~/golang/work
+
+alias gw='cd $GOPATH'
+
+# go ide
+PATH=~/golang/liteide/bin:$PATH
+alias goide='~/golang/liteide/bin/liteide &'
 
 # ssh stuff
 alias keys='ssh-add -l'

@@ -1,7 +1,7 @@
 
 (setq inhibit-startup-message t)
 
-(set-frame-size (selected-frame) 100 60)
+(set-frame-size (selected-frame)75 50)
 
 (add-hook 'dired-load-hook
   (lambda ()
@@ -21,6 +21,8 @@
 (cond
  ((string-match "XEmacs" emacs-version)
 
+  (setq load-path (append '("/home/shahzad/lisp/") load-path))
+
   ;; Display the time in the mode line
   (setq display-time-day-and-date t)
   (display-time)
@@ -32,9 +34,9 @@
   ;; hideshow
   (load-library "hideshow")
 
-  ;;xSN (require 'psvn)
+  ;; SVN support - via psvn
+  ;;xSN  (require 'psvn)
 
-  ;; version control - git, svn?
   (require 'vc)
 
   ;; Set up some defaults

@@ -12,15 +12,18 @@
 // LED matrix cell size
 #define SIZE 8
 
-#define LED_DATA 2
-#define LED_CLK  3
-#define LED_CS   4
+#define LED_DATA 8
+#define LED_CLK  9
+#define LED_CS   10
 
 LedControl lc=LedControl(LED_DATA, LED_CLK, LED_CS, DEVICES);
 
 #define TEMP_DATA 6
 
 DHT dht( TEMP_DATA, DHT11 );
+
+#define PIR_DATA 2
+#define PIR_SHOW_LED 13
 
 unsigned long delaytime = 100;
 
@@ -31,6 +34,9 @@ unsigned long delaytime = 100;
 void setup() {
 
   Serial.begin(115200);
+
+  pinMode( PIR_DATA, INPUT );
+  pinMode( PIR_SHOW_LED, OUTPUT );
 
   for ( int d = 0; d < DEVICES; d ++ ) {
     // Wake up  
@@ -806,7 +812,31 @@ void gameOfLife()
   delay( 1000 );
 }
 
+void checkPir()
+{
+  int delayTime = 20;
+  int pirRead;
+
+  pirRead = digitalRead( PIR_DATA );
+  
+  if ( pirRead == HIGH ) {
+    digitalWrite( PIR_SHOW_LED, HIGH );
+  } else {
+    digitalWrite( PIR_SHOW_LED, LOW );    
+  }
+
+  if ( pirRead == HIGH ) {
+    scrollString( SIZE, DEVICES, "Oi! Wot U up to?" );
+  } else {
+    animateString( "|/-\\", 200 );
+  }
+
+  delay( delayTime );
+}
+
 void loop() {
+
+  checkPir();
 
   //testSpiral();
 
@@ -824,7 +854,7 @@ void loop() {
 
   //animationTest();
 
-  gameOfLife();
+  //gameOfLife();
 
   //writeArduinoOnMatrix();
 }

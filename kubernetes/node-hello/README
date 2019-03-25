@@ -1,0 +1,54 @@
+
+Steps - on Fedora (probably CentOS7 too)
+
+# minikube setup
+
+ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+ chmod +x kubectl 
+ sudo mv kubectl /usr/local/bin
+
+ curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.23.0/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+
+ curl -L https://github.com/dhiltgen/docker-machine-kvm/releases/download/v0.10.0/docker-machine-driver-kvm-centos7 >/tmp/docker-machine-driver-kvm
+ chmod +x /tmp/docker-machine-driver-kvm
+ sudo cp /tmp/docker-machine-driver-kvm /usr/local/bin/docker-machine-driver-kvm
+
+# minikube VM start
+
+ minikube start --vm-driver=kvm
+ kubectl config use-context minikube
+ kubectl cluster-info
+
+# Create test app
+ eval $(minikube docker-env)
+ cd projects/bucket/kubernetes/node-hello/
+ docker build -t hello-node:v1 .
+
+# Deploy
+ kubectl run hello-node --image=hello-node:v1 --port=8080
+ kubectl get deployments
+ kubectl get pods
+ kubectl get events
+ kubectl expose deployment hello-node --type=LoadBalancer
+ kubectl get services
+
+# Run (opens in browser)
+ minikube service hello-node
+
+# Fetch logs
+ kubectl get pods
+ kubectl logs hello-node-69b47b745c-sdtwl
+
+# Do an update and run again
+ docker build -t hello-node:v2 .
+ kubectl set image deployment/hello-node hello-node=hello-node:v2
+ minikube service hello-node
+
+# Clean up and shutdown minikube
+
+ kubectl delete service hello-node
+ kubectl delete deployment hello-node
+ minikube stop
+ 
+eval $(minikube docker-env -u)
+

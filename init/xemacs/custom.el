@@ -10,7 +10,7 @@
  '(toolbar-visible-p nil))
 
 (custom-set-faces
- '(default ((t (:background "Snow" :size "14pt" :family "Fixed"))) t)
+ '(default ((t (:background "Snow" :size "18pt" :family "Nimbus Mono L"))) t)
  '(cperl-array-face ((((class color) (background light)) (:foreground "Blue" :background "lightyellow2"))))
  '(cperl-hash-face ((((class color) (background light)) (:foreground "Red" :background "lightyellow2"))))
  '(dired-face-directory ((((type x pm mswindows tty) (class color)) (:family "fixed"))))
