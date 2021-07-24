@@ -58,7 +58,8 @@ sudo dnf config-manager --save --setopt="*microsoft-*.priority=50"
 sudo dnf install dotnet-sdk-5.0.x86_64
 
 # Set environment - otherwise libhostfxr.so missing errors
-DOTNET_ROOT=/usr/share/dotnet
+# Add this to your shell startup file - eg .bashrc or similar
+export DOTNET_ROOT=/usr/share/dotnet
 ```
 
 ### IT WORKED :)
