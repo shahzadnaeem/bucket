@@ -1,5 +1,11 @@
 # Development Certificate for .NET on Fedora
 
+## Links
+
+- [MS Docs](https://docs.microsoft.com/en-gb/aspnet/core/security/enforcing-ssl?view=aspnetcore-5.0&tabs=visual-studio#ssl-linux)
+- [Article](https://www.devdungeon.com/content/how-add-trusted-ca-certificate-centosfedora)
+- [mkcert](https://github.com/FiloSottile/mkcert)
+
 ## Steps
 
 ```bash
