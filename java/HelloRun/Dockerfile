@@ -1,5 +1,5 @@
 
-FROM    java:8
+FROM    openjdk:11
 WORKDIR /
 ADD     hello.run hello.run
 EXPOSE  8080
