@@ -97,5 +97,7 @@ void run_reverse( int argc, char *argv[] )
 
 int main( int argc, char *argv[])
 {
-    run_reverse( argc, argv );
+  //run_reverse( argc, argv );
+
+  run_nth( argc, argv );
 }
