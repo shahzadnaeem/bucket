@@ -826,7 +826,7 @@ void checkPir()
   }
 
   if ( pirRead == HIGH ) {
-    scrollString( SIZE, DEVICES, "Oi! Wot U up to?" );
+    scrollString( SIZE, DEVICES, "...!!! STOP !!!..." );
   } else {
     animateString( "|/-\\", 200 );
   }
@@ -858,4 +858,3 @@ void loop() {
 
   //writeArduinoOnMatrix();
 }
-
