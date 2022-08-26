@@ -11,21 +11,8 @@ umask 022
 
 PATH=$HOME/bin:$PATH
 
-# Haskell cabal
-PATH=$HOME/.cabal/bin:$PATH
-
-export JAVA_HOME=/usr/java/latest
-PATH=$JAVA_HOME/bin:$PATH
-
 # Arduino
 PATH=$HOME/arduino-1.8.3:$PATH
-
-export COMMON_BUILD_TOOLS=~/projects/maxfocus-CommonBuildTools
-export ANT_HOME=$COMMON_BUILD_TOOLS/Software/Ant
-export ANT_OPTS=-Xmx1g
-export PATH=$ANT_HOME/bin:$PATH
-export MAVEN_HOME=$COMMON_BUILD_TOOLS/Software/Maven
-export PATH=$MAVEN_HOME/bin:$PATH
 
 alias p='cd ~/projects'
 
@@ -44,19 +31,6 @@ alias tm="tmux"
 alias tma="tmux attach"
 
 alias ard='cd ~/projects/bucket/arduino; ~/arduino-1.8.3/arduino &'
-
-# Subversion aliases
-alias w='cd ~/SVN-WORK'
-alias vh='svn help'
-alias vl='svn list'
-alias vg='svn log'
-alias vs='svn status'
-alias vsq='svn status -q'
-alias vd='svn diff'
-alias vu='svn update'
-alias vc='svn commit'
-alias vm='svn merge'
-alias svnas="alias | grep -e \"='svn\" | sed -e \"s/^alias /  /\""
 
 # Git aliases
 alias ga='git add'
@@ -77,22 +51,9 @@ alias gitas="alias | grep -e \"='git\" | sed -e \"s/^alias /  /\""
 # gulp - local deploy needed
 alias gulp='./node_modules/gulp/bin/gulp.js'
 
-# HeidiSQL
-alias hsql='wine "c:\\Program Files (x86)\\HeidiSQL\\heidisql.exe"'
-
-# yum
-alias yu='sudo dnf update'
+# dnf (yum+)
 alias dnfu='sudo dnf update'
-
-# go
-PATH=~/golang/go/bin:$PATH
-export GOPATH=~/golang/work
-
-alias gw='cd $GOPATH'
-
-# go ide
-PATH=~/golang/liteide/bin:$PATH
-alias goide='~/golang/liteide/bin/liteide &'
+alias dnfuxk='sudo dnf update --exclude kernel*'
 
 # ssh stuff
 alias keys='ssh-add -l'
