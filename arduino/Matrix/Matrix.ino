@@ -25,6 +25,8 @@ DHT dht(TEMP_DATA, DHT11);
 #define PIR_DATA 2
 #define PIR_SHOW_LED 13
 
+#define PWM_LED PIR_SHOW_LED
+
 unsigned long delaytime = 100;
 
 #define ADD_NOISE 0
@@ -33,11 +35,11 @@ unsigned long delaytime = 100;
 
 void setup()
 {
-
   Serial.begin(115200);
 
   pinMode(PIR_DATA, INPUT);
   pinMode(PIR_SHOW_LED, OUTPUT);
+  pinMode(PWM_LED, OUTPUT);
 
   analogWriteResolution(12);
   //  analogReadResolution(12);
@@ -1060,7 +1062,10 @@ int waveData[] = {
 
 // Looks like DUE is limited to 133kHZ for a simple square wave at 50% duty cycle
 
-void sineWave(int freq, int seconds)
+const int FREQS = 0;
+const int DELAYS = 1;
+
+void sineWave(int freq, int seconds, int mode)
 {
   const int NUM_SAMPLES = sizeof(waveData) / sizeof(int);
 
@@ -1068,15 +1073,29 @@ void sineWave(int freq, int seconds)
 
   int uSecDelay = 1000000 / (NUM_SAMPLES * freq);
 
+  if (mode == DELAYS) {
+    uSecDelay = freq;
+    if (uSecDelay == 0 ) {
+     freq = 1000; // Fastest possible
+    } else {
+    freq = 1000000 / (NUM_SAMPLES * uSecDelay );
+    }
+  }
+
   // 10s of signal generation
   const int CYCLES = seconds * freq;
 
-  sprintf(msg, "f=%d, d=%d us, #c=%d", freq, uSecDelay, CYCLES);
+  sprintf(msg, "MODE=%s: f=%d, d=%d us, #c=%d", mode==DELAYS?"DELAY":"FREQ", freq, uSecDelay, CYCLES);
   Serial.println(msg);
 
   for (int c = 0; c < CYCLES; c++)
   {
     analogWrite(DAC1, c % 2 == 0 ? 0xfff : 0 );
+    if ( c % freq == 0 ) {
+      // NOTE: 12bit PWM
+      int led_pwm = 4095 - (4095 * (c / freq) / seconds);
+      analogWrite(PWM_LED, led_pwm);
+    }
 
     for (int i = 0; i < NUM_SAMPLES; i++)
     {
@@ -1093,11 +1112,11 @@ void sineWave(int freq, int seconds)
       //        }
 
       // Sine - with sub-sampling. TODO: Figure out sub-sample values for 'higher' frequencies
-      if ( i % 4 == 0 ) {
+      if ( i % 5 == 0 ) {
         int d = waveData[i] / 2 + (4095 / 4 * 2);  // Adds DC offset to output to keep LED forward biased
                                                    // waveData[i] / 4 + (4095 / 4 * 3) for BLUE LEDs
 
-        analogWrite(DAC0, d );  // waveData[i]);
+        analogWrite(DAC0, waveData[i]);  // or d
       }
 
       delayMicroseconds(uSecDelay);
@@ -1105,19 +1124,30 @@ void sineWave(int freq, int seconds)
   }
 }
 
-int freqs[] = { 1, 4, 8, 15 };
+int freqs[] = { 50, 100, 250, 400, 750, 1000 };
+int delays[] = { 0, 1, 2, 4, 5, 10, 15, 25, 50, 75, 100 };
 
 void sineWaves() {
   const int NUM_FREQS = sizeof(freqs) / sizeof(int);
 
-  for (int f = 0; f < NUM_FREQS; f ++ ) {
-    sineWave(freqs[f], 30);
+  for (int f = 0; f < NUM_FREQS; f ++ ) {    
+    sineWave(freqs[f], 10, FREQS);
+  }  
+}
+
+void sineWaves2() {
+  const int NUM_DELAYS = sizeof(delays) / sizeof(int);
+
+  for (int d = 0; d < NUM_DELAYS; d ++ ) {    
+    sineWave(delays[d], 10, DELAYS);
   }  
 }
 
 void loop()
 {
   sineWaves();
+    
+  sineWaves2();
 
   // sineWave(3, 30);
 
