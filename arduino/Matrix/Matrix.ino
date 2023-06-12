@@ -1,7 +1,11 @@
+
 #include <LedControl.h>
 #include <DHT.h>
 
-/* #define __DUE__ */
+#include "MCP4725.h"
+#include "Wire.h"
+
+// #define __DUE__
 #ifdef __DUE__
 #include <DueTimer.h>
 #endif
@@ -22,6 +26,10 @@ LedControl lc = LedControl(LED_DATA, LED_CLK, LED_CS, DEVICES);
 
 DHT dht(TEMP_DATA, DHT11);
 
+// DAC Chip
+#define MCP_ADDR 0x60
+MCP4725 MCP(MCP_ADDR);
+
 #define PIR_DATA 2
 #define PIR_SHOW_LED 13
 
@@ -35,6 +43,15 @@ unsigned long delaytime = 100;
 
 void setup() {
   Serial.begin(115200);
+
+  Wire.begin();
+  // ESP32
+  // MCP.begin(27, 26);
+  // Wire.setClock(3400000);
+  MCP.begin();
+  Wire.setClock(800000);
+
+  MCP.setValue(0);
 
   pinMode(PIR_DATA, INPUT);
   pinMode(PIR_SHOW_LED, OUTPUT);
@@ -802,7 +819,7 @@ void checkPir() {
 }
 
 // FUNCTION: Sine, POINTS: 1024, BITS: 12, LOW: 0, HIGH: 4095
-int waveData[] = {
+int sineData[] = {
   0x800, 0x80c, 0x819, 0x825, 0x832, 0x83e, 0x84b, 0x858, 
   0x864, 0x871, 0x87d, 0x88a, 0x896, 0x8a3, 0x8af, 0x8bc, 
   0x8c8, 0x8d5, 0x8e1, 0x8ee, 0x8fa, 0x907, 0x913, 0x920, 
@@ -1603,15 +1620,19 @@ int randomData[] = {
 const int FREQS = 0;
 const int DELAYS = 1;
 
-void sineWave(int freq, int seconds, int mode) {
-  const int NUM_SAMPLES = sizeof(waveData) / sizeof(int);
+void playWave(int waveData[], int NUM_SAMPLES, int freq, int seconds, int mode) {
 
   char msg[240];
 
-  sprintf(msg, "#SAMPLES = %d", NUM_SAMPLES);
-  Serial.println(msg);
+  // sprintf(msg, "#SAMPLES = %d", NUM_SAMPLES);
+  // Serial.println(msg);
 
+  int pSecDelay = 1000000000 / (NUM_SAMPLES * freq);
   int uSecDelay = 1000000 / (NUM_SAMPLES * freq);
+
+  int error = pSecDelay % 1000;
+
+  const int PER_SAMPLE_ERROR = 0;  // ps overhead
 
   if (mode == DELAYS) {
     uSecDelay = freq;
@@ -1625,8 +1646,14 @@ void sineWave(int freq, int seconds, int mode) {
   // 10s of signal generation
   const int CYCLES = seconds * freq;
 
-  sprintf(msg, "MODE=%s: f=%d, d=%d us, #c=%d", mode == DELAYS ? "DELAY" : "FREQ", freq, uSecDelay, CYCLES);
-  Serial.println(msg);
+  // sprintf(msg, "MODE=%s: f=%d, d=%d us, #c=%d", mode == DELAYS ? "DELAY" : "FREQ", freq, uSecDelay, CYCLES);
+  // Serial.println(msg);
+  // sprintf(msg, "ERROR=%d, d=%ld ps", error, pSecDelay);
+  // Serial.println(msg);
+
+  int currError = 0;
+  int extraDelay = 0;
+  int adjusts = 0;
 
   for (int c = 0; c < CYCLES; c++) {
     analogWrite(DAC1, c % 2 == 0 ? 0xfff : 0);
@@ -1657,21 +1684,49 @@ void sineWave(int freq, int seconds, int mode) {
                                                    // waveData[i] / 4 + (4095 / 4 * 3) for BLUE LEDs
 
         analogWrite(DAC0, waveData[i]);  // or d
+
+        // Add this for XY plots of lissajous figures
+        // MCP.setValue(waveData[(i+NUM_SAMPLES/4)%NUM_SAMPLES]);  // cos
       }
 
-      delayMicroseconds(uSecDelay);
+      if ( currError >= 1000 ) {
+        extraDelay = 1;
+        currError -= 1000;
+        adjusts ++;
+      } else if ( currError <= -1000 ) {
+        if ( uSecDelay > 0 ) {
+          extraDelay = -1;
+        } else {
+          extraDelay = 0;
+        }
+        currError += 1000;
+        adjusts ++;
+      } else {
+        extraDelay = 0;
+      }
+
+      delayMicroseconds(uSecDelay + extraDelay);
+
+      currError += (error - PER_SAMPLE_ERROR);
     }
   }
+
+  // sprintf(msg, "ERROR ADJUSTS=%d", adjusts);
+  // Serial.println(msg);
 }
 
-int freqs[] = { 1, 2, 5, 15, 30, 100, 250, 350 };  //, 400, 750, 1000 };
+int freqs[] = { 1, 5, 10, 30, 50, 100 };  //, 400, 750, 1000 };
 int delays[] = { 0, 1, 2, 4, 5, 10, 15, 25, 50, 75, 100 };
 
-void sineWaves() {
+void theWaves() {
   const int NUM_FREQS = sizeof(freqs) / sizeof(int);
 
   for (int f = 0; f < NUM_FREQS; f++) {
-    sineWave(freqs[f], 10, FREQS);
+    playWave(sineData, 1024, freqs[f], 10, FREQS);
+    playWave(triangleData, 1024, freqs[f], 10, FREQS);
+    playWave(squareData, 1024, freqs[f], 10, FREQS);
+    playWave(rampData, 1024, freqs[f], 10, FREQS);
+    playWave(impulseData, 1024, freqs[f], 10, FREQS);
   }
 }
 
@@ -1679,12 +1734,12 @@ void sineWaves2() {
   const int NUM_DELAYS = sizeof(delays) / sizeof(int);
 
   for (int d = 0; d < NUM_DELAYS; d++) {
-    sineWave(delays[d], 10, DELAYS);
+    playWave(sineData, 1024, delays[d], 10, DELAYS);
   }
 }
 
 void loop() {
-  sineWaves();
+  theWaves();
 
   //  sineWaves2();
 
