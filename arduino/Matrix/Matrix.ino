@@ -5,7 +5,7 @@
 #include "MCP4725.h"
 #include "Wire.h"
 
-// #define __DUE__
+#define __DUE__
 #ifdef __DUE__
 #include <DueTimer.h>
 #endif
@@ -1739,7 +1739,7 @@ void sineWaves2() {
 }
 
 void loop() {
-  theWaves();
+  // theWaves();
 
   //  sineWaves2();
 
@@ -1749,7 +1749,7 @@ void loop() {
 
   // testSpiral();
 
-  // bigCounter();
+  bigCounter();
 
   // nowServing();
 
